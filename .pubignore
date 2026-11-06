@@ -1,0 +1,15 @@
+# Replaces .gitignore for the published archive, so it restates every private path.
+CLAUDE.md
+.dart_tool/
+build/
+pubspec.lock
+.env
+.env.local
+*.env.*
+.github/
+assets/
+specs/
+test/
+tool/
+lefthook.yml
+example/flutter_app/pubspec.lock

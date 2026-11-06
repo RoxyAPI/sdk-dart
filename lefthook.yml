@@ -1,0 +1,26 @@
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      glob: "*.dart"
+      run: dart format {staged_files}
+      stage_fixed: true
+    analyze:
+      run: dart analyze --fatal-infos
+    docs-sync:
+      glob: "{specs/openapi.json,tool/*.dart,example/**/*.dart,README.md,AGENTS.md,doc/llms-full.txt}"
+      run: ROXYAPI_SPEC_FILE=specs/openapi.json dart run tool/generate.dart && git add README.md AGENTS.md doc/llms-full.txt
+      stage_fixed: true
+
+pre-push:
+  parallel: false
+  commands:
+    drift:
+      run: ROXYAPI_SPEC_FILE=specs/openapi.json dart run tool/generate.dart && git diff --exit-code || { echo "generated code or docs drifted from the spec: commit the generate output"; exit 1; }
+      priority: 1
+    analyze:
+      run: dart analyze --fatal-infos
+      priority: 2
+    test:
+      run: dart test
+      priority: 3

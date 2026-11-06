@@ -1,0 +1,116 @@
+name: Release
+
+on:
+  schedule:
+    - cron: "40 6 * * *"
+  workflow_dispatch:
+    inputs:
+      version_bump:
+        description: "patch | minor | major"
+        required: false
+        default: "patch"
+        type: choice
+        options: [patch, minor, major]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # Release tags are the ledger the gate below reads. The default shallow
+          # checkout fetches none of them, which would make every run look like a
+          # first release.
+          fetch-depth: 0
+
+      - uses: dart-lang/setup-dart@v1
+
+      - run: dart pub get
+
+      # Fetches the live spec and also syncs README, AGENTS and the method reference.
+      - name: Regenerate SDK
+        run: dart run tool/generate.dart
+
+      # Compare against the last RELEASED tag, never against the working tree: whatever is
+      # published is what that tag built. A spec change releases only if what the package
+      # publishes (SHIPPED) differs from the last tag, so an edit that reaches no shipped file
+      # never publishes an identical package.
+      - name: Is the published release built from the current spec?
+        id: diff
+        run: |
+          SHIPPED=(lib doc example AGENTS.md README.md)
+          LAST=$(git describe --tags --abbrev=0 --match 'v*' 2>/dev/null || true)
+          if [ -z "$LAST" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git show "$LAST:specs/openapi.json" | jq -cS . > "$RUNNER_TEMP/released-spec.json"
+          jq -cS . specs/openapi.json > "$RUNNER_TEMP/current-spec.json"
+          if cmp -s "$RUNNER_TEMP/released-spec.json" "$RUNNER_TEMP/current-spec.json"; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git add -N -- "${SHIPPED[@]}"
+          if git diff --quiet "$LAST" -- "${SHIPPED[@]}"; then
+            echo "spec changed, generated output identical: no release"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Test
+        if: steps.diff.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          dart format --output=none --set-exit-if-changed .
+          dart analyze --fatal-infos
+          dart test
+
+      - name: Bump version
+        id: bump
+        if: steps.diff.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        env:
+          BUMP: ${{ github.event.inputs.version_bump || 'patch' }}
+        run: |
+          CURRENT=$(sed -n 's/^version: //p' pubspec.yaml)
+          IFS=. read -r MAJOR MINOR PATCH <<< "$CURRENT"
+          case "$BUMP" in
+            major) VERSION="$((MAJOR + 1)).0.0" ;;
+            minor) VERSION="$MAJOR.$((MINOR + 1)).0" ;;
+            *) VERSION="$MAJOR.$MINOR.$((PATCH + 1))" ;;
+          esac
+          sed -i "s/^version: .*/version: $VERSION/" pubspec.yaml
+          echo "const version = '$VERSION';" > lib/src/version.dart
+          { echo '# Changelog'; echo; echo "## $VERSION"; echo; echo '- Regenerated from the latest API specification.'; tail -n +2 CHANGELOG.md; } > "$RUNNER_TEMP/CHANGELOG.md"
+          mv "$RUNNER_TEMP/CHANGELOG.md" CHANGELOG.md
+          dart test test/docs_test.dart
+          dart pub publish --dry-run
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      # pub.dev publishes only from a tag ref, and a push made with GITHUB_TOKEN starts no
+      # workflow, so the tag is pushed first and the publish workflow is dispatched on it.
+      - name: Commit, tag, push, publish
+        if: steps.diff.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.bump.outputs.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pubspec.yaml CHANGELOG.md specs/openapi.json lib doc example test README.md AGENTS.md
+          git commit -m "release: v$VERSION"
+          git tag "v$VERSION"
+          git push origin HEAD:main "v$VERSION"
+          gh workflow run publish.yml --ref "v$VERSION"
+
+      - name: Create GitHub release
+        if: steps.diff.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: v${{ steps.bump.outputs.version }}
+          generate_release_notes: true
+          make_latest: "true"

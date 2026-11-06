@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "RoxyAPI Dart SDK"
+abstract: "Official Dart and Flutter SDK for RoxyAPI. 18+ spiritual intelligence domains behind one API key. MCP ready, fully typed."
+authors:
+  - name: "RoxyAPI"
+url: "https://github.com/RoxyAPI/sdk-dart"
+repository-code: "https://github.com/RoxyAPI/sdk-dart"
+license: MIT
+type: software
+keywords:
+  - astrology-api
+  - vedic-astrology-api
+  - tarot-api
+  - numerology-api
+  - mcp-server
+  - dart-sdk
+  - flutter
+  - openapi

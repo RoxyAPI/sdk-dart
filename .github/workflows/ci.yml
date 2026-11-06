@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        sdk: ["3.9", stable]
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ matrix.sdk }}
+
+      - run: dart pub get
+
+      # Hermetic: regenerates from the committed spec, so this verifies that the committed
+      # generated code and docs still reproduce from it, with no network dependency.
+      # Refreshing the spec itself is the release workflow's job.
+      - name: Codegen drift check
+        env:
+          ROXYAPI_SPEC_FILE: specs/openapi.json
+        run: |
+          dart run tool/generate.dart
+          git add --intent-to-add .
+          git diff --exit-code \
+            || { echo 'codegen drift: commit the regenerated files'; exit 1; }
+
+      - name: Format
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze
+        run: dart analyze --fatal-infos
+
+      - name: Test
+        run: dart test
+
+      # Only the runtime dependency moves: the oldest test runner predates the current SDK.
+      - name: Test against the lowest allowed runtime dependency
+        run: dart pub downgrade http && dart test
+
+      - name: Package
+        run: dart pub publish --dry-run
+
+  score:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: dart-lang/setup-dart@v1
+
+      - name: pub.dev score
+        run: |
+          dart pub global activate pana
+          dart pub global run pana --exit-code-threshold 0 .
+
+  flutter-example:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: example/flutter_app
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Build web
+        run: flutter build web

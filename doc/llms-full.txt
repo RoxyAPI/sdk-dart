@@ -1,0 +1,1360 @@
+# roxyapi: Complete Method Reference
+
+> Dart and Flutter SDK for RoxyAPI. Multi-domain spiritual and metaphysical intelligence API. Fully typed. Install: `dart pub add roxyapi`
+
+Every method returns its typed response and throws `RoxyException` on an error response. Parameters are named: path, body and query values in one list, then `lang`.
+
+```dart
+import 'package:roxyapi/roxyapi.dart';
+
+final roxy = Roxy(Platform.environment['ROXY_API_KEY'] ?? '');
+```
+
+<!-- BEGIN:LANGS -->
+**Multi-language responses.** Interpretations and editorial text are available in 10 languages: `en`, `tr`, `de`, `es`, `hi`, `pt`, `fr`, `ru`, `zh-Hans`, `zh-Hant`. Pass a `Lang` value as `lang` on a supported method. Supported: `astrology`, `vedicAstrology`, `forecast`, `humanDesign`, `chineseAstrology`, `fengShui`, `mesoamericanAstrology`, `vastu`, `numerology`, `kabbalah`, `tarot`, `biorhythm`, `ayurveda`, `iching`, `crystals`, `angelNumbers`, `reports`, `languages`. English-only: `dreams`, `location`, `usage`. A field without a translation in the requested language returns English.
+<!-- END:LANGS -->
+
+<!-- BEGIN:METHODS -->
+## Western Astrology: `roxy.astrology`
+
+Western astrology API for natal birth charts, daily, weekly, monthly, and yearly horoscopes with unique content per s...
+
+[API reference](https://roxyapi.com/api-reference/western-astrology)
+
+```dart
+// Get all zodiac signs - Complete zodiac signs list with dates and elements
+final result = await roxy.astrology.listZodiacSigns();
+// Returns List<ListZodiacSignsResponseItem>: id String, name String, symbol String?, element String, elementLocalized String?, dates ListZodiacSignsResponseItemDates, description String
+
+// Get zodiac sign details - Complete astrology sign profile with personality traits
+final result = await roxy.astrology.getZodiacSign(id: 'aries');
+// Returns GetZodiacSignResponse: id String, name String, symbol String?, symbolName String, element String, elementLocalized String?, modality String, modalityLocalized String?, rulingPlanet String, rulingPlanetLocalized String?, dates GetZodiacSignResponseDates, keywords List<String>, description GetZodiacSignResponseDescription, famous List<String>?, strengths List<String>?, motto String?, gifts String?, challenges String?, weapon String?, compatibleSigns List<String>
+
+// Get all planet meanings - Complete astrology planet interpretations list
+final result = await roxy.astrology.listPlanetMeanings();
+// Returns List<ListPlanetMeaningsResponseItem>: id String, name String, symbol String, tagline String, category String?, rulership String?, description String
+
+// Get planet meaning details - Complete astrology planet interpretation
+final result = await roxy.astrology.getPlanetMeaning(id: 'sun');
+// Returns GetPlanetMeaningResponse: id String, name String, symbol String, tagline String, category String?, temperature String, orbit String, retrograde bool?, rulership String?, detriment String?, exaltation String?, exultation String?, fall String?, keywords GetPlanetMeaningResponseKeywords, description GetPlanetMeaningResponseDescription
+
+// Generate natal chart - Birth chart calculator API with houses and aspects
+final result = await roxy.astrology.generateNatalChart(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$, houseSystem: HouseSystem.placidus);
+// Returns NatalChartResponse: birthDetails NatalChartResponseBirthDetails, planets List<NatalChartResponsePlanetsItem>, houses List<NatalChartResponseHousesItem>, houseSystem String, aspects List<NatalChartResponseAspectsItem>, patterns List<NatalChartResponsePatternsItem>?, aspectsInterpretation NatalChartResponseAspectsInterpretation, ascendant NatalChartResponseAscendant, midheaven NatalChartResponseMidheaven, partOfFortune NatalChartResponsePartOfFortune, vertex NatalChartResponseVertex, summary NatalChartResponseSummary
+
+// Get planetary positions - Ephemeris calculator for all planets
+final result = await roxy.astrology.getPlanetaryPositions(date: '2025-12-18', time: '12:00:00', nodeType: NodeType.true$, latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'));
+// Returns GetPlanetaryPositionsResponse: planets List<GetPlanetaryPositionsResponsePlanetsItem>
+
+// Monthly Ephemeris - Daily tropical planetary positions for a month
+final result = await roxy.astrology.getMonthlyTropicalEphemeris(year: 2026, month: 8);
+// Returns GetMonthlyTropicalEphemerisResponse: year num, month num, days List<GetMonthlyTropicalEphemerisResponseDaysItem>
+
+// Get current moon phase - Lunar phase calculator with zodiac sign
+final result = await roxy.astrology.getCurrentMoonPhase(date: '2025-12-18', time: '12:00:00', timezone: 'America/New_York');
+// Returns GetCurrentMoonPhaseResponse: date String, phase String, illumination num, age num, sign String, degree num, distance num, meaning GetCurrentMoonPhaseResponseMeaning?
+
+// Get upcoming moon phases - Next new moon, full moon, quarters
+final result = await roxy.astrology.getUpcomingMoonPhases(startDate: '2025-12-18', count: 8);
+// Returns GetUpcomingMoonPhasesResponse: phases List<GetUpcomingMoonPhasesResponsePhasesItem>
+
+// Get lunar calendar - Moon phases for entire month
+final result = await roxy.astrology.getMoonCalendar(year: 2026, month: 3);
+// Returns GetMoonCalendarResponse: year num, month num, monthName String, calendar List<GetMoonCalendarResponseCalendarItem>
+
+// Calculate synastry - Relationship compatibility analysis API
+final result = await roxy.astrology.calculateSynastry(person1: CalculateSynastryRequestPerson1(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$, name: 'Alex'), person2: CalculateSynastryRequestPerson2(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$, name: 'Alex'), houseSystem: HouseSystem.placidus);
+// Returns CalculateSynastryResponse: person1 CalculateSynastryResponsePerson1, person2 CalculateSynastryResponsePerson2, compatibilityScore num, interAspects List<CalculateSynastryResponseInterAspectsItem>, summary CalculateSynastryResponseSummary, analysis CalculateSynastryResponseAnalysis
+
+// Calculate house cusps - House system calculator with comparison
+final result = await roxy.astrology.calculateHouses(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), houseSystem: HouseSystem.placidus);
+// Returns HousesResponse: date String, time String, latitude num, longitude num, timezone num, houseSystem String, ascendant HousesResponseAscendant, midheaven HousesResponseMidheaven, houses List<HousesResponseHousesItem>, comparison Map<String, HousesResponseComparisonValue>?
+
+// Calculate planetary aspects - Aspect finder for any date and time
+final result = await roxy.astrology.calculateAspects(date: '1990-07-15', time: '14:30:00', timezone: NumOrString.string('America/New_York'), planets: ['Sun', 'Moon', 'Mercury', 'Venus', 'Mars'], aspectTypes: ['CONJUNCTION', 'OPPOSITION', 'TRINE', 'SQUARE']);
+// Returns AspectsResponse: date String, time String, timezone num, aspectsFound num, aspects List<AspectsResponseAspectsItem>, patterns List<AspectsResponsePatternsItem>?, summary AspectsResponseSummary
+
+// Monthly Aspects - Tropical aspect calendar for an entire month
+final result = await roxy.astrology.getMonthlyTropicalAspects(year: 2026, month: 3, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$);
+// Returns GetMonthlyTropicalAspectsResponse: year num, month num, timezone num, events List<GetMonthlyTropicalAspectsResponseEventsItem>
+
+// Detect aspect patterns - Grand Trine, Kite, T-Square, Grand Cross, Yod, Mystic Rectangle, Stellium
+final result = await roxy.astrology.detectAspectPatterns(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$, strictOrbs: 'false', include: '');
+// Returns AspectPatternsResponse: patterns List<AspectPatternsResponsePatternsItem>, total num, options AspectPatternsResponseOptions
+
+// Calculate planetary transits - Current transits with natal chart comparison
+final result = await roxy.astrology.calculateTransits(date: '2025-12-19', time: '12:00:00', timezone: NumOrString.number(0), nodeType: NodeType.true$);
+// Returns TransitsResponse: transitDate String, transitTime String, timezone num, transitPlanets List<TransitsResponseTransitPlanetsItem>, transitAspects List<TransitsResponseTransitAspectsItem>?, summary TransitsResponseSummary?
+
+// Monthly Transits - Tropical sign ingresses for an entire month
+final result = await roxy.astrology.getMonthlyTropicalTransits(year: 2026, month: 3, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$);
+// Returns GetMonthlyTropicalTransitsResponse: year num, month num, timezone num, startingPositions List<GetMonthlyTropicalTransitsResponseStartingPositionsItem>, transitEvents List<GetMonthlyTropicalTransitsResponseTransitEventsItem>
+
+// Transit Aspects - Detailed transit-to-natal aspect analysis with interpretations
+final result = await roxy.astrology.calculateTransitAspects(natalChart: CalculateTransitAspectsRequestNatalChart(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$), transitDate: '2026-02-03', transitTime: '12:00:00', planets: [Planets.jupiter, Planets.saturn, Planets.pluto], aspectTypes: [AspectTypes.conjunction, AspectTypes.opposition, AspectTypes.trine, AspectTypes.square], minStrength: 50, houseSystem: HouseSystem.placidus);
+// Returns CalculateTransitAspectsResponse: transitDate String, houseSystem String, houses List<CalculateTransitAspectsResponseHousesItem>, ascendant CalculateTransitAspectsResponseAscendant, transitPlanets List<CalculateTransitAspectsResponseTransitPlanetsItem>, natalPlanets List<CalculateTransitAspectsResponseNatalPlanetsItem>, aspects List<CalculateTransitAspectsResponseAspectsItem>, summary CalculateTransitAspectsResponseSummary
+
+// Monthly Parallels - Declination contacts for an entire month
+final result = await roxy.astrology.getMonthlyDeclinationParallels(year: 2026, month: 3, timezone: NumOrString.string('America/New_York'), orb: 1.5, nodeType: NodeType.true$);
+// Returns GetMonthlyDeclinationParallelsResponse: year num, month num, timezone num, orb num, events List<GetMonthlyDeclinationParallelsResponseEventsItem>
+
+// Ecliptic Crossings - Node passages for a whole year
+final result = await roxy.astrology.getPlanetaryNodePassages(year: 2026, timezone: NumOrString.string('America/New_York'));
+// Returns GetPlanetaryNodePassagesResponse: year num, timezone num, events List<GetPlanetaryNodePassagesResponseEventsItem>
+
+// Solar Return Chart - Annual birthday forecast with relocated chart
+final result = await roxy.astrology.generateSolarReturn(birthDate: '1990-07-15', birthTime: '14:30:00', returnYear: 2026, latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), houseSystem: HouseSystem.placidus);
+// Returns GenerateSolarReturnResponse: birthDate String, solarReturnDate String, solarReturnYear num, location GenerateSolarReturnResponseLocation, chart GenerateSolarReturnResponseChart, natalSunPosition GenerateSolarReturnResponseNatalSunPosition, interpretation GenerateSolarReturnResponseInterpretation
+
+// Lunar Return Chart - Monthly emotional forecast with Moon cycle chart
+final result = await roxy.astrology.generateLunarReturn(birthDate: '1990-07-15', birthTime: '14:30:00', returnDate: '2026-02-12', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), houseSystem: HouseSystem.placidus);
+// Returns GenerateLunarReturnResponse: birthDate String, lunarReturnDate String, location GenerateLunarReturnResponseLocation, chart GenerateLunarReturnResponseChart, natalMoonPosition GenerateLunarReturnResponseNatalMoonPosition, interpretation GenerateLunarReturnResponseInterpretation
+
+// Composite Chart - Midpoint relationship chart with interpretations
+final result = await roxy.astrology.generateCompositeChart(person1: GenerateCompositeChartRequestPerson1(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$), person2: GenerateCompositeChartRequestPerson2(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$), houseSystem: HouseSystem.placidus);
+// Returns GenerateCompositeChartResponse: person1 GenerateCompositeChartResponsePerson1, person2 GenerateCompositeChartResponsePerson2, compositePlanets List<GenerateCompositeChartResponseCompositePlanetsItem>, compositeHouses List<GenerateCompositeChartResponseCompositeHousesItem>, compositeAscendant GenerateCompositeChartResponseCompositeAscendant, compositeMidheaven GenerateCompositeChartResponseCompositeMidheaven, aspects List<GenerateCompositeChartResponseAspectsItem>, interpretation GenerateCompositeChartResponseInterpretation
+
+// Compatibility score - Relationship compatibility API
+final result = await roxy.astrology.calculateCompatibility(person1: CalculateCompatibilityRequestPerson1(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$), person2: CalculateCompatibilityRequestPerson2(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$));
+// Returns CalculateCompatibilityResponse: overallScore num, categories CalculateCompatibilityResponseCategories, persons CalculateCompatibilityResponsePersons, signCompatibility CalculateCompatibilityResponseSignCompatibility, elementBalance CalculateCompatibilityResponseElementBalance, archetype CalculateCompatibilityResponseArchetype, strengths List<String>, challenges List<String>, summary String, interpretation String, aspectBreakdown CalculateCompatibilityResponseAspectBreakdown, keyAspects List<CalculateCompatibilityResponseKeyAspectsItem>
+
+// Daily horoscope by zodiac sign - Transit-based editorial columns
+final result = await roxy.astrology.getDailyHoroscope(sign: Sign.aries, date: '2026-04-03', timezone: 'America/New_York');
+// Returns GetDailyHoroscopeResponse: sign String, date String, overview String, love String, career String, health String, finance String, advice String, column String, events List<GetDailyHoroscopeResponseEventsItem>, luckyNumber num, luckyColor String, compatibleSigns List<String>, activeTransits List<String>, moonSign String, moonPhase String, energyRating num
+
+// Weekly horoscope by zodiac sign - Seven-day editorial column
+final result = await roxy.astrology.getWeeklyHoroscope(sign: Sign.aries, date: '2026-04-03', timezone: 'America/New_York');
+// Returns GetWeeklyHoroscopeResponse: sign String, week String, overview String, love String, career String, health String, finance String, advice String, column String, events List<GetWeeklyHoroscopeResponseEventsItem>, luckyDays List<String>, luckyNumbers List<num>, compatibleSigns List<String>
+
+// Monthly horoscope by zodiac sign - Editorial column with key dates
+final result = await roxy.astrology.getMonthlyHoroscope(sign: Sign.aries, date: '2026-04-03', timezone: 'America/New_York');
+// Returns GetMonthlyHoroscopeResponse: sign String, month String, overview String, love String, career String, health String, finance String, advice String, column String, events List<GetMonthlyHoroscopeResponseEventsItem>, weekByWeek List<GetMonthlyHoroscopeResponseWeekByWeekItem>, keyDates List<GetMonthlyHoroscopeResponseKeyDatesItem>, luckyNumbers List<num>, luckyColor String, compatibleSigns List<String>
+
+// Yearly horoscope by zodiac sign - Year ahead forecast with themes, key periods, eclipses and retrogrades
+final result = await roxy.astrology.getYearlyHoroscope(sign: Sign.aries, year: 2026, timezone: 'America/New_York');
+// Returns GetYearlyHoroscopeResponse: sign String, year int, overview String, love String, career String, health String, finance String, advice String, column String, events List<GetYearlyHoroscopeResponseEventsItem>, themes List<GetYearlyHoroscopeResponseThemesItem>, eclipses List<GetYearlyHoroscopeResponseEclipsesItem>, retrogrades List<GetYearlyHoroscopeResponseRetrogradesItem>, keyPeriods List<GetYearlyHoroscopeResponseKeyPeriodsItem>, bestPeriods GetYearlyHoroscopeResponseBestPeriods, luckyNumbers List<num>, luckyColor String, compatibleSigns List<String>
+
+// Planetary Return Chart - Saturn return, Jupiter return, and inner planet cycles
+final result = await roxy.astrology.generatePlanetaryReturn(birthDate: '1990-07-15', birthTime: '14:30:00', planet: Planet.jupiter, approximateDate: '2026-08-15', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), houseSystem: HouseSystem.placidus);
+// Returns GeneratePlanetaryReturnResponse: birthDate String, planet String, returnDate String, approximateCycle String, location GeneratePlanetaryReturnResponseLocation, chart GeneratePlanetaryReturnResponseChart, natalPlanetPosition GeneratePlanetaryReturnResponseNatalPlanetPosition, interpretation GeneratePlanetaryReturnResponseInterpretation
+
+// Astrocartography map - planetary lines and relocation calculator
+final result = await roxy.astrology.generateAstrocartography(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$, include: 'chiron');
+// Returns AstrocartographyResponse: birthDetails AstrocartographyResponseBirthDetails, lines List<AstrocartographyResponseLinesItem>, summary String
+
+// Generate relocation chart - Relocated birth chart calculator with shifted houses and angles
+final result = await roxy.astrology.generateRelocationChart(date: '1961-08-04', time: '19:24:00', timezone: NumOrString.number(-10), birthLatitude: 21.3069, birthLongitude: -157.8583, relocationLatitude: 40.7167, relocationLongitude: -74.006, houseSystem: HouseSystem.placidus);
+// Returns RelocationChartResponse: birthDetails RelocationChartResponseBirthDetails, relocation RelocationChartResponseRelocation, planets List<RelocationPlanet>, houses List<RelocationChartResponseHousesItem>, houseSystem String, ascendant RelocationChartResponseAscendant, midheaven RelocationChartResponseMidheaven, vertex RelocationChartResponseVertex, changes RelocationChartResponseChanges, interpretation RelocationChartResponseInterpretation
+
+// Local space astrology map - Directional planetary compass lines
+final result = await roxy.astrology.generateLocalSpace(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), include: 'chiron,lilith');
+// Returns LocalSpaceResponse: birthDetails LocalSpaceResponseBirthDetails, bodies List<LocalSpaceResponseBodiesItem>, summary String
+
+// Fixed stars and star conjunctions calculator - Regulus, Spica, Algol natal report
+final result = await roxy.astrology.generateFixedStars(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$, orb: 1);
+// Returns FixedStarsResponse: birthDetails FixedStarsResponseBirthDetails, orb num, stars List<FixedStarsResponseStarsItem>, conjunctions List<FixedStarsResponseConjunctionsItem>, summary String
+
+// Arabic lots calculator - seven Hermetic parts including Part of Fortune and Spirit
+final result = await roxy.astrology.calculateArabicLots(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$, houseSystem: HouseSystem.placidus);
+// Returns ArabicLotsResponse: birthDetails ArabicLotsResponseBirthDetails, sect String, lots List<ArabicLotsResponseLotsItem>, summary String
+
+// Asteroid goddesses calculator - Ceres, Pallas, Juno, and Vesta natal positions
+final result = await roxy.astrology.generateAsteroids(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$, houseSystem: HouseSystem.placidus);
+// Returns AsteroidsResponse: birthDetails AsteroidsResponseBirthDetails, houseSystem String, asteroids List<AsteroidsResponseAsteroidsItem>, summary String
+
+// Black Moon Lilith calculator - mean and true lunar apogee in the natal chart
+final result = await roxy.astrology.generateLilith(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$, houseSystem: HouseSystem.placidus);
+// Returns LilithResponse: birthDetails LilithResponseBirthDetails, houseSystem String, lilith List<LilithResponseLilithItem>, summary String
+
+// Secondary progressions calculator - progressed chart, progressed Sun and Moon
+final result = await roxy.astrology.generateProgressions(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$, targetDate: '2025-07-15', houseSystem: HouseSystem.placidus);
+// Returns ProgressionsResponse: birthDetails ProgressionsResponseBirthDetails, targetDate String, progressedDate String, elapsedYears num, planets List<ProgressionsResponsePlanetsItem>, ascendant ProgressionsResponseAscendant, midheaven ProgressionsResponseMidheaven, summary String
+
+// Solar arc directions calculator - directed chart at one degree per year
+final result = await roxy.astrology.generateSolarArc(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$, targetDate: '2025-07-15');
+// Returns SolarArcResponse: birthDetails SolarArcResponseBirthDetails, targetDate String, solarArc num, summary String, directed List<SolarArcResponseDirectedItem>
+
+// Annual profections calculator - lord of the year and yearly time lord by age
+final result = await roxy.astrology.generateProfections(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$, targetDate: '2025-08-04', houseSystem: HouseSystem.placidus);
+// Returns ProfectionsResponse: birthDetails ProfectionsResponseBirthDetails, targetDate String, age int, profectedHouse int, profectedSign String, lordOfYear String, lordNatalPosition ProfectionsResponseLordNatalPosition, interpretation String, summary String
+```
+
+---
+
+## Vedic Astrology: `roxy.vedicAstrology`
+
+Vedic astrology (Jyotish) and KP API for kundli generation with the sixteen Shodasavarga divisional charts (D1 to D60...
+
+[API reference](https://roxyapi.com/api-reference/vedic-astrology)
+
+```dart
+// Get birth chart (D1 Rashi chart) - Kundli Calculator API
+final result = await roxy.vedicAstrology.generateBirthChart(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24, avasthaInfo: true, modernPlanets: true, focus: Focus.general);
+// Returns BirthChartResponse: aries BirthChartResponseAries, taurus BirthChartResponseTaurus, gemini BirthChartResponseGemini, cancer BirthChartResponseCancer, leo BirthChartResponseLeo, virgo BirthChartResponseVirgo, libra BirthChartResponseLibra, scorpio BirthChartResponseScorpio, sagittarius BirthChartResponseSagittarius, capricorn BirthChartResponseCapricorn, aquarius BirthChartResponseAquarius, pisces BirthChartResponsePisces, frame BirthChartResponseFrame, modernPlanets List<BirthChartResponseModernPlanetsItem>?, houses List<BirthChartResponseHousesItem>, combustion List<BirthChartResponseCombustionItem>, planetaryWar List<BirthChartResponsePlanetaryWarItem>, interpretations Map<String, BirthChartResponseInterpretationsValue>, yogas List<BirthChartResponseYogasItem>?, meta Map<String, BirthChartResponseMetaValue>
+
+// Get Navamsa chart (D9) - Marriage Compatibility Calculator
+final result = await roxy.vedicAstrology.generateNavamsa(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24);
+// Returns NavamsaResponse: chart NavamsaResponseChart, frame NavamsaResponseFrame, vargottama List<String>, vargottamaExplanation String
+
+// Get divisional chart (Varga) - D2 to D60 Calculator
+final result = await roxy.vedicAstrology.generateDivisionalChart(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24, division: 10);
+// Returns DivisionalChartResponse: division DivisionalChartResponseDivision, frame DivisionalChartResponseFrame, chart DivisionalChartResponseChart, vargottama List<String>
+
+// Calculate compatibility score - Gun Milan API (Ashtakoot Matching)
+final result = await roxy.vedicAstrology.calculateGunMilan(person1: CompatibilityRequestPerson1(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5)), person2: CompatibilityRequestPerson2(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5)), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24);
+// Returns CompatibilityResponse: frame CompatibilityResponseFrame, total num, maxScore num, percentage num, isCompatible bool, recommendation String, doshas List<String>, doshaCancellations List<CompatibilityResponseDoshaCancellationsItem>, breakdown List<CompatibilityResponseBreakdownItem>
+
+// Calculate ten porutham match - Dashakoot South Indian Kundli Matching API
+final result = await roxy.vedicAstrology.calculateDashakoot(person1: DashakootRequestPerson1(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5)), person2: DashakootRequestPerson2(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5)), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24);
+// Returns DashakootResponse: frame DashakootResponseFrame, total num, maxTotal num, verdict String, recommendation String, rajju DashakootResponseRajju, vedha DashakootResponseVedha, breakdown List<DashakootResponseBreakdownItem>
+
+// Compare malefic affliction - Papasamyam Kundli Matching API
+final result = await roxy.vedicAstrology.calculatePapasamyam(person1: PapasamyamRequestPerson1(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5)), person2: PapasamyamRequestPerson2(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5)), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24);
+// Returns PapasamyamResponse: frame PapasamyamResponseFrame, person1 PapasamyamResponsePerson1, person2 PapasamyamResponsePerson2, verdict String, recommendation String
+
+// Get planetary positions - Graha Positions API
+final result = await roxy.vedicAstrology.getPlanetPositions(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24);
+// Returns PlanetaryPositionsResponse: 
+
+// Monthly Ephemeris - Daily sidereal planetary positions for a month
+final result = await roxy.vedicAstrology.getMonthlyEphemeris(year: 2026, month: 2, coordinateSystem: CoordinateSystem.sidereal);
+// Returns GetMonthlyEphemerisResponse: year num, month num, days List<GetMonthlyEphemerisResponseDaysItem>
+
+// Get current Mahadasha, Antardasha, Pratyantardasha, Sookshma, Prana - Dasha Calculator API
+final result = await roxy.vedicAstrology.getCurrentDasha(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24, significators: false, nodeType: NodeType.mean, datetime: '2026-08-23T13:47:46Z', focus: Focus.general);
+// Returns GetCurrentDashaResponse: houseThemes Map<String, List<String>>?, focus String?, moonNakshatra int, nakshatraName String, nakshatraLord String, moonLongitude num, ayanamsa num, ayanamsaType String, mahadasha GetCurrentDashaResponseMahadasha, antardasha GetCurrentDashaResponseAntardasha, pratyantardasha GetCurrentDashaResponsePratyantardasha, sookshmaDasha GetCurrentDashaResponseSookshmaDasha, pranaDasha GetCurrentDashaResponsePranaDasha, commonHouses GetCurrentDashaResponseCommonHouses?, remainingInMahadasha GetCurrentDashaResponseRemainingInMahadasha, remainingInAntardasha GetCurrentDashaResponseRemainingInAntardasha, remainingInPratyantardasha GetCurrentDashaResponseRemainingInPratyantardasha, remainingInSookshma GetCurrentDashaResponseRemainingInSookshma, remainingInPrana GetCurrentDashaResponseRemainingInPrana
+
+// Get all 9 Mahadasha periods (120-year cycle)
+final result = await roxy.vedicAstrology.getMajorDashas(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24, significators: false, nodeType: NodeType.mean, focus: Focus.general);
+// Returns GetMajorDashasResponse: houseThemes Map<String, List<String>>?, focus String?, moonNakshatra int, nakshatraName String, nakshatraLord String, moonLongitude num, ayanamsa num, ayanamsaType String, birthDashaBalance GetMajorDashasResponseBirthDashaBalance, mahadashas List<GetMajorDashasResponseMahadashasItem>, totalYears num
+
+// Get all Antardashas (sub-periods) for a specific Mahadasha
+final result = await roxy.vedicAstrology.getSubDashas(mahadasha: Mahadasha.jupiter, date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24, significators: false, nodeType: NodeType.mean, focus: Focus.general);
+// Returns GetSubDashasResponse: houseThemes Map<String, List<String>>?, focus String?, mahadashaLord String, moonLongitude num, ayanamsa num, ayanamsaType String, mahadashaPeriod GetSubDashasResponseMahadashaPeriod, antardashas List<GetSubDashasResponseAntardashasItem>
+
+// Get all Pratyantardashas (antara periods) for a Mahadasha and Antardasha
+final result = await roxy.vedicAstrology.getPratyantardashas(mahadasha: Mahadasha.saturn, antardasha: Antardasha.venus, date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24, significators: false, nodeType: NodeType.mean, focus: Focus.general);
+// Returns GetPratyantardashasResponse: houseThemes Map<String, List<String>>?, focus String?, mahadashaLord String, antardashaLord String, moonLongitude num, ayanamsa num, ayanamsaType String, antardashaPeriod GetPratyantardashasResponseAntardashaPeriod, pratyantardashas List<GetPratyantardashasResponsePratyantardashasItem>
+
+// Get all Sookshma dashas for a Mahadasha, Antardasha and Pratyantardasha
+final result = await roxy.vedicAstrology.getSookshmaDashas(mahadasha: Mahadasha.saturn, antardasha: Antardasha.venus, pratyantardasha: Pratyantardasha.rahu, date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24, significators: false, nodeType: NodeType.mean, focus: Focus.general);
+// Returns GetSookshmaDashasResponse: houseThemes Map<String, List<String>>?, focus String?, mahadashaLord String, antardashaLord String, pratyantardashaLord String, moonLongitude num, ayanamsa num, ayanamsaType String, pratyantardashaPeriod GetSookshmaDashasResponsePratyantardashaPeriod, sookshmaDashas List<GetSookshmaDashasResponseSookshmaDashasItem>
+
+// Get all Prana dashas for a Mahadasha, Antardasha, Pratyantardasha and Sookshma
+final result = await roxy.vedicAstrology.getPranaDashas(mahadasha: Mahadasha.saturn, antardasha: Antardasha.venus, pratyantardasha: Pratyantardasha.rahu, sookshma: Sookshma.jupiter, date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24, significators: false, nodeType: NodeType.mean, focus: Focus.general);
+// Returns GetPranaDashasResponse: houseThemes Map<String, List<String>>?, focus String?, mahadashaLord String, antardashaLord String, pratyantardashaLord String, sookshmaLord String, moonLongitude num, ayanamsa num, ayanamsaType String, sookshmaPeriod GetPranaDashasResponseSookshmaPeriod, pranaDashas List<GetPranaDashasResponsePranaDashasItem>
+
+// Daily Reading - Composed Gochara, Panchanga and Dasha for one native on one day
+final result = await roxy.vedicAstrology.getVedicDailyReading(birthDate: '1984-11-03', birthTime: '01:35:00', latitude: 28.8944, longitude: 76.5894, timezone: NumOrString.number(5.5), date: '2026-06-21', nodeType: NodeType.mean, focus: Focus.general);
+// Returns GetVedicDailyReadingResponse: frames GetVedicDailyReadingResponseFrames, date String, dayStart String, dayEnd String, subject GetVedicDailyReadingResponseSubject, panchanga GetVedicDailyReadingResponsePanchanga, grahas List<GetVedicDailyReadingResponseGrahasItem>, tara List<GetVedicDailyReadingResponseTaraItem>, chandrabala List<GetVedicDailyReadingResponseChandrabalaItem>, dasha List<GetVedicDailyReadingResponseDashaItem>, areas GetVedicDailyReadingResponseAreas, score num, verdict String, tally List<GetVedicDailyReadingResponseTallyItem>, evaluated num, degraded List<GetVedicDailyReadingResponseDegradedItem>, houseThemes Map<String, List<String>>, focus String
+
+// Get basic Panchang - Tithi Nakshatra Yoga Karana Calculator
+final result = await roxy.vedicAstrology.getBasicPanchang(date: '2025-12-17', time: '12:00:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5));
+// Returns GetBasicPanchangResponse: tithi GetBasicPanchangResponseTithi, nakshatra GetBasicPanchangResponseNakshatra, yoga GetBasicPanchangResponseYoga, karana GetBasicPanchangResponseKarana, sunLongitude num, moonLongitude num
+
+// Get detailed Panchang with Rahu Kaal, Yamaganda, Gulika
+final result = await roxy.vedicAstrology.getDetailedPanchang(date: '2026-02-03', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5));
+// Returns GetDetailedPanchangResponse: date String, location GetDetailedPanchangResponseLocation, vara GetDetailedPanchangResponseVara, sunrise String, sunset String, moonrise String?, moonset String?, moonSign GetDetailedPanchangResponseMoonSign, sunSign GetDetailedPanchangResponseSunSign, sunNakshatra GetDetailedPanchangResponseSunNakshatra, tithi GetDetailedPanchangResponseTithi, nakshatra GetDetailedPanchangResponseNakshatra, yoga GetDetailedPanchangResponseYoga, karana GetDetailedPanchangResponseKarana, hora GetDetailedPanchangResponseHora, rahuKaal GetDetailedPanchangResponseRahuKaal, yamaganda GetDetailedPanchangResponseYamaganda, gulika GetDetailedPanchangResponseGulika, abhijitMuhurta GetDetailedPanchangResponseAbhijitMuhurta?, brahmaMuhurta GetDetailedPanchangResponseBrahmaMuhurta, vijayaMuhurta GetDetailedPanchangResponseVijayaMuhurta, nishitaMuhurta GetDetailedPanchangResponseNishitaMuhurta, godhuliMuhurta GetDetailedPanchangResponseGodhuliMuhurta?, pratahSandhya GetDetailedPanchangResponsePratahSandhya?, sayahnaSandhya GetDetailedPanchangResponseSayahnaSandhya?, durMuhurta List<GetDetailedPanchangResponseDurMuhurtaItem>, varjyam List<GetDetailedPanchangResponseVarjyamItem>, amritKalam List<GetDetailedPanchangResponseAmritKalamItem>, chandrabalam GetDetailedPanchangResponseChandrabalam, tarabalam GetDetailedPanchangResponseTarabalam, panchaka GetDetailedPanchangResponsePanchaka, bhadra GetDetailedPanchangResponseBhadra, transitions GetDetailedPanchangResponseTransitions
+
+// Get Choghadiya - 8 Muhurta divisions of day and night
+final result = await roxy.vedicAstrology.getChoghadiya(date: '2026-02-03', latitude: 17.385044, longitude: 78.486671, timezone: NumOrString.number(5.5));
+// Returns GetChoghadiyaResponse: date String, dayChoghadiya List<GetChoghadiyaResponseDayChoghadiyaItem>, nightChoghadiya List<GetChoghadiyaResponseNightChoghadiyaItem>
+
+// Get Hora - 24 Planetary Hours (12 day + 12 night)
+final result = await roxy.vedicAstrology.getHora(date: '2026-02-03', latitude: 17.385044, longitude: 78.486671, timezone: NumOrString.number(5.5));
+// Returns GetHoraResponse: date String, dayHoras List<GetHoraResponseDayHorasItem>, nightHoras List<GetHoraResponseNightHorasItem>
+
+// Check Manglik Dosha - Mangal Dosha Calculator API
+final result = await roxy.vedicAstrology.checkManglikDosha(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24);
+// Returns ManglikResponse: frame ManglikResponseFrame, present bool, severity String?, description String, exceptions List<String>?, remedies List<String>?, effects ManglikResponseEffects?
+
+// Check Kalsarpa Dosha - Kalsarpa Yoga Calculator API
+final result = await roxy.vedicAstrology.checkKalsarpaDosha(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24);
+// Returns KalsarpaResponse: frame KalsarpaResponseFrame, present bool, severity String?, type String?, description String, remedies List<String>?, effects KalsarpaResponseEffects?
+
+// Check Sadhesati - Sade Sati Calculator API (Saturn Transit)
+final result = await roxy.vedicAstrology.checkSadhesati(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24);
+// Returns SadhesatiResponse: frame SadhesatiResponseFrame, present bool, severity String?, type String?, description String, remedies List<String>?, effects SadhesatiResponseEffects?
+
+// List all planetary yogas - 301 entry Vedic Yoga Glossary
+final result = await roxy.vedicAstrology.listYogas(family: Family.akriti);
+// Returns ListYogasResponse: yogas List<ListYogasResponseYogasItem>, total num
+
+// Get yoga details by ID - Vedic Yoga Glossary Entry
+final result = await roxy.vedicAstrology.getYoga(id: GetYogaId.gajakesari);
+// Returns YogaDetail: id String, name String, description String, result String, quality String, family String?
+
+// Detect classical Vedic yogas in a birth chart
+final result = await roxy.vedicAstrology.detectYogas(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24);
+// Returns YogaDetectResponse: yogas List<YogaDetectResponseYogasItem>, frame YogaDetectResponseFrame, total num, birthDetails YogaDetectResponseBirthDetails
+
+// Get KP-Newcomb ayanamsa - Dynamic daily calculation
+final result = await roxy.vedicAstrology.getKpAyanamsa(date: '2025-12-26', time: '09:00:00', timezone: 'Asia/Kolkata');
+// Returns KPAyanamsaResponse: date String, instant String, ayanamsa num, type String, formula String, calculated String
+
+// Get KP planetary positions with sub-lords
+final result = await roxy.vedicAstrology.getKpPlanets(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.kpNewcomb, ayanamsaValue: 24, nodeType: NodeType.mean);
+// Returns KPPlanetsResponse: ayanamsa num, planets List<KPPlanetsResponsePlanetsItem>
+
+// Get KP Placidus house cusps with sub-lords
+final result = await roxy.vedicAstrology.getKpCusps(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.kpNewcomb, ayanamsaValue: 24, focus: Focus.general);
+// Returns KPCuspsResponse: ayanamsa num, houseSystem String, cusps List<KPCuspsResponseCuspsItem>, houseThemes Map<String, List<String>>, focus String
+
+// Generate complete KP birth chart
+final result = await roxy.vedicAstrology.generateKpChart(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.kpNewcomb, ayanamsaValue: 24, nodeType: NodeType.mean, focus: Focus.general);
+// Returns KPChartResponse: meta KPChartResponseMeta, ascendant KPChartResponseAscendant, cusps List<KPChartResponseCuspsItem>, planets List<KPChartResponsePlanetsItem>, nodes KPChartResponseNodes, significators KPChartResponseSignificators, houseThemes Map<String, List<String>>, focus String
+
+// Get KP ruling planets with optional significators
+final result = await roxy.vedicAstrology.getKpRulingPlanets(latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), datetime: '2025-01-15T10:30:00Z', birthDate: '1990-07-04', birthTime: '10:12:00', nodeType: NodeType.mean, focus: Focus.general);
+// Returns KPRulingPlanetsResponse: datetime String, location KPRulingPlanetsResponseLocation, dayLord String, moonSignLord String, moonStarLord String, moonSublord String, moonSubSublord String, lagnaSignLord String, lagnaStarLord String, lagnaSublord String, lagnaSubSublord String, rulingPlanets List<String>, significators List<KPRulingPlanetsResponseSignificatorsItem>?, houseThemes Map<String, List<String>>?, focus String?
+
+// Get KP ruling planets with significators at intervals
+final result = await roxy.vedicAstrology.getKpRulingInterval(startDatetime: '2026-02-03T00:00:00Z', endDatetime: '2026-02-03T01:00:00Z', intervalMinutes: 5, latitude: 17.385044, longitude: 78.486671, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.kpNewcomb, nodeType: NodeType.mean, focus: Focus.general);
+// Returns KPRulingPlanetsIntervalResponse: startDatetime String, endDatetime String, intervalMinutes num, location KPRulingPlanetsIntervalResponseLocation, totalIntervals num, intervals List<KPRulingPlanetsIntervalResponseIntervalsItem>, houseThemes Map<String, List<String>>, focus String
+
+// Find KP sublord changes
+final result = await roxy.vedicAstrology.getKpSublordChanges(planet: Planet.moon, startDate: '2025-01-01', endDate: '2025-01-31', timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.kpNewcomb, nodeType: NodeType.mean);
+// Returns KPSublordChangesResponse: planet String, startDate String, endDate String, totalChanges num, changes List<KPSublordChangesResponseChangesItem>
+
+// Find KP rasi ingress times
+final result = await roxy.vedicAstrology.getKpRasiChanges(planet: Planet.sun, startDate: '2025-01-01', endDate: '2025-12-31', timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.kpNewcomb, nodeType: NodeType.mean);
+// Returns KPRasiChangesResponse: planet String, startDate String, endDate String, totalChanges num, changes List<KPRasiChangesResponseChangesItem>
+
+// Get KP planets at time intervals
+final result = await roxy.vedicAstrology.getKpPlanetsInterval(startDatetime: '2025-01-15T00:00:00Z', endDatetime: '2025-01-15T23:59:00Z', intervalMinutes: 60, latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.kpNewcomb, nodeType: NodeType.mean);
+// Returns KPPlanetsIntervalResponse: startDatetime String, endDatetime String, intervalMinutes num, totalIntervals num, ayanamsa String, ayanamsaValue num, intervals List<KPPlanetsIntervalResponseIntervalsItem>
+
+// Cast a KP horary (Prashna) chart from a number 1-249 - KP Horary API
+final result = await roxy.vedicAstrology.castKpHoraryChart(horaryNumber: 108, date: '2026-03-08', time: '14:30:00', latitude: 19.076, longitude: 72.8777, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.kpNewcomb, ayanamsaValue: 24, nodeType: NodeType.mean, focus: Focus.general);
+// Returns KPHoraryResponse: horaryNumber int, questionTime String, ayanamsaType String, ayanamsaDegrees num, ascendant KPHoraryResponseAscendant, cusps List<KPHoraryResponseCuspsItem>, planets List<KPHoraryResponsePlanetsItem>, rulingPlanets KPHoraryResponseRulingPlanets, significators KPHoraryResponseSignificators, houseThemes Map<String, List<String>>, focus String
+
+// Daily finance score from four KP sub lord layers - KP Daily Finance API
+final result = await roxy.vedicAstrology.getKpDailyFinance(birthDate: '1990-06-15', birthTime: '07:30:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), date: '2026-09-14', time: '12:00:00', ayanamsa: Ayanamsa.kpNewcomb, nodeType: NodeType.mean, gainHouses: [2, 11], lossHouses: [6, 8, 12], weights: KPDailyFinanceRequestWeights(cusps: 30, dasha: 40, rulingPlanets: 15, moonWindows: 15));
+// Returns KPDailyFinanceResponse: date String, readingAt String, ayanamsa String?, ayanamsaDegrees num, houses KPDailyFinanceResponseHouses, significators KPDailyFinanceResponseSignificators, layers KPDailyFinanceResponseLayers, score num, band String, bestWindow KPDailyFinanceResponseBestWindow?, worstWindows List<KPDailyFinanceResponseWorstWindowsItem>
+
+// Get planetary aspects (Drishti) - Mutual aspects between all planets
+final result = await roxy.vedicAstrology.calculateDrishti(date: '2026-02-03', time: '12:00:00', latitude: 17.385044, longitude: 78.486671, timezone: NumOrString.number(5.5), coordinateSystem: CoordinateSystem.sidereal);
+// Returns CalculateDrishtiResponse: datetime String, planets List<CalculateDrishtiResponsePlanetsItem>, aspects List<CalculateDrishtiResponseAspectsItem>, aspectTable List<CalculateDrishtiResponseAspectTableItem>, mutualAspects List<CalculateDrishtiResponseMutualAspectsItem>
+
+// Monthly Planetary Aspects - Major and minor aspect events for a month
+final result = await roxy.vedicAstrology.getMonthlyAspects(year: 2026, month: 2, timezone: NumOrString.number(5.5), coordinateSystem: CoordinateSystem.sidereal);
+// Returns GetMonthlyAspectsResponse: year num, month num, timezone num, events List<GetMonthlyAspectsResponseEventsItem>
+
+// Monthly Lunar Aspects - Moon aspect events with all planets for a month
+final result = await roxy.vedicAstrology.getLunarAspects(year: 2026, month: 2, timezone: NumOrString.number(5.5), coordinateSystem: CoordinateSystem.sidereal);
+// Returns GetLunarAspectsResponse: year num, month num, timezone num, events List<GetLunarAspectsResponseEventsItem>
+
+// Transit Analysis - Compare current planets to natal chart (Gochar)
+final result = await roxy.vedicAstrology.calculateTransit(birthDate: '1990-07-04', birthTime: '10:12:00', transitDate: '2026-02-03', transitTime: '12:00:00', latitude: 17.385044, longitude: 78.486671, timezone: NumOrString.number(5.5), coordinateSystem: CoordinateSystem.sidereal);
+// Returns CalculateTransitResponse: frame CalculateTransitResponseFrame, birthDatetime String, transitDatetime String, natalPlanets List<CalculateTransitResponseNatalPlanetsItem>, transitingPlanets List<CalculateTransitResponseTransitingPlanetsItem>, keyTransits List<CalculateTransitResponseKeyTransitsItem>
+
+// Monthly Transit - Planetary sign changes for an entire month
+final result = await roxy.vedicAstrology.getMonthlyTransits(year: 2026, month: 2, timezone: NumOrString.number(5.5), coordinateSystem: CoordinateSystem.sidereal);
+// Returns GetMonthlyTransitsResponse: year num, month num, timezone num, startingPositions List<GetMonthlyTransitsResponseStartingPositionsItem>, transitEvents List<GetMonthlyTransitsResponseTransitEventsItem>
+
+// Declination Parallels - Planets at same or opposite declination
+final result = await roxy.vedicAstrology.calculateParallels(date: '2026-02-03', time: '12:00:00', latitude: 17.385044, longitude: 78.486671, timezone: NumOrString.number(5.5), orb: 1.5);
+// Returns CalculateParallelsResponse: datetime String, planets List<CalculateParallelsResponsePlanetsItem>, parallels List<CalculateParallelsResponseParallelsItem>
+
+// Monthly Declination Parallels - Parallel and contraparallel events for a month
+final result = await roxy.vedicAstrology.getMonthlyParallels(year: 2026, month: 2, timezone: NumOrString.number(5.5));
+// Returns GetMonthlyParallelsResponse: year num, month num, events List<GetMonthlyParallelsResponseEventsItem>
+
+// Ecliptic Crossings - When planets cross the ecliptic plane
+final result = await roxy.vedicAstrology.getEclipticCrossings(year: 2026, timezone: NumOrString.number(5.5), coordinateSystem: CoordinateSystem.sidereal);
+// Returns GetEclipticCrossingsResponse: year num, timezone num, events List<GetEclipticCrossingsResponseEventsItem>
+
+// List all 12 Rashis - Vedic Zodiac Signs Reference
+final result = await roxy.vedicAstrology.listRashis();
+// Returns RashiListResponse: 
+
+// Get Rashi by ID - Vedic Zodiac Sign Detail
+final result = await roxy.vedicAstrology.getRashi(id: GetRashiId.mesha);
+// Returns RashiResponse: id String, name String, vedicName String, dateRange String, symbol String, energy String, characteristics String
+
+// List all 27 Nakshatras - Lunar Mansions Reference
+final result = await roxy.vedicAstrology.listNakshatras();
+// Returns NakshatraListResponse: 
+
+// Get Nakshatra by ID - Lunar Mansion Detail
+final result = await roxy.vedicAstrology.getNakshatra(id: GetNakshatraId.ashwini);
+// Returns NakshatraResponse: id String, name String, number num, range String, lord String, deity String, symbol String, characteristics String, remedies NakshatraResponseRemedies
+
+// Get upagraha (sub-planet) positions - Upagraha Calculator API
+final result = await roxy.vedicAstrology.getUpagrahaPositions(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24);
+// Returns UpagrahaResponse: frame UpagrahaResponseFrame, timeBased List<UpagrahaResponseTimeBasedItem>, sunBased List<UpagrahaResponseSunBasedItem>
+
+// Get Ashtakavarga (planetary strength) analysis - Ashtakavarga Calculator API
+final result = await roxy.vedicAstrology.calculateAshtakavarga(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24);
+// Returns AshtakavargaResponse: frame AshtakavargaResponseFrame, bhinnashtakavarga List<AshtakavargaResponseBhinnashtakavargaItem>, sarvashtakavarga AshtakavargaResponseSarvashtakavarga, reducedBhinnashtakavarga List<AshtakavargaResponseReducedBhinnashtakavargaItem>, reducedSarvashtakavarga AshtakavargaResponseReducedSarvashtakavarga, shodhyaPinda List<AshtakavargaResponseShodhyaPindaItem>, signs List<String>
+
+// Get Shadbala (six-fold planetary strength) analysis - Shadbala Calculator API
+final result = await roxy.vedicAstrology.calculateShadbala(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24);
+// Returns ShadbalaResponse: balaThemes ShadbalaResponseBalaThemes, frame ShadbalaResponseFrame, planets List<ShadbalaResponsePlanetsItem>
+
+// List all 17 avastha states - Planetary State Reference
+final result = await roxy.vedicAstrology.listAvasthas(system: System.deeptadi);
+// Returns List<ListAvasthasResponseItem>: id String, name String, system String, meaning String, interpretation String
+
+// Get avastha by ID - Planetary State Detail
+final result = await roxy.vedicAstrology.getAvastha(id: GetAvasthaId.dipta);
+// Returns GetAvasthaResponse: id String, name String, system String, meaning String, interpretation String
+
+// Get the twelve Arudha padas - Arudha Lagna Calculator API
+final result = await roxy.vedicAstrology.calculateArudhaPadas(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24);
+// Returns ArudhaResponse: frame ArudhaResponseFrame, lagnaRashi String, arudhaLagna String, upapada String, padas List<ArudhaResponsePadasItem>
+
+// Get Chara Karakas including Atmakaraka - Jaimini Karaka Calculator API
+final result = await roxy.vedicAstrology.calculateCharaKarakas(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24, scheme: Scheme.eight);
+// Returns CharaKarakaResponse: frame CharaKarakaResponseFrame, scheme String, atmakaraka String, darakaraka String, karakas List<CharaKarakaResponseKarakasItem>
+
+// Get Bhava Bala (house strength) for all twelve houses - Bhava Bala Calculator API
+final result = await roxy.vedicAstrology.calculateBhavaBala(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24, focus: Focus.general);
+// Returns BhavaBalaResponse: frame BhavaBalaResponseFrame, houseSystem String, bhavas List<BhavaBalaResponseBhavasItem>, houseThemes Map<String, List<String>>, focus String
+
+// Get the Bhav Chalit (Chalit Kundli) cusp-based house chart - Bhav Chalit API
+final result = await roxy.vedicAstrology.calculateBhavChalit(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24, focus: Focus.general);
+// Returns BhavChalitResponse: frame BhavChalitResponseFrame, houseSystem String, ascendant num, midheaven num, bhavas List<BhavChalitResponseBhavasItem>, grahas List<BhavChalitResponseGrahasItem>, movedCount num, houseThemes Map<String, List<String>>, focus String
+
+// Heliacal rising and setting (udaya and asta) - Graha Asta Calculator API
+final result = await roxy.vedicAstrology.getHeliacalVisibility(date: '2026-07-25', latitude: 19.076, longitude: 72.8777, timezone: NumOrString.number(5.5));
+// Returns HeliacalResponse: date String, grahas List<HeliacalResponseGrahasItem>
+```
+
+---
+
+## Forecast: `roxy.forecast`
+
+Astrology forecast API that merges upcoming transit aspects, sign ingresses, retrograde stations, new and full moons,...
+
+[API reference](https://roxyapi.com/api-reference/forecast)
+
+```dart
+// Cross-domain forecast timeline - Transits, ingresses, stations, dasha changes, critical days
+final result = await roxy.forecast.generateTimeline(birthData: GenerateTimelineRequestBirthData(date: '1990-07-15', time: '13:30:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 0), startDate: '2026-06-01', endDate: '2026-08-30', domains: [Domains.western, Domains.vedic, Domains.biorhythm], minSignificance: 0, domainWeights: GenerateTimelineRequestDomainWeights(western: 1.5, vedic: 1.5, biorhythm: 0.5));
+// Returns GenerateTimelineResponse: birthData GenerateTimelineResponseBirthData, startDate String, endDate String, count num, events List<GenerateTimelineResponseEventsItem>
+
+// Western astrology forecast - aspects, ingresses, stations, eclipses, moon phases
+final result = await roxy.forecast.forecastTransits(birthData: ForecastTransitsRequestBirthData(date: '1990-07-15', time: '13:30:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 0), startDate: '2026-06-01', endDate: '2026-08-30', minSignificance: 0);
+// Returns ForecastTransitsResponse: birthData ForecastTransitsResponseBirthData, startDate String, endDate String, count num, events List<ForecastTransitsResponseEventsItem>
+
+// Significant dates - High-significance cross-domain forecast highlights
+final result = await roxy.forecast.findSignificantDates(birthData: FindSignificantDatesRequestBirthData(date: '1990-07-15', time: '13:30:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 0), startDate: '2026-06-01', endDate: '2026-08-30', domains: [Domains.western, Domains.vedic, Domains.biorhythm], minSignificance: 70, domainWeights: FindSignificantDatesRequestDomainWeights(western: 1.5, vedic: 1.5, biorhythm: 0.5));
+// Returns FindSignificantDatesResponse: birthData FindSignificantDatesResponseBirthData, startDate String, endDate String, count num, events List<FindSignificantDatesResponseEventsItem>
+
+// Forecast digest - Pre-summarized next 24h, 7d, 30d, and 90d rollups
+final result = await roxy.forecast.generateDigest(birthData: GenerateDigestRequestBirthData(date: '1990-07-15', time: '13:30:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 0), startDate: '2026-06-01', domains: [Domains.western, Domains.vedic, Domains.biorhythm], minSignificance: 0, domainWeights: GenerateDigestRequestDomainWeights(western: 1.5, vedic: 1.5, biorhythm: 0.5), top: 3);
+// Returns GenerateDigestResponse: birthData GenerateDigestResponseBirthData, startDate String, endDate String, windows List<GenerateDigestResponseWindowsItem>
+
+// Solar return chart - Annual birthday forecast chart for a single subject
+final result = await roxy.forecast.forecastSolarReturn(date: '1990-07-15', time: '14:30:00', year: 2026, latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), houseSystem: HouseSystem.placidus);
+// Returns ForecastSolarReturnResponse: birthDate String, solarReturnDate String, solarReturnYear num, location ForecastSolarReturnResponseLocation, natalSunPosition ForecastSolarReturnResponseNatalSunPosition, chart ForecastSolarReturnResponseChart
+```
+
+---
+
+## Human Design: `roxy.humanDesign`
+
+Human Design API that generates the full bodygraph from a birth moment: type, strategy, inner authority, profile, def...
+
+[API reference](https://roxyapi.com/api-reference/human-design)
+
+```dart
+// Generate full Human Design bodygraph - Type, authority, profile, centers, channels, gates
+final result = await roxy.humanDesign.generateBodygraph(date: '1990-07-15', time: '13:00:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 0, nodeType: NodeType.true$);
+// Returns GenerateBodygraphResponse: type String, typeLocalized String?, typeDescription String, aura String, strategy String, strategyLocalized String?, strategyDescription String, authority String, authorityLocalized String?, authorityDescription String, signature String, signatureLocalized String?, notSelf String, notSelfLocalized String?, profile String, profileKeynotes GenerateBodygraphResponseProfileKeynotes, profileDescription String, definition String, definitionLocalized String?, definitionDescription String, sides Map<String, String>, designInstantUtc String, incarnationCross GenerateBodygraphResponseIncarnationCross, centers List<GenerateBodygraphResponseCentersItem>, channels List<GenerateBodygraphResponseChannelsItem>, gates List<GenerateBodygraphResponseGatesItem>
+
+// Calculate Human Design connection chart - Two-person composite bodygraph compatibility
+final result = await roxy.humanDesign.calculateConnection(personA: CalculateConnectionRequestPersonA(date: '1990-07-15', time: '13:00:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 0, nodeType: NodeType.true$), personB: CalculateConnectionRequestPersonB(date: '1990-07-15', time: '13:00:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 0, nodeType: NodeType.true$));
+// Returns CalculateConnectionResponse: personAGates List<int>?, personBGates List<int>?, totalChannels num, channels List<CalculateConnectionResponseChannelsItem>, centers List<CalculateConnectionResponseCentersItem>, combinedDefinition String, combinedDefinitionLocalized String?, summary CalculateConnectionResponseSummary
+
+// Calculate Human Design Penta - Small-group BG5 operating system for three to five people
+final result = await roxy.humanDesign.calculatePenta(members: []);
+// Returns CalculatePentaResponse: memberCount num, channels List<CalculatePentaResponseChannelsItem>, gates List<CalculatePentaResponseGatesItem>, summary CalculatePentaResponseSummary
+
+// Generate Human Design transit overlay - Current planetary activations on a natal bodygraph
+final result = await roxy.humanDesign.generateTransit(birthData: GenerateTransitRequestBirthData(date: '1990-07-15', time: '13:00:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 0, nodeType: NodeType.true$), date: '2026-05-23', time: '12:00:00');
+// Returns GenerateTransitResponse: date String, time String, timezone num, activations List<GenerateTransitResponseActivationsItem>, completedChannels List<GenerateTransitResponseCompletedChannelsItem>, temporaryCenters List<GenerateTransitResponseTemporaryCentersItem>, summary String
+
+// Calculate Human Design type, authority and profile
+final result = await roxy.humanDesign.calculateType(date: '1990-07-15', time: '13:00:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 0, nodeType: NodeType.true$);
+// Returns CalculateTypeResponse: type String, typeLocalized String?, typeDescription String, aura String, strategy String, strategyLocalized String?, strategyDescription String, authority String, authorityLocalized String?, authorityDescription String, signature String, signatureLocalized String?, notSelf String, notSelfLocalized String?, profile String
+
+// Calculate the 26 Human Design gate activations
+final result = await roxy.humanDesign.calculateGates(date: '1990-07-15', time: '13:00:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 0, nodeType: NodeType.true$);
+// Returns CalculateGatesResponse: personality List<CalculateGatesResponsePersonalityItem>, design List<CalculateGatesResponseDesignItem>
+
+// Look up a Human Design gate by number
+final result = await roxy.humanDesign.getGate(number: 34);
+// Returns GetGateResponse: number num, name String, nameLocalized String?, center String, centerName String, centerNameLocalized String?, ichingHexagram GetGateResponseIchingHexagram, channelPartners List<GetGateResponseChannelPartnersItem>
+
+// Calculate the defined Human Design channels
+final result = await roxy.humanDesign.calculateChannels(date: '1990-07-15', time: '13:00:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 0, nodeType: NodeType.true$);
+// Returns CalculateChannelsResponse: channels List<CalculateChannelsResponseChannelsItem>, total num, definedCenters List<String>
+
+// Calculate the nine Human Design centers
+final result = await roxy.humanDesign.calculateCenters(date: '1990-07-15', time: '13:00:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 0, nodeType: NodeType.true$);
+// Returns CalculateCentersResponse: centers List<CalculateCentersResponseCentersItem>, definedCount num
+
+// Look up a Human Design center by id
+final result = await roxy.humanDesign.getCenter(id: GetCenterId.sacral);
+// Returns GetCenterResponse: id String, name String, nameLocalized String?, motor bool, awareness bool, definedMeaning String, undefinedMeaning String
+
+// Calculate the Human Design profile and line keynotes
+final result = await roxy.humanDesign.calculateProfile(date: '1990-07-15', time: '13:00:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 0, nodeType: NodeType.true$);
+// Returns CalculateProfileResponse: profile String, personalityLine num, designLine num, personalityKeynote String, designKeynote String
+
+// Calculate Human Design Variables - The four arrows and Color, Tone, Base substructure
+final result = await roxy.humanDesign.calculateVariables(date: '1990-07-15', time: '13:00:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 0, nodeType: NodeType.true$);
+// Returns CalculateVariablesResponse: arrows List<CalculateVariablesResponseArrowsItem>, confident bool, confidenceMarginDeg num, baseDescription String
+```
+
+---
+
+## Chinese Astrology: `roxy.chineseAstrology`
+
+Chinese zodiac and BaZi astrology API: Four Pillars charts, Chinese zodiac signs and the Chinese lunisolar calendar f...
+
+[API reference](https://roxyapi.com/api-reference/chinese-astrology)
+
+```dart
+// Generate BaZi chart - Four Pillars of Destiny calculator API
+final result = await roxy.chineseAstrology.generateBaziChart(date: '1990-06-15', time: '14:30:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 116.4, dayBoundary: DayBoundary.splitZi, yearBoundary: YearBoundary.liChun, hourClock: HourClock.clock);
+// Returns GenerateBaziChartResponse: birthData GenerateBaziChartResponseBirthData, conventions GenerateBaziChartResponseConventions, pillars List<GenerateBaziChartResponsePillarsItem>, dayMaster GenerateBaziChartResponseDayMaster, zodiacAnimal String, zodiacAnimalLocalized String?, fiveElements List<GenerateBaziChartResponseFiveElementsItem>, interactions List<GenerateBaziChartResponseInteractionsItem>, summary String
+
+// Calculate luck pillars - BaZi Da Yun ten-year cycle API
+final result = await roxy.chineseAstrology.calculateLuckPillars(date: '1990-06-15', time: '14:30:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 116.4, dayBoundary: DayBoundary.splitZi, yearBoundary: YearBoundary.liChun, hourClock: HourClock.clock, gender: Gender.male, count: 8, annualFromYear: 2026, annualYears: 10);
+// Returns CalculateLuckPillarsResponse: birthData CalculateLuckPillarsResponseBirthData, conventions CalculateLuckPillarsResponseConventions, gender String, direction String, startAge num, startAgeMonths num, daysToTerm num, boundaryTerm String, boundaryTermName String, luckPillars List<CalculateLuckPillarsResponseLuckPillarsItem>, annualPillars List<CalculateLuckPillarsResponseAnnualPillarsItem>?, summary String
+
+// Calculate Day Master strength - BaZi favorable element API
+final result = await roxy.chineseAstrology.calculateDayMasterStrength(date: '1990-06-15', time: '14:30:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 116.4, dayBoundary: DayBoundary.splitZi, yearBoundary: YearBoundary.liChun, hourClock: HourClock.clock);
+// Returns CalculateDayMasterStrengthResponse: birthData CalculateDayMasterStrengthResponseBirthData, conventions CalculateDayMasterStrengthResponseConventions, dayMaster CalculateDayMasterStrengthResponseDayMaster, verdict String, score num, seasonalState String, seasonalStateChinese String, seasonalStateMeaning String, rootCount num, factors List<CalculateDayMasterStrengthResponseFactorsItem>, favorableElements List<String>, unfavorableElements List<String>, fiveElements List<CalculateDayMasterStrengthResponseFiveElementsItem>, summary String
+
+// Calculate BaZi compatibility - Four Pillars matchmaking API
+final result = await roxy.chineseAstrology.calculateBaziCompatibility(personA: CalculateBaziCompatibilityRequestPersonA(date: '1990-06-15', time: '14:30:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 116.4, dayBoundary: DayBoundary.splitZi, yearBoundary: YearBoundary.liChun, hourClock: HourClock.clock), personB: CalculateBaziCompatibilityRequestPersonB(date: '1990-06-15', time: '14:30:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 116.4, dayBoundary: DayBoundary.splitZi, yearBoundary: YearBoundary.liChun, hourClock: HourClock.clock));
+// Returns CalculateBaziCompatibilityResponse: personA CalculateBaziCompatibilityResponsePersonA, personB CalculateBaziCompatibilityResponsePersonB, dayMasterRelation String, interactions List<CalculateBaziCompatibilityResponseInteractionsItem>, score num, harmoniousCount num, challengingCount num, summary String
+
+// Calculate BaZi annual forecast - Liu Nian yearly pillar API
+final result = await roxy.chineseAstrology.calculateAnnualForecast(date: '1990-06-15', time: '14:30:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 116.4, dayBoundary: DayBoundary.splitZi, yearBoundary: YearBoundary.liChun, hourClock: HourClock.clock, year: 2026);
+// Returns CalculateAnnualForecastResponse: birthData CalculateAnnualForecastResponseBirthData, conventions CalculateAnnualForecastResponseConventions, year num, annualPillar CalculateAnnualForecastResponseAnnualPillar, animal String, animalLocalized String?, tenGod CalculateAnnualForecastResponseTenGod, branchTenGod CalculateAnnualForecastResponseBranchTenGod, yearBranchRelation String, benMingNian bool, yearBranchRelationMeaning String, interactions List<CalculateAnnualForecastResponseInteractionsItem>, summary String
+
+// List the 12 Chinese zodiac animals - Sheng Xiao sign catalogue
+final result = await roxy.chineseAstrology.listZodiacAnimals(limit: 12, offset: 0);
+// Returns ListZodiacAnimalsResponse: total num, limit num, offset num, animals List<ListZodiacAnimalsResponseAnimalsItem>
+
+// Get one Chinese zodiac animal - Full sign profile with compatibility partners
+final result = await roxy.chineseAstrology.getZodiacAnimal(id: GetZodiacAnimalId.rat);
+// Returns GetZodiacAnimalResponse: id String, name String, nameLocalized String?, chinese String, pinyin String, branch String, element String, elementLocalized String?, polarity String, traits List<String>, summary String, strengths List<String>, weaknesses List<String>, compatibilitySummary String, hours GetZodiacAnimalResponseHours, trine GetZodiacAnimalResponseTrine, secretFriend GetZodiacAnimalResponseSecretFriend, clashPartner GetZodiacAnimalResponseClashPartner, harmPartner GetZodiacAnimalResponseHarmPartner, elementVariants List<GetZodiacAnimalResponseElementVariantsItem>
+
+// Find the Chinese zodiac animal for a birth date - Sheng Xiao calculator
+final result = await roxy.chineseAstrology.calculateZodiacAnimal(date: '1990-06-15', yearBoundary: YearBoundary.lunarNewYear);
+// Returns CalculateZodiacAnimalResponse: date String, animal CalculateZodiacAnimalResponseAnimal, yearPillar CalculateZodiacAnimalResponseYearPillar, element String, elementLocalized String?, polarity String, interpretation String, conventions CalculateZodiacAnimalResponseConventions
+
+// Chinese zodiac compatibility - Trine, six harmony, clash and harm analysis
+final result = await roxy.chineseAstrology.getZodiacCompatibility(sign1: Sign1.rat, sign2: Sign2.dragon);
+// Returns GetZodiacCompatibilityResponse: signs GetZodiacCompatibilityResponseSigns, relationship String, relationshipName String, relationshipNameLocalized String?, relationshipChinese String, relationshipPinyin String, score num, verdict String, sharedElement String?, sharedElementLocalized String?, summary String, strengths List<String>, frictions List<String>, advice String
+
+// Daily Chinese zodiac reading - Day pillar forecast by animal sign
+final result = await roxy.chineseAstrology.getDailyZodiacReading(id: GetZodiacAnimalId.rat, date: '2026-04-03', timezone: 'America/New_York');
+// Returns GetDailyZodiacReadingResponse: animal GetDailyZodiacReadingResponseAnimal, date String, dayPillar GetDailyZodiacReadingResponseDayPillar, relationship String, energyRating num, overview String, love String, career String, advice String, year GetDailyZodiacReadingResponseYear, benMingNian bool
+
+// List the 24 solar terms - Jie Qi calendar API with exact instants
+final result = await roxy.chineseAstrology.listSolarTerms(year: 2026);
+// Returns ListSolarTermsResponse: year num, referenceOffset num, total num, terms List<ListSolarTermsResponseTermsItem>
+
+// Convert lunar and Gregorian dates - Chinese lunisolar calendar API
+final result = await roxy.chineseAstrology.calculateLunarDate(date: '1990-06-15', lunarYear: 1990, lunarMonth: 5, lunarDay: 23, isLeapMonth: false);
+// Returns CalculateLunarDateResponse: gregorianDate String, lunar CalculateLunarDateResponseLunar, leapMonthOfYear num?, referenceOffset num
+
+// Get the almanac for a day - Tong Shu API with day officers and mansions
+final result = await roxy.chineseAstrology.getAlmanacDay(date: '1990-06-15');
+// Returns GetAlmanacDayResponse: date String, lunar GetAlmanacDayResponseLunar, yearPillar GetAlmanacDayResponseYearPillar, monthPillar GetAlmanacDayResponseMonthPillar, dayPillar GetAlmanacDayResponseDayPillar, dayOfficer GetAlmanacDayResponseDayOfficer, mansion GetAlmanacDayResponseMansion, clashAnimal String, clashAnimalLocalized String?, favours List<String>, avoids List<String>
+
+// Get a month of almanac days - Chinese calendar month view API
+final result = await roxy.chineseAstrology.getMonthlyAlmanac(year: 1990, month: 6);
+// Returns GetMonthlyAlmanacResponse: year num, month num, total num, solarTerms List<GetMonthlyAlmanacResponseSolarTermsItem>, days List<GetMonthlyAlmanacResponseDaysItem>
+
+// Find auspicious days - Chinese date selection API for weddings and openings
+final result = await roxy.chineseAstrology.lookupAuspiciousDays(activity: Activity.wedding, startDate: '2026-03-01', endDate: '2026-04-30', avoidAnimal: AvoidAnimal.rat);
+// Returns LookupAuspiciousDaysResponse: activity String, activityLabel String, startDate String, endDate String, daysSearched num, avoidAnimal String?, avoidAnimalLocalized String?, total num, days List<LookupAuspiciousDaysResponseDaysItem>
+
+// List the five elements - Wu Xing API with generating and controlling cycles
+final result = await roxy.chineseAstrology.listFiveElements(limit: 5, offset: 0);
+// Returns ListFiveElementsResponse: total num, limit num, offset num, generatingCycle List<String>, controllingCycle List<String>, elements List<ListFiveElementsResponseElementsItem>
+```
+
+---
+
+## Feng Shui: `roxy.fengShui`
+
+Compute classical feng shui from one API: Xuan Kong flying star natal charts for any of the nine periods and 24 mount...
+
+[API reference](https://roxyapi.com/api-reference/feng-shui)
+
+```dart
+// Calculate Kua number - Feng shui personal direction calculator API
+final result = await roxy.fengShui.calculateKuaNumber(date: '1985-07-15', gender: Gender.male, yearBoundary: YearBoundary.liChun);
+// Returns CalculateKuaNumberResponse: kua num, rawKua num, reassigned bool, gender String, group String, solarYear num, boundaryDate String, trigram CalculateKuaNumberResponseTrigram, sectors List<CalculateKuaNumberResponseSectorsItem>, conventions CalculateKuaNumberResponseConventions
+
+// Look up a Kua number - Eight Mansions reference API
+final result = await roxy.fengShui.getKuaNumber(number: 8);
+// Returns GetKuaNumberResponse: number num, group String, trigram GetKuaNumberResponseTrigram, sectors List<GetKuaNumberResponseSectorsItem>
+
+// Generate Eight Mansions map - Ba Zhai lucky direction API
+final result = await roxy.fengShui.generateEightMansions(kua: 6, date: '1985-07-15', gender: Gender.male, yearBoundary: YearBoundary.liChun, facing: GenerateEightMansionsFacing.southeast);
+// Returns GenerateEightMansionsResponse: kua num, group String, trigram GenerateEightMansionsResponseTrigram, sectors List<GenerateEightMansionsResponseSectorsItem>, bestSector String, worstSector String, facingSector GenerateEightMansionsResponseFacingSector?, conventions GenerateEightMansionsResponseConventions
+
+// Generate flying star natal chart - Xuan Kong Fei Xing API
+final result = await roxy.fengShui.generateFlyingStarChart(period: 9, facing: GenerateFlyingStarChartFacing.wu, facingDegrees: 180);
+// Returns GenerateFlyingStarChartResponse: period num, facing GenerateFlyingStarChartResponseFacing, sitting GenerateFlyingStarChartResponseSitting, facingDegrees num?, straddling bool, mountainCenterStar num, waterCenterStar num, mountainFlight String, waterFlight String, structure GenerateFlyingStarChartResponseStructure, palaces List<GenerateFlyingStarChartResponsePalacesItem>
+
+// Annual flying stars - Yearly feng shui star chart API
+final result = await roxy.fengShui.getAnnualFlyingStars(year: 2026);
+// Returns GetAnnualFlyingStarsResponse: year num, centerStar num, changeoverDate String, palaces List<GetAnnualFlyingStarsResponsePalacesItem>
+
+// Monthly flying stars - Month by month feng shui overlay API
+final result = await roxy.fengShui.getMonthlyFlyingStars(year: 2026, month: 1);
+// Returns GetMonthlyFlyingStarsResponse: year num, month num, centerStar num, yearBranch String, palaces List<GetMonthlyFlyingStarsResponsePalacesItem>
+
+// List the nine flying stars - Xuan Kong star reference API
+final result = await roxy.fengShui.listFlyingStars(limit: 9, offset: 0);
+// Returns ListFlyingStarsResponse: total num, limit num, offset num, stars List<ListFlyingStarsResponseStarsItem>
+
+// Annual afflictions - Tai Sui, San Sha and Five Yellow API
+final result = await roxy.fengShui.getAnnualAfflictions(year: 2026);
+// Returns GetAnnualAfflictionsResponse: year num, yearBranch String, changeoverDate String, taiSui GetAnnualAfflictionsResponseTaiSui, suiPo GetAnnualAfflictionsResponseSuiPo, sanSha GetAnnualAfflictionsResponseSanSha, fiveYellow GetAnnualAfflictionsResponseFiveYellow
+
+// List Bagua sectors - Feng shui bagua map API
+final result = await roxy.fengShui.listBaguaSectors(limit: 9, offset: 0);
+// Returns ListBaguaSectorsResponse: total num, limit num, offset num, sectors List<ListBaguaSectorsResponseSectorsItem>
+
+// Look up a Bagua sector - Life area reference API
+final result = await roxy.fengShui.getBaguaSector(id: GetBaguaSectorId.wealth);
+// Returns GetBaguaSectorResponse: id String, name String, nameLocalized String?, number num, palace String, direction String?, element String, colors List<String>, trigram GetBaguaSectorResponseTrigram?, earlierHeavenTrigram GetBaguaSectorResponseEarlierHeavenTrigram?, focus String, meaning String
+
+// List the nine periods - San Yuan period table API
+final result = await roxy.fengShui.listNinePeriods(date: '2026-08-23');
+// Returns ListNinePeriodsResponse: total num, cycleStartYear num, cycleEndYear num, date String, currentPeriod num, periods List<ListNinePeriodsResponsePeriodsItem>
+```
+
+---
+
+## Mesoamerican Astrology: `roxy.mesoamericanAstrology`
+
+Calculate Mayan astrology day signs, the Tzolkin sacred round, the Haab year, the full Long Count and the Aztec tonal...
+
+[API reference](https://roxyapi.com/api-reference/mesoamerican-astrology)
+
+```dart
+// Mayan day sign for a date - Tzolkin calculator API
+final result = await roxy.mesoamericanAstrology.calculateTzolkin(date: '2012-12-21', correlation: Correlation.gmt584283);
+// Returns CalculateTzolkinResponse: daySign String, daySignName String, daySignClassic String, daySignKiche String, number num, trecena CalculateTzolkinResponseTrecena, date String, reading CalculateTzolkinResponseReading, conventions CalculateTzolkinResponseConventions
+
+// Generate a Mayan chart - Tzolkin, Haab and Long Count calculator API
+final result = await roxy.mesoamericanAstrology.generateMayanChart(date: '2012-12-21', correlation: Correlation.gmt584283, yearBearerSystem: YearBearerSystem.classic);
+// Returns GenerateMayanChartResponse: date String, tzolkin GenerateMayanChartResponseTzolkin, haab GenerateMayanChartResponseHaab, longCount GenerateMayanChartResponseLongCount, calendarRound String, lordOfNight GenerateMayanChartResponseLordOfNight, yearBearer GenerateMayanChartResponseYearBearer, cross List<GenerateMayanChartResponseCrossItem>, summary String, conventions GenerateMayanChartResponseConventions
+
+// Convert a Maya Long Count - Long Count calendar converter API
+final result = await roxy.mesoamericanAstrology.convertLongCount(date: '2012-12-21', longCount: '13.0.0.0.0', correlation: Correlation.gmt584283);
+// Returns ConvertLongCountResponse: date String, longCount String, daysSinceEpoch num, julianDayNumber num, calendarRound String, lordOfNight String, note String?, conventions ConvertLongCountResponseConventions
+
+// Daily Mayan energy reading - Tzolkin day sign of the day API
+final result = await roxy.mesoamericanAstrology.getDailyMayanReading(date: '2026-09-02', correlation: Correlation.gmt584283);
+// Returns GetDailyMayanReadingResponse: daySign String, daySignName String, daySignClassic String, daySignKiche String, number num, trecena GetDailyMayanReadingResponseTrecena, date String, overview String, reading GetDailyMayanReadingResponseReading, conventions GetDailyMayanReadingResponseConventions
+
+// Monthly Tzolkin calendar grid - Maya calendar month API
+final result = await roxy.mesoamericanAstrology.getMonthlyTzolkinCalendar(year: 2026, month: 9, correlation: Correlation.gmt584283);
+// Returns GetMonthlyTzolkinCalendarResponse: year num, month num, total num, days List<GetMonthlyTzolkinCalendarResponseDaysItem>, conventions GetMonthlyTzolkinCalendarResponseConventions
+
+// Mayan nawal compatibility - Tzolkin pair analysis API
+final result = await roxy.mesoamericanAstrology.calculateMayanCompatibility(personA: CalculateMayanCompatibilityRequestPersonA(date: '2012-12-21'), personB: CalculateMayanCompatibilityRequestPersonB(date: '2012-12-21'), correlation: Correlation.gmt584283, directionScheme: DirectionScheme.madridCodex);
+// Returns CalculateMayanCompatibilityResponse: personA CalculateMayanCompatibilityResponsePersonA, personB CalculateMayanCompatibilityResponsePersonB, daysApart num, components List<CalculateMayanCompatibilityResponseComponentsItem>, score num, verdict String, summary String, conventions CalculateMayanCompatibilityResponseConventions
+
+// List the 20 Mayan day signs - Tzolkin nawal catalogue API
+final result = await roxy.mesoamericanAstrology.listMayanDaySigns(directionScheme: DirectionScheme.madridCodex, limit: 20, offset: 0);
+// Returns ListMayanDaySignsResponse: total num, limit num, offset num, daySigns List<ListMayanDaySignsResponseDaySignsItem>, conventions ListMayanDaySignsResponseConventions
+
+// Get one Mayan day sign - Nawal profile API
+final result = await roxy.mesoamericanAstrology.getMayanDaySign(id: GetMayanDaySignId.imix, directionScheme: DirectionScheme.madridCodex);
+// Returns GetMayanDaySignResponse: position num, id String, nameYucatec String, nameClassic String, nameKiche String, gloss String, glossAlternate String, direction String, color String, keynote String, directionReading String, essence String, strengths List<String>, challenges List<String>, guidance String, trecena GetMayanDaySignResponseTrecena, conventions GetMayanDaySignResponseConventions
+
+// List the 20 Mayan trecenas - Tzolkin thirteen day period API
+final result = await roxy.mesoamericanAstrology.listTrecenas(limit: 20, offset: 0);
+// Returns ListTrecenasResponse: total num, limit num, offset num, trecenas List<ListTrecenasResponseTrecenasItem>
+
+// Get one Mayan trecena - Thirteen day period profile API
+final result = await roxy.mesoamericanAstrology.getTrecena(number: 1);
+// Returns GetTrecenaResponse: number num, rulingSign String, rulingSignName String, rulingSignKiche String, length num, reading String
+
+// List the 19 Haab periods - Maya solar calendar month API
+final result = await roxy.mesoamericanAstrology.listHaabMonths(limit: 19, offset: 0);
+// Returns ListHaabMonthsResponse: total num, limit num, offset num, months List<ListHaabMonthsResponseMonthsItem>
+
+// Get one Haab period - Maya solar calendar month profile API
+final result = await roxy.mesoamericanAstrology.getHaabMonth(id: GetHaabMonthId.pop);
+// Returns GetHaabMonthResponse: position num, id String, nameYucatec String, nameClassic String, length num, gloss String, reading String
+
+// Aztec day sign for a date - Tonalpohualli calculator API
+final result = await roxy.mesoamericanAstrology.calculateTonalpohualli(date: '2012-12-21');
+// Returns CalculateTonalpohualliResponse: daySign String, daySignName String, gloss String, direction String, number num, trecena CalculateTonalpohualliResponseTrecena, keynote String, guidance String, scope String, date String, conventions CalculateTonalpohualliResponseConventions
+
+// Daily Aztec energy reading - Tonalpohualli day sign of the day API
+final result = await roxy.mesoamericanAstrology.getDailyAztecReading(date: '2026-09-02');
+// Returns GetDailyAztecReadingResponse: daySign String, daySignName String, gloss String, direction String, number num, trecena GetDailyAztecReadingResponseTrecena, keynote String, guidance String, scope String, date String, overview String, conventions GetDailyAztecReadingResponseConventions
+
+// List the 20 Aztec day signs - Tonalpohualli sign catalogue API
+final result = await roxy.mesoamericanAstrology.listAztecDaySigns(limit: 20, offset: 0);
+// Returns ListAztecDaySignsResponse: total num, limit num, offset num, daySigns List<ListAztecDaySignsResponseDaySignsItem>
+
+// Get one Aztec day sign - Tonalpohualli sign profile API
+final result = await roxy.mesoamericanAstrology.getAztecDaySign(id: GetAztecDaySignId.cipactli);
+// Returns GetAztecDaySignResponse: position num, id String, nameNahuatl String, gloss String, direction String, essence String, guidance String, keynote String
+
+// List the 20 Aztec trecenas - Tonalpohualli thirteen day period API
+final result = await roxy.mesoamericanAstrology.listAztecTrecenas(limit: 20, offset: 0);
+// Returns ListAztecTrecenasResponse: total num, limit num, offset num, trecenas List<ListAztecTrecenasResponseTrecenasItem>
+
+// Get one Aztec trecena - Tonalpohualli period profile API
+final result = await roxy.mesoamericanAstrology.getAztecTrecena(number: 1);
+// Returns GetAztecTrecenaResponse: number num, startSign String, startSignName String, length num, reading String
+```
+
+---
+
+## Vastu: `roxy.vastu`
+
+Vastu Shastra API for directional home and plot analysis: entrance padas with the classical effect of each of the 32...
+
+[API reference](https://roxyapi.com/api-reference/vastu)
+
+```dart
+// Calculate entrance pada - Vastu main door direction API
+final result = await roxy.vastu.calculateEntrancePada(plot: CalculateEntrancePadaRequestPlot(width: 30, depth: 40, polygon: [CalculateEntrancePadaRequestPlotPolygonItem(x: 0, y: 0), CalculateEntrancePadaRequestPlotPolygonItem(x: 30, y: 0), CalculateEntrancePadaRequestPlotPolygonItem(x: 30, y: 40), CalculateEntrancePadaRequestPlotPolygonItem(x: 0, y: 40)], unit: Unit.feet), facing: GenerateEightMansionsFacing.north, facingDegrees: 15, doorPosition: 0.4, grid: Grid.v81Pada);
+// Returns CalculateEntrancePadaResponse: pada num, side String, startCorner String, ordinalOnSide num, square num, cell CalculateEntrancePadaResponseCell, devata CalculateEntrancePadaResponseDevata?, effect String, auspiciousness String, reading String, recommendedPadas List<num>, source CalculateEntrancePadaResponseSource, conventions CalculateEntrancePadaResponseConventions
+
+// Generate Vastu Purusha Mandala - 81 pada and 64 pada grid API
+final result = await roxy.vastu.generateMandala(plot: GenerateMandalaRequestPlot(width: 30, depth: 40, polygon: [GenerateMandalaRequestPlotPolygonItem(x: 0, y: 0), GenerateMandalaRequestPlotPolygonItem(x: 30, y: 0), GenerateMandalaRequestPlotPolygonItem(x: 30, y: 40), GenerateMandalaRequestPlotPolygonItem(x: 0, y: 40)], unit: Unit.feet), grid: Grid.v81Pada);
+// Returns GenerateMandalaResponse: grid String, cells List<GenerateMandalaResponseCellsItem>, brahmasthan GenerateMandalaResponseBrahmasthan, marma GenerateMandalaResponseMarma?, vamsa List<GenerateMandalaResponseVamsaItem>?, atimarma List<num>?, sources List<GenerateMandalaResponseSourcesItem>, conventions GenerateMandalaResponseConventions
+
+// Analyse a plot - Vastu land and site assessment API
+final result = await roxy.vastu.calculatePlotAnalysis(plot: CalculatePlotAnalysisRequestPlot(width: 30, depth: 40, polygon: [CalculatePlotAnalysisRequestPlotPolygonItem(x: 0, y: 0), CalculatePlotAnalysisRequestPlotPolygonItem(x: 30, y: 0), CalculatePlotAnalysisRequestPlotPolygonItem(x: 30, y: 40), CalculatePlotAnalysisRequestPlotPolygonItem(x: 0, y: 40)], unit: Unit.feet), facing: GenerateEightMansionsFacing.north, facingDegrees: 15, slopeLowDirection: SlopeLowDirection.northeast, road: Road.north, extensions: [Extensions.northeast], cuts: [Cuts.southwest], water: Water.northeast, slopeSchool: SlopeSchool.brihatSamhita);
+// Returns CalculatePlotAnalysisResponse: orientation CalculatePlotAnalysisResponseOrientation, dimensions CalculatePlotAnalysisResponseDimensions, shape CalculatePlotAnalysisResponseShape, ratio CalculatePlotAnalysisResponseRatio, slope CalculatePlotAnalysisResponseSlope?, water CalculatePlotAnalysisResponseWater?, extensions List<CalculatePlotAnalysisResponseExtensionsItem>, cuts List<CalculatePlotAnalysisResponseCutsItem>, road CalculatePlotAnalysisResponseRoad?, sources List<CalculatePlotAnalysisResponseSourcesItem>, conventions CalculatePlotAnalysisResponseConventions
+
+// Calculate Ayadi shadvarga - Vastu proportion and yoni calculator API
+final result = await roxy.vastu.calculateAyadi(length: 11, breadth: 11, perimeter: 11, circumference: 11, unit: Unit.hasta, hastaInches: 18, ayadiText: AyadiText.manasara, vyayaFormula: VyayaFormula.p910);
+// Returns CalculateAyadiResponse: measures CalculateAyadiResponseMeasures, vargas List<CalculateAyadiResponseVargasItem>, vayas num, verdict CalculateAyadiResponseVerdict, conventions CalculateAyadiResponseConventions
+
+// Check room placement - Vastu room direction compliance API
+final result = await roxy.vastu.calculateRoomCompliance(plot: CalculateRoomComplianceRequestPlot(width: 30, depth: 40, polygon: [CalculateRoomComplianceRequestPlotPolygonItem(x: 0, y: 0), CalculateRoomComplianceRequestPlotPolygonItem(x: 30, y: 0), CalculateRoomComplianceRequestPlotPolygonItem(x: 30, y: 40), CalculateRoomComplianceRequestPlotPolygonItem(x: 0, y: 40)], unit: Unit.feet), facing: GenerateEightMansionsFacing.north, facingDegrees: 15, rooms: []);
+// Returns CalculateRoomComplianceResponse: rooms List<CalculateRoomComplianceResponseRoomsItem>, score num, scoring CalculateRoomComplianceResponseScoring, facing String, sources List<CalculateRoomComplianceResponseSourcesItem>
+
+// Find griha pravesh dates - Vastu house warming muhurta API
+final result = await roxy.vastu.findGrihaPraveshDates(startDate: '2027-01-20', endDate: '2027-03-20', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.string('America/New_York'), muhurtaText: MuhurtaText.muhurtaChintamani);
+// Returns FindGrihaPraveshDatesResponse: days List<FindGrihaPraveshDatesResponseDaysItem>, total num, window FindGrihaPraveshDatesResponseWindow, rejectionsByRule Map<String, num>, rules List<FindGrihaPraveshDatesResponseRulesItem>, leftToTheAstrologer List<String>, sources List<FindGrihaPraveshDatesResponseSourcesItem>, conventions FindGrihaPraveshDatesResponseConventions
+
+// List the eight directions - Vastu dikpala and direction reference API
+final result = await roxy.vastu.listDikpalaDirections(limit: 8, offset: 0);
+// Returns ListDikpalaDirectionsResponse: total num, limit num, offset num, directions List<ListDikpalaDirectionsResponseDirectionsItem>
+
+// Look up one direction - Vastu dikpala reference API
+final result = await roxy.vastu.getDikpalaDirection(id: GetDikpalaDirectionId.northeast);
+// Returns GetDikpalaDirectionResponse: id String, dikpala String, kind String, element String?, squares List<num>, devatas List<GetDikpalaDirectionResponseDevatasItem>, places String?, water GetDikpalaDirectionResponseWater, sources List<GetDikpalaDirectionResponseSourcesItem>
+
+// List the 45 devatas - Vastu Purusha Mandala reference API
+final result = await roxy.vastu.listDevatas(limit: 45, offset: 0);
+// Returns ListDevatasResponse: total num, limit num, offset num, devatas List<ListDevatasResponseDevatasItem>
+
+// Look up one devata - Vastu mandala devata reference API
+final result = await roxy.vastu.getDevata(id: GetDevataId.jayanta);
+// Returns GetDevataResponse: id String, name String, class$ String, group String?, side String?, quadrant String?, squares List<num>, cells List<GetDevataResponseCellsItem>, padaCount num, entrancePada num?, role String, verses List<String>, note String?, source GetDevataResponseSource
+```
+
+---
+
+## Numerology: `roxy.numerology`
+
+Numerology API for life path numbers, complete numerology charts and compatibility, in both Pythagorean and Chaldean...
+
+[API reference](https://roxyapi.com/api-reference/numerology)
+
+```dart
+// Calculate Life Path number - Calculator and meaning API
+final result = await roxy.numerology.calculateLifePath(year: 1990, month: 7, day: 15);
+// Returns CalculateLifePathResponse: number num, calculation String, type String, hasKarmicDebt bool, karmicDebtNumber num?, karmicDebtMeaning CalculateLifePathResponseKarmicDebtMeaning?, meaning CalculateLifePathResponseMeaning
+
+// Calculate Expression number - Destiny number calculator API
+final result = await roxy.numerology.calculateExpression(fullName: 'John William Smith');
+// Returns CalculateExpressionResponse: number num, calculation String, type String, hasKarmicDebt bool, karmicDebtNumber num?, karmicDebtMeaning CalculateExpressionResponseKarmicDebtMeaning?, meaning CalculateExpressionResponseMeaning
+
+// Calculate Bridge Numbers - Numerology bridge numbers API
+final result = await roxy.numerology.calculateBridgeNumbers(fullName: 'John William Smith', year: 1990, month: 7, day: 15);
+// Returns CalculateBridgeNumbersResponse: lifePathExpression CalculateBridgeNumbersResponseLifePathExpression, expressionPersonality CalculateBridgeNumbersResponseExpressionPersonality, soulUrgePersonality CalculateBridgeNumbersResponseSoulUrgePersonality, expressionSoulUrge CalculateBridgeNumbersResponseExpressionSoulUrge
+
+// Calculate Soul Urge number - Heart Desire number calculator API
+final result = await roxy.numerology.calculateSoulUrge(fullName: 'John William Smith');
+// Returns CalculateSoulUrgeResponse: number num, calculation String, type String, hasKarmicDebt bool, karmicDebtNumber num?, karmicDebtMeaning CalculateSoulUrgeResponseKarmicDebtMeaning?, meaning CalculateSoulUrgeResponseMeaning
+
+// Calculate Personality number - Outer personality numerology API
+final result = await roxy.numerology.calculatePersonality(fullName: 'John William Smith');
+// Returns CalculatePersonalityResponse: number num, calculation String, type String, hasKarmicDebt bool, karmicDebtNumber num?, karmicDebtMeaning CalculatePersonalityResponseKarmicDebtMeaning?, meaning CalculatePersonalityResponseMeaning
+
+// Calculate Birth Day number - Birthday numerology API
+final result = await roxy.numerology.calculateBirthDay(day: 23);
+// Returns CalculateBirthDayResponse: number num, calculation String, type String, hasKarmicDebt bool, karmicDebtNumber num?, karmicDebtMeaning CalculateBirthDayResponseKarmicDebtMeaning?, meaning CalculateBirthDayResponseMeaning
+
+// Calculate Maturity number - Realization number numerology API
+final result = await roxy.numerology.calculateMaturity(lifePath: 5, expression: 7, fullName: 'John William Smith', year: 1990, month: 7, day: 15);
+// Returns CalculateMaturityResponse: number num, calculation String, type String, hasKarmicDebt bool, karmicDebtNumber num?, karmicDebtMeaning CalculateMaturityResponseKarmicDebtMeaning?, meaning CalculateMaturityResponseMeaning
+
+// Analyze Karmic Lessons - Missing numbers numerology API
+final result = await roxy.numerology.analyzeKarmicLessons(fullName: 'John William Smith');
+// Returns AnalyzeKarmicLessonsResponse: missingNumbers List<num>, lessons List<AnalyzeKarmicLessonsResponseLessonsItem>, presentNumbers Map<String, num>
+
+// Detect Karmic Debt numbers - Karmic debt 13, 14, 16, 19 API
+final result = await roxy.numerology.checkKarmicDebt(year: 1990, month: 7, day: 15, fullName: 'John William Smith');
+// Returns CheckKarmicDebtResponse: hasKarmicDebt bool, debtNumbers List<num>, meanings List<CheckKarmicDebtResponseMeaningsItem>, message String
+
+// Calculate Personal Day - Daily numerology forecast API
+final result = await roxy.numerology.calculatePersonalDay(month: 7, day: 18, targetDate: '2026-04-04');
+// Returns CalculatePersonalDayResponse: personalDay num, theme String, guidance String, targetDate String, personalMonth num, personalMonthTheme String, personalYear num, personalYearTheme String
+
+// Calculate Personal Month - Monthly numerology forecast API
+final result = await roxy.numerology.calculatePersonalMonth(month: 7, day: 18, year: 2026, targetMonth: 4);
+// Returns CalculatePersonalMonthResponse: personalMonth num, theme String, focus String, calendarMonth num, personalYear num, personalYearTheme String
+
+// Calculate Personal Year - Personal Year number forecast API
+final result = await roxy.numerology.calculatePersonalYear(month: 7, day: 15, year: 2025);
+// Returns CalculatePersonalYearResponse: personalYear num, cycle String, theme String, forecast String, opportunities List<String>, challenges List<String>, advice String
+
+// Calculate numerology compatibility - Love match scoring API
+final result = await roxy.numerology.calculateNumCompatibility(person1: CalculateNumCompatibilityRequestPerson1(fullName: 'John William Smith', year: 1990, month: 7, day: 15, lifePath: 5, expression: 7, soulUrge: 6), person2: CalculateNumCompatibilityRequestPerson2(fullName: 'Jane Marie Doe', year: 1992, month: 3, day: 22, lifePath: 3, expression: 9, soulUrge: 2));
+// Returns CalculateNumCompatibilityResponse: overallScore num, rating String, lifePath CalculateNumCompatibilityResponseLifePath, expression CalculateNumCompatibilityResponseExpression, soulUrge CalculateNumCompatibilityResponseSoulUrge, strengths List<String>, challenges List<String>, advice String
+
+// Generate numerology chart - Complete numerology reading API
+final result = await roxy.numerology.generateNumerologyChart(fullName: 'John William Smith', year: 1990, month: 7, day: 15, currentYear: 2025, targetDate: '2026-10-28');
+// Returns GenerateNumerologyChartResponse: profile GenerateNumerologyChartResponseProfile, coreNumbers GenerateNumerologyChartResponseCoreNumbers, additionalInsights GenerateNumerologyChartResponseAdditionalInsights, birthDayProfile GenerateNumerologyChartResponseBirthDayProfile?, maturityStatus GenerateNumerologyChartResponseMaturityStatus, luckyAssociations GenerateNumerologyChartResponseLuckyAssociations?, summary String
+
+// Get number meaning - Numerology number meanings API
+final result = await roxy.numerology.getNumberMeaning(number: '5');
+// Returns GetNumberMeaningResponse: number num, type String, meaning GetNumberMeaningResponseMeaning
+
+// Get daily numerology number - Number of the Day API
+final result = await roxy.numerology.getDailyNumber(seed: 'user123', date: '2026-03-06');
+// Returns GetDailyNumberResponse: date String, seed String, number num, type String, dailyMessage String, meaning GetDailyNumberResponseMeaning
+
+// Calculate Chaldean numerology - Chaldean name number calculator API
+final result = await roxy.numerology.calculateChaldean(name: 'Helen');
+// Returns CalculateChaldeanResponse: name String, destiny CalculateChaldeanResponseDestiny, soulUrge CalculateChaldeanResponseSoulUrge, personality CalculateChaldeanResponsePersonality, numberMeaning CalculateChaldeanResponseNumberMeaning, caution bool, summary String
+
+// Get compound number meaning - Chaldean compound numbers 10 to 52 API
+final result = await roxy.numerology.getCompoundNumber(number: '23');
+// Returns GetCompoundNumberResponse: number num, name String?, nature String, meaning String, root num, sameAs num?
+
+// Calculate dual numerology - Pythagorean and Chaldean name number API
+final result = await roxy.numerology.calculateDual(name: 'David');
+// Returns CalculateDualResponse: name String, pythagorean CalculateDualResponsePythagorean, chaldean CalculateDualResponseChaldean, agreement bool, note String
+
+// Calculate business name numerology - Brand name numerology API
+final result = await roxy.numerology.calculateBusinessName(name: 'Ford');
+// Returns CalculateBusinessNameResponse: name String, total num, compound num?, root num, planet String, rating String, favorableCompound bool, industries List<String>, guidance String, calculation String, compoundMeaning CalculateBusinessNameResponseCompoundMeaning?, summary String
+```
+
+---
+
+## Kabbalah: `roxy.kabbalah`
+
+Kabbalah API for gematria, the 72 names, the Tree of Life and the Hebrew birthday
+
+[API reference](https://roxyapi.com/api-reference/kabbalah)
+
+```dart
+// Calculate gematria - Hebrew gematria calculator API with every spelling shown
+final result = await roxy.kabbalah.calculateGematria(text: 'Sarah', textHebrew: 'שלום', transliteration: Transliteration.letterMapMathers, ciphers: [Ciphers.misparHechrachi, Ciphers.misparGadol], misparGadol: MisparGadol.finals500900, atbashOutput: AtbashOutput.both, includeMatches: true, latinCiphers: false);
+// Returns CalculateGematriaResponse: input CalculateGematriaResponseInput, hebrewForms List<CalculateGematriaResponseHebrewFormsItem>, chosen CalculateGematriaResponseChosen, values List<CalculateGematriaResponseValuesItem>, transformations List<CalculateGematriaResponseTransformationsItem>, latinValues List<CalculateGematriaResponseLatinValuesItem>?, matches List<CalculateGematriaResponseMatchesItem>, conventions CalculateGematriaResponseConventions
+
+// List gematria ciphers - gematria methods API with provenance on every row
+final result = await roxy.kabbalah.listGematriaCiphers();
+// Returns ListGematriaCiphersResponse: total num, ciphers List<ListGematriaCiphersResponseCiphersItem>, transformations List<ListGematriaCiphersResponseTransformationsItem>, latinCiphers List<ListGematriaCiphersResponseLatinCiphersItem>
+
+// Generate a name profile - Kabbalah name numerology API with the spelling shown
+final result = await roxy.kabbalah.generateNameProfile(name: 'Sarah', nameHebrew: 'שרה', transliteration: Transliteration.letterMapMathers, misparGadol: MisparGadol.finals500900);
+// Returns GenerateNameProfileResponse: input GenerateNameProfileResponseInput, hebrewForms List<GenerateNameProfileResponseHebrewFormsItem>, chosen GenerateNameProfileResponseChosen, values GenerateNameProfileResponseValues, letters List<GenerateNameProfileResponseLettersItem>, sephirah GenerateNameProfileResponseSephirah, matches List<GenerateNameProfileResponseMatchesItem>, conventions GenerateNameProfileResponseConventions
+
+// Generate a birth profile - Hebrew birthday and birth angel API
+final result = await roxy.kabbalah.generateBirthProfile(date: '1990-06-15', time: '14:30:00', timezone: NumOrString.string('America/New_York'), angelDating: AngelDating.solarLongitude, yearStart: YearStart.march21, leapDayPolicy: LeapDayPolicy.extendPrevious, afterSunset: false, targetDate: '2026-10-28');
+// Returns GenerateBirthProfileResponse: birthData GenerateBirthProfileResponseBirthData, hebrewDate GenerateBirthProfileResponseHebrewDate, hebrewBirthday GenerateBirthProfileResponseHebrewBirthday, angels List<GenerateBirthProfileResponseAngelsItem>, sephirah GenerateBirthProfileResponseSephirah, conventions GenerateBirthProfileResponseConventions
+
+// List the 72 names - Shem HaMephorash API derived from the verses
+final result = await roxy.kabbalah.listShemNames(limit: 20, offset: 0, longitude: 131.18);
+// Returns ListShemNamesResponse: total num, limit num, offset num, longitude num?, names List<ListShemNamesResponseNamesItem>
+
+// Get one of the 72 names - 72 names of God API by index
+final result = await roxy.kabbalah.getShemName(number: 27);
+// Returns GetShemNameResponse: number num, letters String, lettersAsWritten String, suffix String, name String, romanization String, traditionalName String, arcStart num, arcEnd num, sign String, degreeInSign num, choir String, publishedDisagreement GetShemNameResponsePublishedDisagreement?
+
+// Get the Tree of Life - sephirot and 22 paths API with typed school variants
+final result = await roxy.kabbalah.getTreeOfLife(treeVariant: TreeVariant.kircher, sephirotSystem: SephirotSystem.classical, letterAttribution: LetterAttribution.seferYetzirahGra);
+// Returns GetTreeOfLifeResponse: sephirot List<GetTreeOfLifeResponseSephirotItem>, paths List<GetTreeOfLifeResponsePathsItem>, worlds List<GetTreeOfLifeResponseWorldsItem>, lightningFlash List<String>, conventions GetTreeOfLifeResponseConventions
+
+// Get one sephirah - sefirot meaning API with the paths that touch it
+final result = await roxy.kabbalah.getSephirah(id: GetSephirahId.tiferet, sephirotSystem: SephirotSystem.classical, letterAttribution: LetterAttribution.seferYetzirahGra);
+// Returns GetSephirahResponse: id String, number num?, hebrew String, romanization String, english String, pillar String, pillarName String, world String?, attribution String, meaning String, paths List<GetSephirahResponsePathsItem>, conventions GetSephirahResponseConventions
+
+// List the Hebrew letters - Hebrew alphabet API with the Sefer Yetzirah attributions
+final result = await roxy.kabbalah.listHebrewLetters(letterAttribution: LetterAttribution.seferYetzirahGra);
+// Returns ListHebrewLettersResponse: total num, letterAttribution String, classCounts ListHebrewLettersResponseClassCounts, letters List<ListHebrewLettersResponseLettersItem>
+
+// Get one Hebrew letter - Hebrew letter meaning API
+final result = await roxy.kabbalah.getHebrewLetter(id: GetHebrewLetterId.shin, letterAttribution: LetterAttribution.seferYetzirahGra);
+// Returns GetHebrewLetterResponse: id String, letter String, final$ String?, romanization String, name String, meaning String, ordinal num, value num, finalValue num?, letterClass String, classReading String, attribution GetHebrewLetterResponseAttribution, trump GetHebrewLetterResponseTrump, path num?
+
+// Compare two names - gematria name compatibility API with every component published
+final result = await roxy.kabbalah.calculateNameCompatibility(firstName: 'Sarah', firstNameHebrew: 'שרה', secondName: 'David', secondNameHebrew: 'דוד', transliteration: Transliteration.letterMapMathers, misparGadol: MisparGadol.finals500900);
+// Returns CalculateNameCompatibilityResponse: first CalculateNameCompatibilityResponseFirst, second CalculateNameCompatibilityResponseSecond, sharedValues List<CalculateNameCompatibilityResponseSharedValuesItem>, score num, band String, components List<CalculateNameCompatibilityResponseComponentsItem>, reading String, conventions CalculateNameCompatibilityResponseConventions
+
+// Get the sephirah of the day - Omer count API with the sephirot pairing
+final result = await roxy.kabbalah.getDailySephirah(date: '2026-04-04', timezone: 'Asia/Jerusalem', afterSunset: 'false');
+// Returns GetDailySephirahResponse: date String, inOmer bool, day num?, week num?, dayInWeek num?, weekSephirah GetDailySephirahResponseWeekSephirah?, daySephirah GetDailySephirahResponseDaySephirah?, hebrewLabel String?, hebrewDate String?, reading String, nextStart String?
+```
+
+---
+
+## Tarot: `roxy.tarot`
+
+Tarot reading API with the complete 78-card Rider-Waite-Smith deck and card meanings for love, career, health, and sp...
+
+[API reference](https://roxyapi.com/api-reference/tarot)
+
+```dart
+// List all 78 tarot cards - Tarot deck catalog API
+final result = await roxy.tarot.listCards(limit: 20, offset: 0, arcana: Arcana.major, suit: Suit.cups, number: 1);
+// Returns ListCardsResponse: total num, limit num, offset num, cards List<BasicCard>
+
+// Get tarot card by id - Tarot card meaning API
+final result = await roxy.tarot.getCard(id: 'fool');
+// Returns Card: id String, name String, arcana String, suit String?, number num, keywords CardKeywords, upright CardUpright, reversed CardReversed, imageUrl String
+
+// Draw tarot cards - Seeded tarot draw API
+final result = await roxy.tarot.drawCards(count: 3, seed: 'user123-2025-12-27', allowReversals: true, allowDuplicates: false);
+// Returns DrawCardsResponse: seed String?, cards List<DrawnCard>
+
+// Daily tarot card - Card of the day API
+final result = await roxy.tarot.getDailyCard(seed: 'user123', date: '2026-03-06');
+// Returns GetDailyCardResponse: date String, seed String, card DrawnCard, dailyMessage String
+
+// Yes or no answer - Yes no tarot reading API
+final result = await roxy.tarot.castYesNo(question: 'Should I accept the job offer?', seed: 'reading-2f9c1a');
+// Returns CastYesNoResponse: question String?, seed String?, answer String, answerLocalized String?, strength String, strengthLocalized String?, card CastYesNoResponseCard, interpretation String
+
+// Three card spread, past present future - Tarot spread API
+final result = await roxy.tarot.castThreeCard(question: 'What do I need to know about my career?', seed: 'reading-2f9c1a');
+// Returns CastThreeCardResponse: spread String, question String?, seed String?, positions List<CastThreeCardResponsePositionsItem>, summary String?
+
+// Celtic Cross spread, 10 cards - Tarot spread API
+final result = await roxy.tarot.castCelticCross(question: 'What should I know about this situation?', seed: 'reading-2f9c1a');
+// Returns CastCelticCrossResponse: spread String, question String?, seed String?, positions List<CastCelticCrossResponsePositionsItem>, summary String?
+
+// Love spread, 5 cards - Relationship tarot reading API
+final result = await roxy.tarot.castLoveSpread(question: 'What do I need to know about my relationship?', seed: 'reading-2f9c1a');
+// Returns CastLoveSpreadResponse: spread String, question String?, seed String?, positions List<CastLoveSpreadResponsePositionsItem>, summary String?
+
+// Career spread, 7 cards - Career tarot reading API
+final result = await roxy.tarot.castCareerSpread(question: 'What do I need to know about my career path?', seed: 'reading-2f9c1a');
+// Returns CastCareerSpreadResponse: spread String, question String?, seed String?, positions List<CastCareerSpreadResponsePositionsItem>, summary String?
+
+// Custom spread builder - Configurable tarot spread API
+final result = await roxy.tarot.castCustomSpread(spreadName: 'My Custom Spread', positions: [CastCustomSpreadRequestPositionsItem(name: 'Core Issue', interpretation: 'What is really going on'), CastCustomSpreadRequestPositionsItem(name: 'Hidden Factor', interpretation: 'What you cannot see'), CastCustomSpreadRequestPositionsItem(name: 'Best Action', interpretation: 'What to do next')], question: 'How do I move forward with this project?', seed: 'reading-2f9c1a');
+// Returns CastCustomSpreadResponse: spread String, question String?, seed String?, positions List<CastCustomSpreadResponsePositionsItem>
+```
+
+---
+
+## Biorhythm: `roxy.biorhythm`
+
+Biorhythm API for entertainment and reflection, with 10 model cycle types across 3 primary (physical, emotional, inte...
+
+[API reference](https://roxyapi.com/api-reference/biorhythm)
+
+```dart
+// Get biorhythm reading - Complete cycle analysis for any date
+final result = await roxy.biorhythm.getReading(birthDate: '1990-07-15', targetDate: '2026-04-10');
+// Returns GetReadingResponse: birthDate String, targetDate String, daysSinceBirth num, cycles Map<String, GetReadingResponseCyclesValue>, energyRating num, overallPhase String, interpretation String, advice String, criticalAlerts List<GetReadingResponseCriticalAlertsItem>
+
+// Get biorhythm forecast - Multi-day cycle predictions with best and worst days
+final result = await roxy.biorhythm.getForecast(birthDate: '1990-07-15', startDate: '2026-04-01', endDate: '2026-04-30');
+// Returns GetForecastResponse: birthDate String, startDate String, endDate String, totalDays num, summary GetForecastResponseSummary, days List<GetForecastResponseDaysItem>
+
+// Find critical days - Zero crossing detection for any date range
+final result = await roxy.biorhythm.getCriticalDays(birthDate: '1990-07-15', startDate: '2026-04-01', endDate: '2026-06-30');
+// Returns GetCriticalDaysResponse: birthDate String, startDate String, endDate String, totalCriticalDays num, criticalDays List<GetCriticalDaysResponseCriticalDaysItem>, doubleCriticalDays List<String>, tripleCriticalDay String?
+
+// Calculate compatibility - Biorhythm alignment between two people
+final result = await roxy.biorhythm.calculateBioCompatibility(person1: CalculateBioCompatibilityRequestPerson1(birthDate: '1990-07-15'), person2: CalculateBioCompatibilityRequestPerson2(birthDate: '1992-03-22'), targetDate: '2026-04-10');
+// Returns CalculateBioCompatibilityResponse: person1 CalculateBioCompatibilityResponsePerson1, person2 CalculateBioCompatibilityResponsePerson2, targetDate String, overallScore num, rating String, cycles Map<String, CalculateBioCompatibilityResponseCyclesValue>, strengths List<String>, challenges List<String>, advice String, dailySync CalculateBioCompatibilityResponseDailySync
+
+// Get phase info - Lightweight cycle status for dashboards and widgets
+final result = await roxy.biorhythm.getPhases(birthDate: '1990-07-15', targetDate: '2026-04-10');
+// Returns GetPhasesResponse: birthDate String, targetDate String, daysSinceBirth num, phases Map<String, GetPhasesResponsePhasesValue>, summary String
+
+// Get daily biorhythm - Seeded reading for daily check-in features
+final result = await roxy.biorhythm.getDailyBiorhythm(seed: 'user123', date: '2026-03-06');
+// Returns GetDailyBiorhythmResponse: date String, seed String, energyRating num, overallPhase String, spotlight GetDailyBiorhythmResponseSpotlight, quickRead GetDailyBiorhythmResponseQuickRead, dailyMessage String, advice String
+```
+
+---
+
+## Ayurveda: `roxy.ayurveda`
+
+Ayurveda API for dosha profiles, the dinacharya daily routine and the ritucharya seasonal regimen, with a verse cited...
+
+[API reference](https://roxyapi.com/api-reference/ayurveda)
+
+```dart
+// Ayurvedic constitution from a birth chart - Dosha profile API
+final result = await roxy.ayurveda.calculateAyurvedicConstitution(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24, signDoshaScheme: SignDoshaScheme.satyacharya);
+// Returns CalculateAyurvedicConstitutionResponse: frame CalculateAyurvedicConstitutionResponseFrame, lagnaSign String, moonSign String, factors List<CalculateAyurvedicConstitutionResponseFactorsItem>, composite CalculateAyurvedicConstitutionResponseComposite, strengthRanking List<CalculateAyurvedicConstitutionResponseStrengthRankingItem>, planetDoshas List<CalculateAyurvedicConstitutionResponsePlanetDoshasItem>, summary String, conventions CalculateAyurvedicConstitutionResponseConventions, meta CalculateAyurvedicConstitutionResponseMeta
+
+// Dinacharya daily routine - Brahma muhurta and dosha clock API
+final result = await roxy.ayurveda.getDinacharyaSchedule(date: '2026-06-21', latitude: 51.5074, longitude: -0.1278, timezone: NumOrString.string('Europe/London'), doshaClock: DoshaClock.sunriseAnchored);
+// Returns GetDinacharyaScheduleResponse: date String, sunrise String, sunset String, nextSunrise String, brahmaMuhurta GetDinacharyaScheduleResponseBrahmaMuhurta, doshaPeriods List<GetDinacharyaScheduleResponseDoshaPeriodsItem>, alternatePeriods List<GetDinacharyaScheduleResponseAlternatePeriodsItem>, routine List<GetDinacharyaScheduleResponseRoutineItem>, summary String, sources List<GetDinacharyaScheduleResponseSourcesItem>, conventions GetDinacharyaScheduleResponseConventions, meta GetDinacharyaScheduleResponseMeta
+
+// Ayurveda seasonal regimen - Ritucharya and ritu resolution API
+final result = await roxy.ayurveda.getRitucharya(date: '2026-03-01', ritucharyaScheme: RitucharyaScheme.sutrasthana6, rituZodiac: RituZodiac.sayana, hemisphere: Hemisphere.northern);
+// Returns GetRitucharyaResponse: date String, ritu GetRitucharyaResponseRitu, ayana GetRitucharyaResponseAyana, phase GetRitucharyaResponsePhase, strength GetRitucharyaResponseStrength, tasteIncreasing GetRitucharyaResponseTasteIncreasing, doshaCycle List<GetRitucharyaResponseDoshaCycleItem>, regimen List<GetRitucharyaResponseRegimenItem>, summary String, sources List<GetRitucharyaResponseSourcesItem>, conventions GetRitucharyaResponseConventions, meta GetRitucharyaResponseMeta
+
+// Daily Ayurveda reading - Dosha clock and brahma muhurta by location API
+final result = await roxy.ayurveda.getDailyAyurvedaReading(date: '2026-06-21', latitude: 51.5074, longitude: -0.1278, timezone: 'Europe/London');
+// Returns GetDailyAyurvedaReadingResponse: date String, sunrise String, sunset String, brahmaMuhurta GetDailyAyurvedaReadingResponseBrahmaMuhurta, doshaPeriods List<GetDailyAyurvedaReadingResponseDoshaPeriodsItem>, ritu GetDailyAyurvedaReadingResponseRitu, doshaCycle List<GetDailyAyurvedaReadingResponseDoshaCycleItem>, summary String, sources List<GetDailyAyurvedaReadingResponseSourcesItem>, conventions GetDailyAyurvedaReadingResponseConventions, meta GetDailyAyurvedaReadingResponseMeta
+
+// List the three doshas - Dosha catalogue API
+final result = await roxy.ayurveda.listDoshas(limit: 3, offset: 0);
+// Returns ListDoshasResponse: total num, limit num, offset num, doshas List<ListDoshasResponseDoshasItem>, sources List<ListDoshasResponseSourcesItem>, meta ListDoshasResponseMeta
+
+// Get one dosha - Vata pitta kapha profile API
+final result = await roxy.ayurveda.getDosha(id: GetDoshaId.vata);
+// Returns GetDoshaResponse: dosha GetDoshaResponseDosha, sources List<GetDoshaResponseSourcesItem>, meta GetDoshaResponseMeta
+
+// List the six tastes - Ayurveda rasa and dosha matrix API
+final result = await roxy.ayurveda.listRasas(limit: 6, offset: 0);
+// Returns ListRasasResponse: total num, limit num, offset num, strengthOrder List<String>, rasas List<ListRasasResponseRasasItem>, matrix Map<String, ListRasasResponseMatrixValue>, sources List<ListRasasResponseSourcesItem>, meta ListRasasResponseMeta
+
+// List the twenty qualities - Ayurveda guna pairs API
+final result = await roxy.ayurveda.listGunas(limit: 10, offset: 0);
+// Returns ListGunasResponse: total num, limit num, offset num, rule String, pairs List<ListGunasResponsePairsItem>, sources List<ListGunasResponseSourcesItem>, meta ListGunasResponseMeta
+```
+
+---
+
+## I-Ching: `roxy.iching`
+
+I-Ching oracle API with all 64 hexagrams, 384 changing lines, 8 trigrams, and modern interpretations for love, career...
+
+[API reference](https://roxyapi.com/api-reference/i-ching)
+
+```dart
+// Daily hexagram - Daily I-Ching oracle API
+final result = await roxy.iching.getDailyHexagram(seed: 'user123', date: '2026-03-06');
+// Returns GetDailyHexagramResponse: date String, seed String, hexagram GetDailyHexagramResponseHexagram, dailyMessage String
+
+// Cast daily reading with changing lines - I-Ching divination API
+final result = await roxy.iching.castDailyReading(seed: 'user123', date: '2026-03-06');
+// Returns CastDailyReadingResponse: date String, seed String, hexagram CastDailyReadingResponseHexagram?, lines List<num>, changingLinePositions List<num>, changingLines List<ChangingLine>?, resultingHexagram CastDailyReadingResponseResultingHexagram?
+
+// List all 64 hexagrams - I-Ching hexagram catalog API
+final result = await roxy.iching.listHexagrams(limit: 20, offset: 0);
+// Returns ListHexagramsResponse: total num, limit num, offset num, hexagrams List<BasicHexagram>
+
+// Random hexagram - I-Ching hexagram picker API
+final result = await roxy.iching.getRandomHexagram();
+// Returns Hexagram: number num, symbol String, chinese String, english String, pinyin String, binary String, upperTrigram String, lowerTrigram String, judgment String, image String, interpretation Interpretation, changingLines List<ChangingLine>
+
+// Lookup hexagram by line pattern - I-Ching binary lookup API
+final result = await roxy.iching.lookupHexagram(lines: '111111');
+// Returns Hexagram: number num, symbol String, chinese String, english String, pinyin String, binary String, upperTrigram String, lowerTrigram String, judgment String, image String, interpretation Interpretation, changingLines List<ChangingLine>
+
+// Get hexagram by number - I-Ching hexagram detail API
+final result = await roxy.iching.getHexagram(number: 1);
+// Returns Hexagram: number num, symbol String, chinese String, english String, pinyin String, binary String, upperTrigram String, lowerTrigram String, judgment String, image String, interpretation Interpretation, changingLines List<ChangingLine>
+
+// Cast an I-Ching reading - Hexagram divination API
+final result = await roxy.iching.castReading(seed: 'user123-question1');
+// Returns CastReadingResponse: seed String?, hexagram Hexagram?, lines List<num>, changingLinePositions List<num>, resultingHexagram Hexagram?
+
+// List all 8 trigrams - Bagua trigram catalog API
+final result = await roxy.iching.listTrigrams();
+// Returns ListTrigramsResponse: total num, trigrams List<BasicTrigram>
+
+// Get trigram by number or name - Bagua trigram detail API
+final result = await roxy.iching.getTrigram(id: 'Heaven');
+// Returns Trigram: number num, symbol String, chinese String, english String, pinyin String, binary String, element String, attribute String, familyMember String, direction String, bodyPart String, animal String, season String, quality String, meaning String
+```
+
+---
+
+## Crystals and Healing Stones: `roxy.crystals`
+
+Crystal healing API covering the most popular and widely-searched healing crystals and gemstones, from Amethyst and R...
+
+[API reference](https://roxyapi.com/api-reference/crystals-and-healing-stones)
+
+```dart
+// Crystals by zodiac sign - Zodiac birthstone API
+final result = await roxy.crystals.getCrystalsByZodiac(sign: Sign.pisces, limit: 20, offset: 0);
+// Returns GetCrystalsByZodiacResponse: sign String, total num, limit num, offset num, crystals List<GetCrystalsByZodiacResponseCrystalsItem>
+
+// Crystals by chakra - Chakra healing stones API
+final result = await roxy.crystals.getCrystalsByChakra(chakra: Chakra.heart, limit: 20, offset: 0);
+// Returns GetCrystalsByChakraResponse: chakra String, total num, limit num, offset num, crystals List<GetCrystalsByChakraResponseCrystalsItem>
+
+// Crystals by element - Elemental crystal lookup API
+final result = await roxy.crystals.getCrystalsByElement(element: Element.water, limit: 20, offset: 0);
+// Returns GetCrystalsByElementResponse: element String, total num, limit num, offset num, crystals List<GetCrystalsByElementResponseCrystalsItem>
+
+// Birthstones by month - Birthstone lookup API
+final result = await roxy.crystals.getBirthstones(month: 2);
+// Returns GetBirthstonesResponse: month num, monthName String, total num, crystals List<GetBirthstonesResponseCrystalsItem>
+
+// Search crystals - Crystal search API
+final result = await roxy.crystals.searchCrystals(q: 'love', limit: 20, offset: 0);
+// Returns SearchCrystalsResponse: query String, total num, limit num, offset num, crystals List<SearchCrystalsResponseCrystalsItem>
+
+// Crystal pairings - Crystal combination API
+final result = await roxy.crystals.getCrystalPairings(id: 'amethyst');
+// Returns GetCrystalPairingsResponse: crystal String, name String, count num, pairings List<GetCrystalPairingsResponsePairingsItem>
+
+// Daily crystal - Crystal of the day API
+final result = await roxy.crystals.getDailyCrystal(seed: 'user123', date: '2026-03-06');
+// Returns GetDailyCrystalResponse: date String, seed String, name String, id String, imageUrl String?, description String, chakras List<String>, zodiacSigns List<String>?, affirmation String
+
+// Random crystal - Crystal discovery API
+final result = await roxy.crystals.getRandomCrystal();
+// Returns GetRandomCrystalResponse: name String, id String, imageUrl String?, description String, chakras List<String>, zodiacSigns List<String>?, affirmation String
+
+// List crystal colors - Crystal color filter API
+final result = await roxy.crystals.listCrystalColors();
+// Returns ListCrystalColorsResponse: count num, colors List<String>
+
+// List crystal planets - Planetary ruler filter API
+final result = await roxy.crystals.listCrystalPlanets();
+// Returns ListCrystalPlanetsResponse: count num, planets List<String>
+
+// List all crystals - Crystal healing database API
+final result = await roxy.crystals.listCrystals(chakra: Chakra.heart, zodiac: Zodiac.pisces, element: Element.water, color: 'pink', planet: 'Venus', limit: 20, offset: 0);
+// Returns ListCrystalsResponse: total num, limit num, offset num, crystals List<ListCrystalsResponseCrystalsItem>
+
+// Get crystal by id - Crystal healing properties API
+final result = await roxy.crystals.getCrystal(id: 'amethyst');
+// Returns GetCrystalResponse: name String, id String, imageUrl String?, description String, meaning GetCrystalResponseMeaning, chakras List<String>, zodiacSigns List<String>?, planet String?, elements List<String>?, colors List<String>?, hardness num, numericalVibration num, keywords List<String>?, birthMonth num?, affirmation String, pairsWith List<String>
+```
+
+---
+
+## Dreams: `roxy.dreams`
+
+Dream interpretation API with a 2,200+ symbol dream dictionary and psychological meanings covering animals, objects,...
+
+[API reference](https://roxyapi.com/api-reference/dreams)
+
+```dart
+// List and search dream symbols - Dream dictionary API
+final result = await roxy.dreams.searchDreamSymbols(q: 'water', letter: 'a', limit: 20, offset: 0);
+// Returns SearchDreamSymbolsResponse: total num, limit num, offset num, symbols List<BasicDreamSymbol>
+
+// Random dream symbols - Dream symbol discovery API
+final result = await roxy.dreams.getRandomSymbols(count: 1);
+// Returns GetRandomSymbolsResponse: symbols List<DreamSymbol>
+
+// Symbol counts by letter - Dream dictionary index API
+final result = await roxy.dreams.getSymbolLetterCounts();
+// Returns GetSymbolLetterCountsResponse: letters Map<String, num>, total num
+
+// Get dream symbol by id - Dream interpretation API
+final result = await roxy.dreams.getDreamSymbol(id: 'snake');
+// Returns DreamSymbol: id String, name String, letter String, meaning String
+
+// Daily dream symbol - Dream symbol of the day API
+final result = await roxy.dreams.getDailyDreamSymbol(seed: 'user123', date: '2026-03-06');
+// Returns GetDailyDreamSymbolResponse: date String, seed String, symbol GetDailyDreamSymbolResponseSymbol, dailyMessage String
+```
+
+---
+
+## Angel Numbers: `roxy.angelNumbers`
+
+Angel numbers API with meanings for 111, 222, 333, 444, 555, 666, 777, 888, 999, 1111, and 75+ sequences covering eve...
+
+[API reference](https://roxyapi.com/api-reference/angel-numbers)
+
+```dart
+// List all angel numbers - Angel number catalog API
+final result = await roxy.angelNumbers.listAngelNumbers(limit: 20, offset: 0, type: ListAngelNumbersType.repeating);
+// Returns ListAngelNumbersResponse: total num, limit num, offset num, numbers List<ListAngelNumbersResponseNumbersItem>
+
+// Get angel number meaning - Angel number lookup API
+final result = await roxy.angelNumbers.getAngelNumber(number: '444');
+// Returns GetAngelNumberResponse: number String, title String, coreMessage String, type String, digitRoot num, keywords List<String>, energy String, meaning GetAngelNumberResponseMeaning, biblical String, shadow String, affirmation String, actionSteps List<String>
+
+// Analyze any number sequence - Angel number analysis API
+final result = await roxy.angelNumbers.analyzeNumberSequence(number: '1234', context: Context.clock);
+// Returns AnalyzeNumberSequenceResponse: number String, type String, digitRoot num, digits num, uniqueDigits num, isPalindrome bool, isRepeating bool, knownMeaning AnalyzeNumberSequenceResponseKnownMeaning?, digitRootMeaning AnalyzeNumberSequenceResponseDigitRootMeaning?, contextNote String?
+
+// Daily angel number - Angel number of the day API
+final result = await roxy.angelNumbers.getDailyAngelNumber(seed: 'user123', date: '2026-03-06');
+// Returns GetDailyAngelNumberResponse: date String, seed String, number String, title String, coreMessage String, type String, digitRoot num, energy String, meaning GetDailyAngelNumberResponseMeaning, biblical String, shadow String, keywords List<String>, affirmation String, actionSteps List<String>
+```
+
+---
+
+## Location and Timezone: `roxy.location`
+
+Timezone and location API with city search and geocoding across 5,180,000+ cities, towns and villages in 240+ countri...
+
+[API reference](https://roxyapi.com/api-reference/location-and-timezone)
+
+```dart
+// Search cities worldwide - Geocoding autocomplete with coordinates and timezone
+final result = await roxy.location.searchCities(q: 'berlin', limit: 10, offset: 0);
+// Returns SearchCitiesResponse: total num, limit num, offset num, cities List<SearchCitiesResponseCitiesItem>
+
+// List all countries - ISO codes and city coverage
+final result = await roxy.location.listCountries(limit: 50, offset: 0);
+// Returns ListCountriesResponse: total num, limit num, offset num, countries List<ListCountriesResponseCountriesItem>
+
+// Get cities in a country - Geocoding directory sorted by population
+final result = await roxy.location.getCitiesByCountry(iso2: 'DE', limit: 20, offset: 0);
+// Returns GetCitiesByCountryResponse: total num, limit num, offset num, cities List<GetCitiesByCountryResponseCitiesItem>
+```
+
+---
+
+## Usage: `roxy.usage`
+
+Monitor your API usage, check rate limits, and track request consumption
+
+[API reference](https://roxyapi.com/api-reference/usage)
+
+```dart
+// Get API usage statistics
+final result = await roxy.usage.getUsageStats();
+// Returns GetUsageStatsResponse: plan String, usedThisMonth num, requestsPerMonth num, remainingThisMonth num, email String, status String, endDate String
+```
+
+---
+
+## Reports: `roxy.reports`
+
+Branded reports built from the API: a natal chart and more as a print-ready PDF, self-contained HTML or Markdown, whi...
+
+[API reference](https://roxyapi.com/api-reference/reports)
+
+```dart
+// Natal chart report - Branded PDF report API
+final result = await roxy.reports.generateNatalReport(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$, houseSystem: HouseSystem.placidus, format: Format.pdf, branding: NatalReportRequestBranding(name: 'Luna Rivera Astrology', logo: 'https://example.com/logo.png', footer: 'For reflection and entertainment. Book a reading at example.com.', website: 'https://example.com', email: 'hello@example.com', colors: NatalReportRequestBrandingColors(primary: '#1e293b', accent: '#b45309'), font: Font.frauncesJost, theme: Theme.practitioner), readings: true);
+// Returns GenerateNatalReportResponse: template String, lang String, format String, title String, pages int?, pdf String?, html String?, markdown String?
+
+// Synastry report - Branded PDF report API
+final result = await roxy.reports.generateSynastryReport(person1: SynastryReportRequestPerson1(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$, name: 'Alex'), person2: SynastryReportRequestPerson2(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$, name: 'Alex'), houseSystem: HouseSystem.placidus, format: Format.pdf, branding: SynastryReportRequestBranding(name: 'Luna Rivera Astrology', logo: 'https://example.com/logo.png', footer: 'For reflection and entertainment. Book a reading at example.com.', website: 'https://example.com', email: 'hello@example.com', colors: SynastryReportRequestBrandingColors(primary: '#1e293b', accent: '#b45309'), font: Font.frauncesJost, theme: Theme.practitioner), readings: true);
+// Returns GenerateSynastryReportResponse: template String, lang String, format String, title String, pages int?, pdf String?, html String?, markdown String?
+
+// Kundli report - Branded PDF report API
+final result = await roxy.reports.generateKundliReport(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24, format: Format.pdf, branding: KundliReportRequestBranding(name: 'Luna Rivera Astrology', logo: 'https://example.com/logo.png', footer: 'For reflection and entertainment. Book a reading at example.com.', website: 'https://example.com', email: 'hello@example.com', colors: KundliReportRequestBrandingColors(primary: '#1e293b', accent: '#b45309'), font: Font.frauncesJost, theme: Theme.practitioner), readings: true);
+// Returns GenerateKundliReportResponse: template String, lang String, format String, title String, pages int?, pdf String?, html String?, markdown String?
+
+// Kundli matching report - Branded PDF report API
+final result = await roxy.reports.generateMatchmakingReport(person1: MatchmakingReportRequestPerson1(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5)), person2: MatchmakingReportRequestPerson2(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5)), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24, format: Format.pdf, branding: MatchmakingReportRequestBranding(name: 'Luna Rivera Astrology', logo: 'https://example.com/logo.png', footer: 'For reflection and entertainment. Book a reading at example.com.', website: 'https://example.com', email: 'hello@example.com', colors: MatchmakingReportRequestBrandingColors(primary: '#1e293b', accent: '#b45309'), font: Font.frauncesJost, theme: Theme.practitioner), readings: true);
+// Returns GenerateMatchmakingReportResponse: template String, lang String, format String, title String, pages int?, pdf String?, html String?, markdown String?
+
+// Yearly forecast report - Branded PDF report API
+final result = await roxy.reports.generateYearlyForecastReport(date: '1990-07-15', time: '14:30:00', year: 2026, latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), houseSystem: HouseSystem.placidus, format: Format.pdf, branding: YearlyForecastReportRequestBranding(name: 'Luna Rivera Astrology', logo: 'https://example.com/logo.png', footer: 'For reflection and entertainment. Book a reading at example.com.', website: 'https://example.com', email: 'hello@example.com', colors: YearlyForecastReportRequestBrandingColors(primary: '#1e293b', accent: '#b45309'), font: Font.frauncesJost, theme: Theme.practitioner), readings: true);
+// Returns GenerateYearlyForecastReportResponse: template String, lang String, format String, title String, pages int?, pdf String?, html String?, markdown String?
+
+// Human Design report - Branded PDF report API
+final result = await roxy.reports.generateHumanDesignReport(date: '1990-07-15', time: '13:00:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 0, nodeType: NodeType.true$, format: Format.pdf, branding: HumanDesignReportRequestBranding(name: 'Luna Rivera Astrology', logo: 'https://example.com/logo.png', footer: 'For reflection and entertainment. Book a reading at example.com.', website: 'https://example.com', email: 'hello@example.com', colors: HumanDesignReportRequestBrandingColors(primary: '#1e293b', accent: '#b45309'), font: Font.frauncesJost, theme: Theme.practitioner), readings: true);
+// Returns GenerateHumanDesignReportResponse: template String, lang String, format String, title String, pages int?, pdf String?, html String?, markdown String?
+
+// BaZi report - Branded PDF report API
+final result = await roxy.reports.generateBaziReport(date: '1990-06-15', time: '14:30:00', timezone: NumOrString.string('America/New_York'), latitude: 0, longitude: 116.4, dayBoundary: DayBoundary.splitZi, yearBoundary: YearBoundary.liChun, hourClock: HourClock.clock, gender: Gender.male, year: 2027, format: Format.pdf, branding: BaziReportRequestBranding(name: 'Luna Rivera Astrology', logo: 'https://example.com/logo.png', footer: 'For reflection and entertainment. Book a reading at example.com.', website: 'https://example.com', email: 'hello@example.com', colors: BaziReportRequestBrandingColors(primary: '#1e293b', accent: '#b45309'), font: Font.frauncesJost, theme: Theme.practitioner), readings: true);
+// Returns GenerateBaziReportResponse: template String, lang String, format String, title String, pages int?, pdf String?, html String?, markdown String?
+
+// Numerology report - Branded PDF report API
+final result = await roxy.reports.generateNumerologyReport(fullName: 'John William Smith', year: 1990, month: 7, day: 15, currentYear: 2025, targetDate: '2026-10-28', format: Format.pdf, branding: NumerologyReportRequestBranding(name: 'Luna Rivera Astrology', logo: 'https://example.com/logo.png', footer: 'For reflection and entertainment. Book a reading at example.com.', website: 'https://example.com', email: 'hello@example.com', colors: NumerologyReportRequestBrandingColors(primary: '#1e293b', accent: '#b45309'), font: Font.frauncesJost, theme: Theme.practitioner), readings: true);
+// Returns GenerateNumerologyReportResponse: template String, lang String, format String, title String, pages int?, pdf String?, html String?, markdown String?
+
+// Tarot reading report - Branded PDF report API
+final result = await roxy.reports.generateTarotReport(spread: Spread.celticCross, question: 'What should I know about this situation?', seed: 'reading-2f9c1a', format: Format.pdf, branding: TarotReportRequestBranding(name: 'Luna Rivera Astrology', logo: 'https://example.com/logo.png', footer: 'For reflection and entertainment. Book a reading at example.com.', website: 'https://example.com', email: 'hello@example.com', colors: TarotReportRequestBrandingColors(primary: '#1e293b', accent: '#b45309'), font: Font.frauncesJost, theme: Theme.practitioner), readings: true);
+// Returns GenerateTarotReportResponse: template String, lang String, format String, title String, pages int?, pdf String?, html String?, markdown String?
+```
+
+---
+
+## Languages: `roxy.languages`
+
+List the response languages accepted by the `lang` query parameter on every i18n-aware endpoint
+
+[API reference](https://roxyapi.com/api-reference/languages)
+
+```dart
+// Get field labels for a language
+final result = await roxy.languages.getFieldLabels();
+// Returns GetFieldLabelsResponse: lang String, fields Map<String, String>, enums Map<String, String>
+
+// List supported response languages
+final result = await roxy.languages.listLanguages();
+// Returns ListLanguagesResponse: languages List<ListLanguagesResponseLanguagesItem>
+```
+<!-- END:METHODS -->
+
+## Error Handling
+
+<!-- BEGIN:ERRORS -->
+Every error returns `{ error, code, doc_url }`, thrown as `RoxyException` with `statusCode`, `code`, `message` and `docUrl`. Switch on `code`; `message` is readable text and may change. Each meaning below says whether and when to retry, and `retryAfter` carries the wait when the response sends it. Every code is documented at https://roxyapi.com/docs/errors.
+
+| Status | Code | Meaning |
+|--------|------|---------|
+| 400 | `validation_error` | A field is missing or invalid. The body lists every failing field at once in issues, each with its path and the expected shape. |
+| 400 | `bad_request` | The request was rejected as a whole, for example a body that is not valid JSON or a date range that ends before it starts. |
+| 400 | `date_out_of_range` | A date lies outside the span the planetary positions are served for. The error names the supported dates. |
+| 400 | `invalid_branding` | The report branding cannot be used, for example a logo that is not a PNG, JPEG, WebP or SVG image. |
+| 400 | `logo_fetch_failed` | The report logo could not be fetched: it must be an HTTPS URL on a public host that answers within the size limit. |
+| 400 | `unsupported_character` | The report text holds a character no report font draws. The error names it: remove or replace it. |
+| 401 | `api_key_required` | No API key was sent. |
+| 401 | `invalid_api_key` | The key sent is malformed or cannot be verified. |
+| 401 | `api_key_revoked` | The key was valid once and has since been revoked from the account page. |
+| 401 | `subscription_not_found` | The key verifies, but the subscription behind it no longer exists. |
+| 401 | `subscription_inactive` | The subscription behind the key is cancelled, expired or suspended, or a trial is past its end date. |
+| 401 | `publishable_key_not_allowed_on_mcp` | A publishable key was used on a Remote MCP server, which takes a secret key. |
+| 401 | `invalid_client_ip` | A keyless request could not be attributed to a caller. |
+| 401 | `unauthorized` | Authentication failed with no more specific reason to give. |
+| 403 | `forbidden` | The key is valid, but this request is not permitted. |
+| 403 | `origin_required` | A publishable key with an origin allowlist was used with no Origin header, as from a server or a native app. |
+| 403 | `origin_not_allowed` | The calling site is not on the origin allowlist of this publishable key. |
+| 404 | `not_found` | Nothing is served at this path, or the identifier in it does not exist. A path miss adds suggestions, the closest real endpoints. |
+| 405 | `method_not_allowed` | The path exists for a different HTTP method. The body lists the accepted methods in allow, as does the Allow header. |
+| 409 | `conflict` | The request cannot be applied in the current state. |
+| 410 | `gone` | The path was removed permanently. |
+| 413 | `payload_too_large` | The request body is larger than the API accepts. A body far over the cap is refused before it reaches the API and returns a bare 413 with no JSON body. |
+| 415 | `unsupported_media_type` | A request with a body was sent without Content-Type: application/json. |
+| 422 | `unprocessable_entity` | Every field is valid, but the combination cannot be computed. |
+| 429 | `rate_limit_exceeded` | The monthly request allowance is used up. Retry-After gives the seconds to the reset. |
+| 429 | `rate_limit_per_minute` | The per-minute limit of the plan was reached. Retry-After gives the seconds to the next minute, and the monthly allowance is not charged. |
+| 429 | `rate_limited` | A rate limit was reached, reported without the plan detail. |
+| 429 | `free_tier_exhausted` | A keyless request has used up its trial allowance. |
+| 429 | `reports_rate_limited` | Too many reports were requested this minute. Retry-After gives the seconds to the next minute. |
+| 500 | `internal_error` | The request failed inside our service. Retry with exponential backoff. |
+| 503 | `compute_saturated` | Heavy calculations are briefly at capacity. Send the same request again after Retry-After seconds. |
+| 503 | `reports_busy` | Report rendering is briefly at capacity. Send the same request again after Retry-After seconds. |
+| 503 | `report_render_timeout` | The report took too long to render. Send the same request again. |
+| Any | `error` | A fallback for a status with no more specific code. The status and the error field carry the signal. |
+<!-- END:ERRORS -->
+
+Retries are on by default: `Roxy(key)` resends a request up to twice after a 429, 500, 502, 503 or 504, or a connection that was never made, waiting for `Retry-After` when present (up to `maxDelay`, default 30 seconds) and a jittered backoff otherwise. `Roxy(key, maxRetries: 0)` turns retries off. A read timeout is never retried. On a persistent failure the total is 1 + `maxRetries` requests, so 3 by default and exactly 1 with `maxRetries: 0`. A network failure (DNS, timeout, connection reset) throws the HTTP client exception instead of `RoxyException`.
+
+## Links
+
+- Documentation: https://roxyapi.com/docs
+- Interactive API docs: https://roxyapi.com/api-reference
+- Pricing and API keys: https://roxyapi.com/pricing
+- MCP for AI agents: https://roxyapi.com/docs/mcp
+- Templates: https://roxyapi.com/templates
+- Source and issues: https://github.com/RoxyAPI/sdk-dart
+- Other SDKs: TypeScript https://www.npmjs.com/package/@roxyapi/sdk, Python https://pypi.org/project/roxy-sdk/, PHP https://packagist.org/packages/roxyapi/sdk, .NET https://www.nuget.org/packages/RoxyApi.Sdk, Go https://pkg.go.dev/github.com/RoxyAPI/sdk-go, Rust https://crates.io/crates/roxyapi

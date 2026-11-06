@@ -1,0 +1,8 @@
+.dart_tool/
+build/
+pubspec.lock
+.env
+.env.local
+*.env.*
+CLAUDE.md
+!example/flutter_app/pubspec.lock

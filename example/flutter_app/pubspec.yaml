@@ -1,0 +1,21 @@
+name: roxyapi_flutter_example
+description: A Flutter app that renders a natal chart from RoxyAPI with the roxy-natal-chart component.
+publish_to: none
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.6.0
+  roxyapi:
+    path: ../..
+  web: ^1.1.0
+  webview_flutter: ^4.14.0
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
