@@ -61,9 +61,10 @@ void main() {
         isNotNull,
         reason: 'roxy.${op.namespace}.${op.operationId}',
       );
-      expect(params, [
-        for (final p in op.params) p.dart,
-      ], reason: '${op.operationId} parameters: path, body, query, then lang');
+      final expected = [for (final p in op.params) p.dart];
+      final order =
+          '${op.operationId} parameters: path, body, query, then lang';
+      expect(params, expected, reason: order);
     }
   });
 
