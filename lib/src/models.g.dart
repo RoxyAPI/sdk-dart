@@ -19551,26 +19551,29 @@ extension type GetDailyHoroscopeResponse.fromJson(Map<String, Object?> json)
   /// Date of this daily horoscope (YYYY-MM-DD).
   String get date => read(json, 'date', asString);
 
-  /// The single most relevant event of the period, whichever life area it touches, read into the whole-sign houses of this sign. The same event that leads column, at lede length rather than developed into a full movement, and checkable against the events array. Typically 30 to 60 words. Join it with love, career, health and finance for a general reading built from the six sections. Deterministic: the same sign and period always returns the same text.
+  /// The event of the day that most reaches home, roots and the self, or on a quiet day a standing planet, written as the five topic fields are and opening on the lead of column whenever focus is overview. Typically 80 to 120 words. Join it with love, career, health and finance for a general reading built from the six sections. Deterministic: the same sign and period always returns the same text.
   String get overview => read(json, 'overview', asString);
 
-  /// Love and relationship forecast, read into the whole-sign houses of this sign. The same ranked events that drive column, filtered to romance and partnership, plus the standing placements that reach it. Every event named here is in the events array, so a piece can be fact-checked before it runs; this section reads an event through whichever of its houses carries romance and partnership, which for an aspect between two houses can be the other one from the house the events array leads with, and both are whole-sign houses of the bodies involved counted from this sign. Typically 50 to 90 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is the same material woven into one piece instead of split by topic. Deterministic: the same sign and period always returns the same text.
+  /// Love and relationship forecast, read into the whole-sign houses of this sign. It opens on the event of the day that most reaches romance and partnership, or on a quiet day a standing planet, naming the bodies, the aspect and the life area and what it stirs, then a human situation of this topic with a way through it, a conditional with a few options, and a close; the topic named in focus opens on the same event as column. Every named event is in events, with each participant sign and whole-sign house in placements at the event time. This section reads whichever participant house carries romance and partnership; the aggregate event house remains the leading body house. Typically 80 to 120 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is a separate piece of its own. Deterministic: the same sign and period always returns the same text.
   String get love => read(json, 'love', asString);
 
-  /// Career and professional outlook, read into the whole-sign houses of this sign. The same ranked events that drive column, filtered to career, work and reputation, plus the standing placements that reach it. Every event named here is in the events array, so a piece can be fact-checked before it runs; this section reads an event through whichever of its houses carries career, work and reputation, which for an aspect between two houses can be the other one from the house the events array leads with, and both are whole-sign houses of the bodies involved counted from this sign. Typically 50 to 90 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is the same material woven into one piece instead of split by topic. Deterministic: the same sign and period always returns the same text.
+  /// Career and professional outlook, read into the whole-sign houses of this sign. It opens on the event of the day that most reaches career, work and reputation, or on a quiet day a standing planet, naming the bodies, the aspect and the life area and what it stirs, then a human situation of this topic with a way through it, a conditional with a few options, and a close; the topic named in focus opens on the same event as column. Every named event is in events, with each participant sign and whole-sign house in placements at the event time. This section reads whichever participant house carries career, work and reputation; the aggregate event house remains the leading body house. Typically 80 to 120 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is a separate piece of its own. Deterministic: the same sign and period always returns the same text.
   String get career => read(json, 'career', asString);
 
-  /// Health, energy, and wellness guidance, read into the whole-sign houses of this sign. The same ranked events that drive column, filtered to health, plus the standing placements that reach it. Every event named here is in the events array, so a piece can be fact-checked before it runs; this section reads an event through whichever of its houses carries health, which for an aspect between two houses can be the other one from the house the events array leads with, and both are whole-sign houses of the bodies involved counted from this sign. Typically 50 to 90 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is the same material woven into one piece instead of split by topic. Deterministic: the same sign and period always returns the same text.
+  /// Health, energy, and wellness guidance, read into the whole-sign houses of this sign. It opens on the event of the day that most reaches health, or on a quiet day a standing planet, naming the bodies, the aspect and the life area and what it stirs, then a human situation of this topic with a way through it, a conditional with a few options, and a close; the topic named in focus opens on the same event as column. Every named event is in events, with each participant sign and whole-sign house in placements at the event time. This section reads whichever participant house carries health; the aggregate event house remains the leading body house. Typically 80 to 120 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is a separate piece of its own. Deterministic: the same sign and period always returns the same text.
   String get health => read(json, 'health', asString);
 
-  /// Financial outlook and money-related guidance, read into the whole-sign houses of this sign. The same ranked events that drive column, filtered to finance, plus the standing placements that reach it. Every event named here is in the events array, so a piece can be fact-checked before it runs; this section reads an event through whichever of its houses carries finance, which for an aspect between two houses can be the other one from the house the events array leads with, and both are whole-sign houses of the bodies involved counted from this sign. Typically 50 to 90 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is the same material woven into one piece instead of split by topic. Deterministic: the same sign and period always returns the same text.
+  /// Financial outlook and money-related guidance, read into the whole-sign houses of this sign. It opens on the event of the day that most reaches finance, or on a quiet day a standing planet, naming the bodies, the aspect and the life area and what it stirs, then a human situation of this topic with a way through it, a conditional with a few options, and a close; the topic named in focus opens on the same event as column. Every named event is in events, with each participant sign and whole-sign house in placements at the event time. This section reads whichever participant house carries finance; the aggregate event house remains the leading body house. Typically 80 to 120 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is a separate piece of its own. Deterministic: the same sign and period always returns the same text.
   String get finance => read(json, 'finance', asString);
 
-  /// The single actionable takeaway from the leading event of the period, read into the whole-sign houses of this sign and checkable against the events array. Drawn from the same event as overview, kept to a short, actionable pair of sentences rather than grown to match the other sections. Deterministic: the same sign and period always returns the same text.
+  /// The single actionable takeaway of the period. It opens on the event of the day that most reaches travel, belief, conversation and daily learning, or on a quiet day a standing planet, naming the bodies, the aspect and the life area, then a situation with a way through it, a conditional with a few options, and a close, in the shape of the five fields beside it. Deterministic: the same sign and period always returns the same text.
   String get advice => read(json, 'advice', asString);
 
-  /// The full column for this period, ready to run as one piece, with paragraphs separated by a blank line. Names the events driving it and the dates they fall on, read into the whole-sign houses of this sign. Typically 120 to 180 words. The six section fields read the same ranked events filtered to their own life area, each composed as a column of its own rather than an excerpt of this one, so render either shape and never both. Deterministic: the same sign and period always returns the same column.
+  /// The full column for this period, ready to run as one piece, its paragraphs, where it has more than one, separated by a blank line. Names the events driving it and the dates they fall on, read into the whole-sign houses of this sign. Typically 80 to 120 words. The six section fields each open on an event or standing planet of their own read through their life area, the one named in focus on the lead of this column, so render either shape and never both. Deterministic: the same sign and period always returns the same column.
   String get column => read(json, 'column', asString);
+
+  /// The topic this reading is mainly about: love, career, finance or health when the lead event falls in that life area, overview for a bigger-picture period. A machine value, canonical English in every language, so a client can route its own content on it (a related article, a product, a call to action) without parsing the prose; the topic field it names reads the same lead the column opens on.
+  String get focus => read(json, 'focus', asString);
 
   /// The dated astronomical events this reading is built on, earliest first. Every field in every row can be checked against an independent authority, so a column can be fact-checked before it is published. Empty on a period in which nothing exact happens, where the reading falls back to the standing positions instead.
   List<GetDailyHoroscopeResponseEventsItem> get events => read(
@@ -19579,17 +19582,28 @@ extension type GetDailyHoroscopeResponse.fromJson(Map<String, Object?> json)
     listOf(model(GetDailyHoroscopeResponseEventsItem.fromJson)),
   );
 
+  /// Where each of the ten bodies stands for this reading, one row per body, so every standing claim in the prose (a body in a house, until a date, retrograde until it turns direct, exalted or at home) can be checked against the response itself. It carries state only: every aspect, lunation, eclipse, ingress or station of the period is a row of events\[\]. Against events\[\], it adds the bodies that do nothing exact in the period (events\[\] names only what happens), the entry and exit of the sign each stands in (events\[\].through carries an exit only for an ingress inside the period), the instant a retrograde body turns direct, and dignity. Against activeTransits, which the daily prints as translated strings for the seven visible bodies, it adds Uranus, Neptune and Pluto, the lowercase sign and numeric house as values, the retrograde flag as a boolean, and the three instants. Where an instant appears in both keys it is the same string. Never translated.
+  List<GetDailyHoroscopeResponsePositionsItem> get positions => read(
+    json,
+    'positions',
+    listOf(model(GetDailyHoroscopeResponsePositionsItem.fromJson)),
+  );
+
   /// Lucky number for the day, 1 to 9, from the traditional planetary number correspondence applied to the planet that governs this sign today. Not a random draw and not a function of the date.
   num get luckyNumber => read(json, 'luckyNumber', asNum);
 
-  /// Lucky color for the day, drawn from the three colors of the sign element and selected by the planet governing the reading.
+  /// Lucky color for the day, the color traditionally ruled by the planet that governs this sign today: Sun gold, Moon silver, Mercury light blue, Venus green, Mars red, Jupiter purple, Saturn brown. When Uranus, Neptune or Pluto governs, the next most governing of the seven classical planets gives the color. Translated with the lang parameter.
   String get luckyColor => read(json, 'luckyColor', asString);
 
-  /// Most compatible zodiac signs for this sign. Trine partners (same element) followed by a sextile partner (complementary element). Use for compatibility widgets, dating app onboarding, and horoscope cards.
+  /// Three zodiac signs most in tune with this sign today, best first. Read from the real sky of the period, so the list moves with the transits instead of repeating a fixed table, and every pick can be traced in positions\[\]. On a quiet sky it settles on the classic element partners. For the fixed sign-to-sign pairing, read compatibleSigns from the signs endpoint.
   List<String> get compatibleSigns =>
       read(json, 'compatibleSigns', listOf(asString));
 
-  /// Active planetary transits affecting this sign today, with house activations. Each transit shows the planet, its current sign, and which house it activates for the queried sign. The sign and the house phrase translate with the lang parameter; the planet name stays canonical English so a caller can match on it whatever the language.
+  /// Crystal of the day for this sign: a stone traditionally linked to this sign and to the planet that governs it today, stepping down to the next governing planet when none is, and to any stone of the sign after that. Rotates by date among equally fitting stones, so the same sign meets a new stone on consecutive days. Use for daily crystal cards beside the horoscope.
+  GetDailyHoroscopeResponseCrystal get crystal =>
+      read(json, 'crystal', model(GetDailyHoroscopeResponseCrystal.fromJson));
+
+  /// Active planetary transits affecting this sign today, with house activations. Each transit shows the planet, its current sign, and the house it activates for the queried sign, named by its life area as the prose names it (your house of partnership). The sign and the house phrase translate with the lang parameter; the planet name stays canonical English so a caller can match on it whatever the language.
   List<String> get activeTransits =>
       read(json, 'activeTransits', listOf(asString));
 
@@ -19603,6 +19617,18 @@ extension type GetDailyHoroscopeResponse.fromJson(Map<String, Object?> json)
   num get energyRating => read(json, 'energyRating', asNum);
 }
 
+/// Crystal of the day for this sign: a stone traditionally linked to this sign and to the planet that governs it today, stepping down to the next governing planet when none is, and to any stone of the sign after that. Rotates by date among equally fitting stones, so the same sign meets a new stone on consecutive days. Use for daily crystal cards beside the horoscope.
+extension type GetDailyHoroscopeResponseCrystal.fromJson(
+  Map<String, Object?> json
+)
+    implements Object {
+  /// Crystal identifier, stable in every language. Pass it to the crystal lookup endpoint, GET /crystals/{id}, for the full healing properties, chakras and affirmation.
+  String get id => read(json, 'id', asString);
+
+  /// Display name of the crystal, translated with the lang parameter.
+  String get name => read(json, 'name', asString);
+}
+
 extension type GetDailyHoroscopeResponseEventsItem.fromJson(
   Map<String, Object?> json
 )
@@ -19610,14 +19636,33 @@ extension type GetDailyHoroscopeResponseEventsItem.fromJson(
   /// Kind of event. aspect is an exact angle between two moving bodies, sign-ingress a body entering a new sign, retrograde-station a body turning retrograde or direct, lunar-phase one of the four quarters, eclipse a solar or lunar eclipse, and solar-season the Sun entering a sign.
   String get type => read(json, 'type', asString);
 
-  /// Exact instant the event perfects, UTC, to the second. Verifiable against NASA JPL Horizons for a position event and against the US Naval Observatory for a lunar phase or eclipse.
+  /// Exact instant the event perfects, ISO 8601 to the second, on the clock the reading is read on: UTC with Z by default, the offset of timezone when one is passed on a daily, weekly or monthly reading (2026-11-13T19:27:27-05:00 in New York), the same instant either way; a yearly reading is written in UTC. Verifiable against NASA JPL Horizons for a position event and against the US Naval Observatory for a lunar phase or eclipse.
   String get at => read(json, 'at', asString);
 
   /// Bodies involved, canonical English regardless of the requested language so the value stays safe to switch on. Two entries for an aspect, faster body first. One entry for an ingress, a station, a lunar phase, or an eclipse.
   List<String> get bodies => read(json, 'bodies', listOf(asString));
 
+  /// Each participant at the enclosing event timestamp, in bodies order: two entries for an aspect and one for every other event. Names and signs stay canonical English in every language. Each entry carries its own whole-sign house, including the second body of an aspect. Event placements can differ from positions, which reports noon on the first day of the period.
+  List<GetDailyHoroscopeResponseEventsItemPlacementsItem> get placements =>
+      read(
+        json,
+        'placements',
+        listOf(
+          model(GetDailyHoroscopeResponseEventsItemPlacementsItem.fromJson),
+        ),
+      );
+
   /// Angle formed, on aspect events only: conjunction, sextile, square, trine, opposition, semi-sextile, quincunx, semi-square, or sesquiquadrate.
   String? get aspect => readOrNull(json, 'aspect', asString);
+
+  /// Exact quarter phase, on lunar-phase events only: new-moon, first-quarter, full-moon, or last-quarter. Canonical English in every language. Use to identify the phase at the event instant.
+  String? get phase => readOrNull(json, 'phase', asString);
+
+  /// Eclipse classification at peak, on eclipse events only: penumbral, partial, annular, or total. Canonical English in every language. Sun in bodies identifies a solar eclipse and Moon a lunar eclipse.
+  String? get kind => readOrNull(json, 'kind', asString);
+
+  /// Direction the body turns at the event instant, on retrograde-station events only: retrograde starts backward motion and direct ends it. Canonical English in every language. Present even when the other end of the retrograde span cannot be dated.
+  String? get direction => readOrNull(json, 'direction', asString);
 
   /// Sign the event falls in, lowercase, where it has exactly one. Absent for an aspect whose two bodies stand in different signs.
   String? get sign => readOrNull(json, 'sign', asString);
@@ -19625,8 +19670,51 @@ extension type GetDailyHoroscopeResponseEventsItem.fromJson(
   /// Whole-sign house the event falls in, counted from the queried sign, 1 to 12. This is what turns one global sky event into a statement about this reader.
   int get house => read(json, 'house', asInt);
 
-  /// End of the window this event holds open, UTC, given only where a bounded window is a real fact about it: the orb span of an aspect, the sign span of an ingress or a season, the retrograde span of a station. Absent for a lunar phase or an eclipse, which are instants and not spans.
+  /// End of the window this event holds open, on the same clock as at, given only where a bounded window is a real fact about it: the orb span of an aspect, the sign span of an ingress or a season, the retrograde span of a station. Absent for a lunar phase or an eclipse, which are instants and not spans.
   String? get through => readOrNull(json, 'through', asString);
+}
+
+extension type GetDailyHoroscopeResponseEventsItemPlacementsItem.fromJson(
+  Map<String, Object?> json
+)
+    implements Object {
+  /// Body name, canonical English in every language. Matches the entry at the same index in bodies.
+  String get name => read(json, 'name', asString);
+
+  /// Sign this body occupies at the event timestamp, lowercase and never translated. For a sign change, the sign entered.
+  String get sign => read(json, 'sign', asString);
+
+  /// Whole-sign house this body occupies at the event instant, counted from the queried sign, 1 to 12.
+  int get house => read(json, 'house', asInt);
+}
+
+extension type GetDailyHoroscopeResponsePositionsItem.fromJson(
+  Map<String, Object?> json
+)
+    implements Object {
+  /// Body, canonical English regardless of the requested language: Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune or Pluto, in that order, one row each. Same key and values as planets\[\].name on the natal chart.
+  String get name => read(json, 'name', asString);
+
+  /// Sign the body stands in at noon on the first day of the period on the reader clock, lowercase like events\[\].sign, never translated.
+  String get sign => read(json, 'sign', asString);
+
+  /// Whole-sign house that sign is for the queried sign, 1 to 12, counted as events\[\].house is.
+  int get house => read(json, 'house', asInt);
+
+  /// Whether the body moves retrograde at that noon. Same key as planets\[\].isRetrograde on the natal chart; the daily activeTransits prints the same flag as a translated string.
+  bool get isRetrograde => read(json, 'isRetrograde', asBool);
+
+  /// Essential dignity of the body in that sign, the same value planets\[\].dignity reports on the natal chart: domicile, exaltation, detriment, fall, or peregrine. Always English. A column or card that calls a body at home or exalted is backed by this value.
+  String get dignity => read(json, 'dignity', asString);
+
+  /// Instant the body entered this sign, to the second, on the same clock as events\[\].at. Where the entry is also a row of events\[\] in this response it is that row at, byte for byte. Absent only where the entry lies too far back to date.
+  String? get enteredAt => readOrNull(json, 'enteredAt', asString);
+
+  /// Instant the body next leaves this sign, to the second, on the same clock as events\[\].at: the date a column prints in until April 15. Where it is also in events\[\] (the ingress that ends the stay, or the through of the ingress that began it) it is that string, byte for byte. Absent only where the exit lies too far ahead to date.
+  String? get leavesAt => readOrNull(json, 'leavesAt', asString);
+
+  /// Instant the body next turns direct, to the second, on the same clock as events\[\].at, present only while isRetrograde is true: the date a retrograde is dated by in the prose. Where the station is also in events\[\] it is that row at or through, byte for byte. Absent only where the turn lies too far ahead to date.
+  String? get turnsDirectAt => readOrNull(json, 'turnsDirectAt', asString);
 }
 
 extension type GetDailyMayanReadingResponse.fromJson(Map<String, Object?> json)
@@ -22576,32 +22664,42 @@ extension type GetMonthlyHoroscopeResponse.fromJson(Map<String, Object?> json)
   /// Month of this forecast (YYYY-MM).
   String get month => read(json, 'month', asString);
 
-  /// The single most relevant event of the period, whichever life area it touches, read into the whole-sign houses of this sign. The same event that leads column, at lede length rather than developed into a full movement, and checkable against the events array. Typically 55 to 100 words. Join it with love, career, health and finance for a general reading built from the six sections. Deterministic: the same sign and period always returns the same text.
+  /// The event of the month that most reaches home, roots and the self, or on a quiet month a standing planet, written as the five topic fields are and opening on the lead of column whenever focus is overview. Typically 35 to 90 words. Join it with love, career, health and finance for a general reading built from the six sections. Deterministic: the same sign and period always returns the same text.
   String get overview => read(json, 'overview', asString);
 
-  /// Monthly love and relationship forecast, read into the whole-sign houses of this sign. The same ranked events that drive column, filtered to romance and partnership, plus the standing placements that reach it. Every event named here is in the events array, so a piece can be fact-checked before it runs; this section reads an event through whichever of its houses carries romance and partnership, which for an aspect between two houses can be the other one from the house the events array leads with, and both are whole-sign houses of the bodies involved counted from this sign. Typically 120 to 200 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is the same material woven into one piece instead of split by topic. Deterministic: the same sign and period always returns the same text.
+  /// Monthly love and relationship forecast, read into the whole-sign houses of this sign. It is the love monthly, a full piece that reads every transit of the month that reaches romance and partnership through love, in date order, each dated, then a close. Every named event is in events, with each participant sign and whole-sign house in placements at the event time. This section reads whichever participant house carries romance and partnership; the aggregate event house remains the leading body house. Typically 180 to 250 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is a separate piece of its own. Deterministic: the same sign and period always returns the same text.
   String get love => read(json, 'love', asString);
 
-  /// Monthly career and professional outlook, read into the whole-sign houses of this sign. The same ranked events that drive column, filtered to career, work and reputation, plus the standing placements that reach it. Every event named here is in the events array, so a piece can be fact-checked before it runs; this section reads an event through whichever of its houses carries career, work and reputation, which for an aspect between two houses can be the other one from the house the events array leads with, and both are whole-sign houses of the bodies involved counted from this sign. Typically 120 to 200 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is the same material woven into one piece instead of split by topic. Deterministic: the same sign and period always returns the same text.
+  /// Monthly career and professional outlook, read into the whole-sign houses of this sign. It opens on the event of the month that most reaches career, work and reputation, dated, or on a quiet month a standing planet, naming the bodies, the aspect and the life area and what it stirs, then a human situation of this topic with a way through it, a conditional with a few options, and a close; the topic named in focus opens on the same event as column. Every named event is in events, with each participant sign and whole-sign house in placements at the event time. This section reads whichever participant house carries career, work and reputation; the aggregate event house remains the leading body house. Typically 35 to 90 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is a separate piece of its own. Deterministic: the same sign and period always returns the same text.
   String get career => read(json, 'career', asString);
 
-  /// Monthly health and wellness guidance, read into the whole-sign houses of this sign. The same ranked events that drive column, filtered to health, plus the standing placements that reach it. Every event named here is in the events array, so a piece can be fact-checked before it runs; this section reads an event through whichever of its houses carries health, which for an aspect between two houses can be the other one from the house the events array leads with, and both are whole-sign houses of the bodies involved counted from this sign. Typically 120 to 200 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is the same material woven into one piece instead of split by topic. Deterministic: the same sign and period always returns the same text.
+  /// Monthly health and wellness guidance, read into the whole-sign houses of this sign. It opens on the event of the month that most reaches health, dated, or on a quiet month a standing planet, naming the bodies, the aspect and the life area and what it stirs, then a human situation of this topic with a way through it, a conditional with a few options, and a close; the topic named in focus opens on the same event as column. Every named event is in events, with each participant sign and whole-sign house in placements at the event time. This section reads whichever participant house carries health; the aggregate event house remains the leading body house. Typically 35 to 90 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is a separate piece of its own. Deterministic: the same sign and period always returns the same text.
   String get health => read(json, 'health', asString);
 
-  /// Monthly financial outlook and guidance, read into the whole-sign houses of this sign. The same ranked events that drive column, filtered to finance, plus the standing placements that reach it. Every event named here is in the events array, so a piece can be fact-checked before it runs; this section reads an event through whichever of its houses carries finance, which for an aspect between two houses can be the other one from the house the events array leads with, and both are whole-sign houses of the bodies involved counted from this sign. Typically 120 to 200 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is the same material woven into one piece instead of split by topic. Deterministic: the same sign and period always returns the same text.
+  /// Monthly financial outlook and guidance, read into the whole-sign houses of this sign. It opens on the event of the month that most reaches finance, dated, or on a quiet month a standing planet, naming the bodies, the aspect and the life area and what it stirs, then a human situation of this topic with a way through it, a conditional with a few options, and a close; the topic named in focus opens on the same event as column. Every named event is in events, with each participant sign and whole-sign house in placements at the event time. This section reads whichever participant house carries finance; the aggregate event house remains the leading body house. Typically 35 to 90 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is a separate piece of its own. Deterministic: the same sign and period always returns the same text.
   String get finance => read(json, 'finance', asString);
 
-  /// The single actionable takeaway from the leading event of the period, read into the whole-sign houses of this sign and checkable against the events array. Drawn from the same event as overview, kept to a short, actionable pair of sentences rather than grown to match the other sections. Deterministic: the same sign and period always returns the same text.
+  /// The single actionable takeaway of the period. It opens on the event of the month that most reaches travel, belief, conversation and daily learning, or on a quiet month a standing planet, naming the bodies, the aspect and the life area, then a situation with a way through it, a conditional with a few options, and a close, in the shape of the five fields beside it. Deterministic: the same sign and period always returns the same text.
   String get advice => read(json, 'advice', asString);
 
-  /// The full column for this period, ready to run as one piece, with paragraphs separated by a blank line. Names the events driving it and the dates they fall on, read into the whole-sign houses of this sign. Typically 400 to 700 words. The six section fields read the same ranked events filtered to their own life area, each composed as a column of its own rather than an excerpt of this one, so render either shape and never both. Deterministic: the same sign and period always returns the same column.
+  /// The full column for this period, ready to run as one piece, its paragraphs, where it has more than one, separated by a blank line. Names the events driving it and the dates they fall on, read into the whole-sign houses of this sign. Typically 180 to 250 words. The six section fields each open on an event or standing planet of their own read through their life area, the one named in focus on the lead of this column, so render either shape and never both. Deterministic: the same sign and period always returns the same column.
   String get column => read(json, 'column', asString);
+
+  /// The topic this reading is mainly about: love, career, finance or health when the lead event falls in that life area, overview for a bigger-picture period. A machine value, canonical English in every language, so a client can route its own content on it (a related article, a product, a call to action) without parsing the prose; the topic field it names reads the same lead the column opens on.
+  String get focus => read(json, 'focus', asString);
 
   /// The dated astronomical events this reading is built on, earliest first. Every field in every row can be checked against an independent authority, so a column can be fact-checked before it is published. Empty on a period in which nothing exact happens, where the reading falls back to the standing positions instead.
   List<GetMonthlyHoroscopeResponseEventsItem> get events => read(
     json,
     'events',
     listOf(model(GetMonthlyHoroscopeResponseEventsItem.fromJson)),
+  );
+
+  /// Where each of the ten bodies stands for this reading, one row per body, so every standing claim in the prose (a body in a house, until a date, retrograde until it turns direct, exalted or at home) can be checked against the response itself. It carries state only: every aspect, lunation, eclipse, ingress or station of the period is a row of events\[\]. Against events\[\], it adds the bodies that do nothing exact in the period (events\[\] names only what happens), the entry and exit of the sign each stands in (events\[\].through carries an exit only for an ingress inside the period), the instant a retrograde body turns direct, and dignity. Against activeTransits, which the daily prints as translated strings for the seven visible bodies, it adds Uranus, Neptune and Pluto, the lowercase sign and numeric house as values, the retrograde flag as a boolean, and the three instants. Where an instant appears in both keys it is the same string. Never translated.
+  List<GetMonthlyHoroscopeResponsePositionsItem> get positions => read(
+    json,
+    'positions',
+    listOf(model(GetMonthlyHoroscopeResponsePositionsItem.fromJson)),
   );
 
   /// The month read one calendar week at a time, off the same ranked events as column and events\[\]: the life area each week turns on, and the one thing that area asks for. Two weeks may land in the same area, because two events of a month often do; the sentence beside it is always different. Use it for the week strip of a monthly page.
@@ -22611,7 +22709,7 @@ extension type GetMonthlyHoroscopeResponse.fromJson(Map<String, Object?> json)
     listOf(model(GetMonthlyHoroscopeResponseWeekByWeekItem.fromJson)),
   );
 
-  /// The dates to circle this month, earliest first: every lunation and eclipse of the month, plus the headline movements the reading is built on, which are the sign changes of the slower planets and every station with the direction it turns. Each is placed in the whole-sign house it reaches for this sign. Every row is an instant the ephemeris gives, checkable against NASA JPL Horizons or the US Naval Observatory, and every row that is not a lunation or an eclipse is also a row of events\[\], so the list cannot contradict the reading beside it.
+  /// The dates to circle this month, earliest first: every lunation and eclipse of the month, plus the headline movements the reading is built on, which are the sign changes of the slower planets and every station with the direction it turns. Each is placed in the whole-sign house it reaches for this sign. Every row is an instant the ephemeris gives, checkable against NASA JPL Horizons or the US Naval Observatory, and every row is also a row of events\[\], so the list cannot contradict the reading beside it.
   List<GetMonthlyHoroscopeResponseKeyDatesItem> get keyDates => read(
     json,
     'keyDates',
@@ -22621,10 +22719,10 @@ extension type GetMonthlyHoroscopeResponse.fromJson(Map<String, Object?> json)
   /// Four lucky numbers for the month, each 1 to 9 and all distinct, from the traditional planetary number correspondence applied to the four planets that govern this sign this month.
   List<num> get luckyNumbers => read(json, 'luckyNumbers', listOf(asNum));
 
-  /// Lucky color for the month, drawn from the three colors of the sign element and selected by the planet governing the reading.
+  /// Lucky color for the month, the color traditionally ruled by the planet that governs this sign this month: Sun gold, Moon silver, Mercury light blue, Venus green, Mars red, Jupiter purple, Saturn brown. When Uranus, Neptune or Pluto governs, the next most governing of the seven classical planets gives the color. Translated with the lang parameter.
   String get luckyColor => read(json, 'luckyColor', asString);
 
-  /// Most compatible zodiac signs for this sign. Trine partners (same element) followed by a sextile partner (complementary element).
+  /// Three zodiac signs most in tune with this sign this month, best first. Read from the real sky of the period, so the list moves with the transits instead of repeating a fixed table, and every pick can be traced in positions\[\]. On a quiet sky it settles on the classic element partners. For the fixed sign-to-sign pairing, read compatibleSigns from the signs endpoint.
   List<String> get compatibleSigns =>
       read(json, 'compatibleSigns', listOf(asString));
 }
@@ -22636,14 +22734,33 @@ extension type GetMonthlyHoroscopeResponseEventsItem.fromJson(
   /// Kind of event. aspect is an exact angle between two moving bodies, sign-ingress a body entering a new sign, retrograde-station a body turning retrograde or direct, lunar-phase one of the four quarters, eclipse a solar or lunar eclipse, and solar-season the Sun entering a sign.
   String get type => read(json, 'type', asString);
 
-  /// Exact instant the event perfects, UTC, to the second. Verifiable against NASA JPL Horizons for a position event and against the US Naval Observatory for a lunar phase or eclipse.
+  /// Exact instant the event perfects, ISO 8601 to the second, on the clock the reading is read on: UTC with Z by default, the offset of timezone when one is passed on a daily, weekly or monthly reading (2026-11-13T19:27:27-05:00 in New York), the same instant either way; a yearly reading is written in UTC. Verifiable against NASA JPL Horizons for a position event and against the US Naval Observatory for a lunar phase or eclipse.
   String get at => read(json, 'at', asString);
 
   /// Bodies involved, canonical English regardless of the requested language so the value stays safe to switch on. Two entries for an aspect, faster body first. One entry for an ingress, a station, a lunar phase, or an eclipse.
   List<String> get bodies => read(json, 'bodies', listOf(asString));
 
+  /// Each participant at the enclosing event timestamp, in bodies order: two entries for an aspect and one for every other event. Names and signs stay canonical English in every language. Each entry carries its own whole-sign house, including the second body of an aspect. Event placements can differ from positions, which reports noon on the first day of the period.
+  List<GetMonthlyHoroscopeResponseEventsItemPlacementsItem> get placements =>
+      read(
+        json,
+        'placements',
+        listOf(
+          model(GetMonthlyHoroscopeResponseEventsItemPlacementsItem.fromJson),
+        ),
+      );
+
   /// Angle formed, on aspect events only: conjunction, sextile, square, trine, opposition, semi-sextile, quincunx, semi-square, or sesquiquadrate.
   String? get aspect => readOrNull(json, 'aspect', asString);
+
+  /// Exact quarter phase, on lunar-phase events only: new-moon, first-quarter, full-moon, or last-quarter. Canonical English in every language. Use to identify the phase at the event instant.
+  String? get phase => readOrNull(json, 'phase', asString);
+
+  /// Eclipse classification at peak, on eclipse events only: penumbral, partial, annular, or total. Canonical English in every language. Sun in bodies identifies a solar eclipse and Moon a lunar eclipse.
+  String? get kind => readOrNull(json, 'kind', asString);
+
+  /// Direction the body turns at the event instant, on retrograde-station events only: retrograde starts backward motion and direct ends it. Canonical English in every language. Present even when the other end of the retrograde span cannot be dated.
+  String? get direction => readOrNull(json, 'direction', asString);
 
   /// Sign the event falls in, lowercase, where it has exactly one. Absent for an aspect whose two bodies stand in different signs.
   String? get sign => readOrNull(json, 'sign', asString);
@@ -22651,19 +22768,62 @@ extension type GetMonthlyHoroscopeResponseEventsItem.fromJson(
   /// Whole-sign house the event falls in, counted from the queried sign, 1 to 12. This is what turns one global sky event into a statement about this reader.
   int get house => read(json, 'house', asInt);
 
-  /// End of the window this event holds open, UTC, given only where a bounded window is a real fact about it: the orb span of an aspect, the sign span of an ingress or a season, the retrograde span of a station. Absent for a lunar phase or an eclipse, which are instants and not spans.
+  /// End of the window this event holds open, on the same clock as at, given only where a bounded window is a real fact about it: the orb span of an aspect, the sign span of an ingress or a season, the retrograde span of a station. Absent for a lunar phase or an eclipse, which are instants and not spans.
   String? get through => readOrNull(json, 'through', asString);
+}
+
+extension type GetMonthlyHoroscopeResponseEventsItemPlacementsItem.fromJson(
+  Map<String, Object?> json
+)
+    implements Object {
+  /// Body name, canonical English in every language. Matches the entry at the same index in bodies.
+  String get name => read(json, 'name', asString);
+
+  /// Sign this body occupies at the event timestamp, lowercase and never translated. For a sign change, the sign entered.
+  String get sign => read(json, 'sign', asString);
+
+  /// Whole-sign house this body occupies at the event instant, counted from the queried sign, 1 to 12.
+  int get house => read(json, 'house', asInt);
 }
 
 extension type GetMonthlyHoroscopeResponseKeyDatesItem.fromJson(
   Map<String, Object?> json
 )
     implements Object {
-  /// UTC date of the event (YYYY-MM-DD). The exact instant, to the second, is on the matching row of events\[\].
+  /// Date of the event (YYYY-MM-DD) on the clock the month is read on, the day the column names it: a station at 00:27 UTC is the previous day in New York. The exact instant, to the second, is on the matching row of events\[\].
   String get date => read(json, 'date', asString);
 
-  /// The event as one sentence in the requested language, placed in the whole-sign house it reaches for this sign.
+  /// The event in the requested language, with the sign it falls in and the life area of the whole-sign house that sign is for this zodiac sign, as a dated calendar list prints it.
   String get event => read(json, 'event', asString);
+}
+
+extension type GetMonthlyHoroscopeResponsePositionsItem.fromJson(
+  Map<String, Object?> json
+)
+    implements Object {
+  /// Body, canonical English regardless of the requested language: Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune or Pluto, in that order, one row each. Same key and values as planets\[\].name on the natal chart.
+  String get name => read(json, 'name', asString);
+
+  /// Sign the body stands in at noon on the first day of the period on the reader clock, lowercase like events\[\].sign, never translated.
+  String get sign => read(json, 'sign', asString);
+
+  /// Whole-sign house that sign is for the queried sign, 1 to 12, counted as events\[\].house is.
+  int get house => read(json, 'house', asInt);
+
+  /// Whether the body moves retrograde at that noon. Same key as planets\[\].isRetrograde on the natal chart; the daily activeTransits prints the same flag as a translated string.
+  bool get isRetrograde => read(json, 'isRetrograde', asBool);
+
+  /// Essential dignity of the body in that sign, the same value planets\[\].dignity reports on the natal chart: domicile, exaltation, detriment, fall, or peregrine. Always English. A column or card that calls a body at home or exalted is backed by this value.
+  String get dignity => read(json, 'dignity', asString);
+
+  /// Instant the body entered this sign, to the second, on the same clock as events\[\].at. Where the entry is also a row of events\[\] in this response it is that row at, byte for byte. Absent only where the entry lies too far back to date.
+  String? get enteredAt => readOrNull(json, 'enteredAt', asString);
+
+  /// Instant the body next leaves this sign, to the second, on the same clock as events\[\].at: the date a column prints in until April 15. Where it is also in events\[\] (the ingress that ends the stay, or the through of the ingress that began it) it is that string, byte for byte. Absent only where the exit lies too far ahead to date.
+  String? get leavesAt => readOrNull(json, 'leavesAt', asString);
+
+  /// Instant the body next turns direct, to the second, on the same clock as events\[\].at, present only while isRetrograde is true: the date a retrograde is dated by in the prose. Where the station is also in events\[\] it is that row at or through, byte for byte. Absent only where the turn lies too far ahead to date.
+  String? get turnsDirectAt => readOrNull(json, 'turnsDirectAt', asString);
 }
 
 extension type GetMonthlyHoroscopeResponseWeekByWeekItem.fromJson(
@@ -22676,7 +22836,7 @@ extension type GetMonthlyHoroscopeResponseWeekByWeekItem.fromJson(
   /// The life area the week turns on, in the requested language: the theme of the whole-sign house holding the strongest event the reading names inside that week, or of the strongest standing placement where the week holds no dated event. Same values as the life areas of the yearly key periods.
   String get focus => read(json, 'focus', asString);
 
-  /// What that house asks for, as one sentence in the requested language. No two weeks of one month repeat a sentence.
+  /// One practical sentence for that life area, in the requested language. No two weeks of one month repeat a sentence.
   String get advice => read(json, 'advice', asString);
 }
 
@@ -26115,26 +26275,29 @@ extension type GetWeeklyHoroscopeResponse.fromJson(Map<String, Object?> json)
   /// Start date of the forecast week (Monday).
   String get week => read(json, 'week', asString);
 
-  /// The single most relevant event of the period, whichever life area it touches, read into the whole-sign houses of this sign. The same event that leads column, at lede length rather than developed into a full movement, and checkable against the events array. Typically 40 to 80 words. Join it with love, career, health and finance for a general reading built from the six sections. Deterministic: the same sign and period always returns the same text.
+  /// The event of the week that most reaches home, roots and the self, or on a quiet week a standing planet, written as the five topic fields are and opening on the lead of column whenever focus is overview. Typically 120 to 160 words. Join it with love, career, health and finance for a general reading built from the six sections. Deterministic: the same sign and period always returns the same text.
   String get overview => read(json, 'overview', asString);
 
-  /// Weekly love and relationship forecast, read into the whole-sign houses of this sign. The same ranked events that drive column, filtered to romance and partnership, plus the standing placements that reach it. Every event named here is in the events array, so a piece can be fact-checked before it runs; this section reads an event through whichever of its houses carries romance and partnership, which for an aspect between two houses can be the other one from the house the events array leads with, and both are whole-sign houses of the bodies involved counted from this sign. Typically 80 to 120 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is the same material woven into one piece instead of split by topic. Deterministic: the same sign and period always returns the same text.
+  /// Weekly love and relationship forecast, read into the whole-sign houses of this sign. It opens on the event of the week that most reaches romance and partnership, dated by its day, or on a quiet week a standing planet, naming the bodies, the aspect and the life area and what it stirs, then a human situation of this topic with a way through it, a conditional with a few options, and a close; the topic named in focus opens on the same event as column. Every named event is in events, with each participant sign and whole-sign house in placements at the event time. This section reads whichever participant house carries romance and partnership; the aggregate event house remains the leading body house. Typically 120 to 160 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is a separate piece of its own. Deterministic: the same sign and period always returns the same text.
   String get love => read(json, 'love', asString);
 
-  /// Weekly career and professional outlook, read into the whole-sign houses of this sign. The same ranked events that drive column, filtered to career, work and reputation, plus the standing placements that reach it. Every event named here is in the events array, so a piece can be fact-checked before it runs; this section reads an event through whichever of its houses carries career, work and reputation, which for an aspect between two houses can be the other one from the house the events array leads with, and both are whole-sign houses of the bodies involved counted from this sign. Typically 80 to 120 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is the same material woven into one piece instead of split by topic. Deterministic: the same sign and period always returns the same text.
+  /// Weekly career and professional outlook, read into the whole-sign houses of this sign. It opens on the event of the week that most reaches career, work and reputation, dated by its day, or on a quiet week a standing planet, naming the bodies, the aspect and the life area and what it stirs, then a human situation of this topic with a way through it, a conditional with a few options, and a close; the topic named in focus opens on the same event as column. Every named event is in events, with each participant sign and whole-sign house in placements at the event time. This section reads whichever participant house carries career, work and reputation; the aggregate event house remains the leading body house. Typically 120 to 160 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is a separate piece of its own. Deterministic: the same sign and period always returns the same text.
   String get career => read(json, 'career', asString);
 
-  /// Weekly health, energy, and wellness guidance, read into the whole-sign houses of this sign. The same ranked events that drive column, filtered to health, plus the standing placements that reach it. Every event named here is in the events array, so a piece can be fact-checked before it runs; this section reads an event through whichever of its houses carries health, which for an aspect between two houses can be the other one from the house the events array leads with, and both are whole-sign houses of the bodies involved counted from this sign. Typically 80 to 120 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is the same material woven into one piece instead of split by topic. Deterministic: the same sign and period always returns the same text.
+  /// Weekly health, energy, and wellness guidance, read into the whole-sign houses of this sign. It opens on the event of the week that most reaches health, dated by its day, or on a quiet week a standing planet, naming the bodies, the aspect and the life area and what it stirs, then a human situation of this topic with a way through it, a conditional with a few options, and a close; the topic named in focus opens on the same event as column. Every named event is in events, with each participant sign and whole-sign house in placements at the event time. This section reads whichever participant house carries health; the aggregate event house remains the leading body house. Typically 120 to 160 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is a separate piece of its own. Deterministic: the same sign and period always returns the same text.
   String get health => read(json, 'health', asString);
 
-  /// Weekly financial outlook, read into the whole-sign houses of this sign. The same ranked events that drive column, filtered to finance, plus the standing placements that reach it. Every event named here is in the events array, so a piece can be fact-checked before it runs; this section reads an event through whichever of its houses carries finance, which for an aspect between two houses can be the other one from the house the events array leads with, and both are whole-sign houses of the bodies involved counted from this sign. Typically 80 to 120 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is the same material woven into one piece instead of split by topic. Deterministic: the same sign and period always returns the same text.
+  /// Weekly financial outlook, read into the whole-sign houses of this sign. It opens on the event of the week that most reaches finance, dated by its day, or on a quiet week a standing planet, naming the bodies, the aspect and the life area and what it stirs, then a human situation of this topic with a way through it, a conditional with a few options, and a close; the topic named in focus opens on the same event as column. Every named event is in events, with each participant sign and whole-sign house in placements at the event time. This section reads whichever participant house carries finance; the aggregate event house remains the leading body house. Typically 120 to 160 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is a separate piece of its own. Deterministic: the same sign and period always returns the same text.
   String get finance => read(json, 'finance', asString);
 
-  /// The single actionable takeaway from the leading event of the period, read into the whole-sign houses of this sign and checkable against the events array. Drawn from the same event as overview, kept to a short, actionable pair of sentences rather than grown to match the other sections. Deterministic: the same sign and period always returns the same text.
+  /// The single actionable takeaway of the period. It opens on the event of the week that most reaches travel, belief, conversation and daily learning, or on a quiet week a standing planet, naming the bodies, the aspect and the life area, then a situation with a way through it, a conditional with a few options, and a close, in the shape of the five fields beside it. Deterministic: the same sign and period always returns the same text.
   String get advice => read(json, 'advice', asString);
 
-  /// The full column for this period, ready to run as one piece, with paragraphs separated by a blank line. Names the events driving it and the dates they fall on, read into the whole-sign houses of this sign. Typically 250 to 450 words. The six section fields read the same ranked events filtered to their own life area, each composed as a column of its own rather than an excerpt of this one, so render either shape and never both. Deterministic: the same sign and period always returns the same column.
+  /// The full column for this period, ready to run as one piece, its paragraphs, where it has more than one, separated by a blank line. Names the events driving it and the dates they fall on, read into the whole-sign houses of this sign. Typically 120 to 160 words. The six section fields each open on an event or standing planet of their own read through their life area, the one named in focus on the lead of this column, so render either shape and never both. Deterministic: the same sign and period always returns the same column.
   String get column => read(json, 'column', asString);
+
+  /// The topic this reading is mainly about: love, career, finance or health when the lead event falls in that life area, overview for a bigger-picture period. A machine value, canonical English in every language, so a client can route its own content on it (a related article, a product, a call to action) without parsing the prose; the topic field it names reads the same lead the column opens on.
+  String get focus => read(json, 'focus', asString);
 
   /// The dated astronomical events this reading is built on, earliest first. Every field in every row can be checked against an independent authority, so a column can be fact-checked before it is published. Empty on a period in which nothing exact happens, where the reading falls back to the standing positions instead.
   List<GetWeeklyHoroscopeResponseEventsItem> get events => read(
@@ -26143,13 +26306,20 @@ extension type GetWeeklyHoroscopeResponse.fromJson(Map<String, Object?> json)
     listOf(model(GetWeeklyHoroscopeResponseEventsItem.fromJson)),
   );
 
+  /// Where each of the ten bodies stands for this reading, one row per body, so every standing claim in the prose (a body in a house, until a date, retrograde until it turns direct, exalted or at home) can be checked against the response itself. It carries state only: every aspect, lunation, eclipse, ingress or station of the period is a row of events\[\]. Against events\[\], it adds the bodies that do nothing exact in the period (events\[\] names only what happens), the entry and exit of the sign each stands in (events\[\].through carries an exit only for an ingress inside the period), the instant a retrograde body turns direct, and dignity. Against activeTransits, which the daily prints as translated strings for the seven visible bodies, it adds Uranus, Neptune and Pluto, the lowercase sign and numeric house as values, the retrograde flag as a boolean, and the three instants. Where an instant appears in both keys it is the same string. Never translated.
+  List<GetWeeklyHoroscopeResponsePositionsItem> get positions => read(
+    json,
+    'positions',
+    listOf(model(GetWeeklyHoroscopeResponsePositionsItem.fromJson)),
+  );
+
   /// The three most favorable days this week, from the planetary rulers of the seven weekdays, ranked by how strongly each of those planets stands for this sign.
   List<String> get luckyDays => read(json, 'luckyDays', listOf(asString));
 
   /// Three lucky numbers for the week, each 1 to 9 and all distinct, from the traditional planetary number correspondence applied to the three planets that govern this sign this week.
   List<num> get luckyNumbers => read(json, 'luckyNumbers', listOf(asNum));
 
-  /// Most compatible zodiac signs for this sign. Trine partners (same element) followed by a sextile partner (complementary element).
+  /// Three zodiac signs most in tune with this sign this week, best first. Read from the real sky of the period, so the list moves with the transits instead of repeating a fixed table, and every pick can be traced in positions\[\]. On a quiet sky it settles on the classic element partners. For the fixed sign-to-sign pairing, read compatibleSigns from the signs endpoint.
   List<String> get compatibleSigns =>
       read(json, 'compatibleSigns', listOf(asString));
 }
@@ -26161,14 +26331,33 @@ extension type GetWeeklyHoroscopeResponseEventsItem.fromJson(
   /// Kind of event. aspect is an exact angle between two moving bodies, sign-ingress a body entering a new sign, retrograde-station a body turning retrograde or direct, lunar-phase one of the four quarters, eclipse a solar or lunar eclipse, and solar-season the Sun entering a sign.
   String get type => read(json, 'type', asString);
 
-  /// Exact instant the event perfects, UTC, to the second. Verifiable against NASA JPL Horizons for a position event and against the US Naval Observatory for a lunar phase or eclipse.
+  /// Exact instant the event perfects, ISO 8601 to the second, on the clock the reading is read on: UTC with Z by default, the offset of timezone when one is passed on a daily, weekly or monthly reading (2026-11-13T19:27:27-05:00 in New York), the same instant either way; a yearly reading is written in UTC. Verifiable against NASA JPL Horizons for a position event and against the US Naval Observatory for a lunar phase or eclipse.
   String get at => read(json, 'at', asString);
 
   /// Bodies involved, canonical English regardless of the requested language so the value stays safe to switch on. Two entries for an aspect, faster body first. One entry for an ingress, a station, a lunar phase, or an eclipse.
   List<String> get bodies => read(json, 'bodies', listOf(asString));
 
+  /// Each participant at the enclosing event timestamp, in bodies order: two entries for an aspect and one for every other event. Names and signs stay canonical English in every language. Each entry carries its own whole-sign house, including the second body of an aspect. Event placements can differ from positions, which reports noon on the first day of the period.
+  List<GetWeeklyHoroscopeResponseEventsItemPlacementsItem> get placements =>
+      read(
+        json,
+        'placements',
+        listOf(
+          model(GetWeeklyHoroscopeResponseEventsItemPlacementsItem.fromJson),
+        ),
+      );
+
   /// Angle formed, on aspect events only: conjunction, sextile, square, trine, opposition, semi-sextile, quincunx, semi-square, or sesquiquadrate.
   String? get aspect => readOrNull(json, 'aspect', asString);
+
+  /// Exact quarter phase, on lunar-phase events only: new-moon, first-quarter, full-moon, or last-quarter. Canonical English in every language. Use to identify the phase at the event instant.
+  String? get phase => readOrNull(json, 'phase', asString);
+
+  /// Eclipse classification at peak, on eclipse events only: penumbral, partial, annular, or total. Canonical English in every language. Sun in bodies identifies a solar eclipse and Moon a lunar eclipse.
+  String? get kind => readOrNull(json, 'kind', asString);
+
+  /// Direction the body turns at the event instant, on retrograde-station events only: retrograde starts backward motion and direct ends it. Canonical English in every language. Present even when the other end of the retrograde span cannot be dated.
+  String? get direction => readOrNull(json, 'direction', asString);
 
   /// Sign the event falls in, lowercase, where it has exactly one. Absent for an aspect whose two bodies stand in different signs.
   String? get sign => readOrNull(json, 'sign', asString);
@@ -26176,8 +26365,51 @@ extension type GetWeeklyHoroscopeResponseEventsItem.fromJson(
   /// Whole-sign house the event falls in, counted from the queried sign, 1 to 12. This is what turns one global sky event into a statement about this reader.
   int get house => read(json, 'house', asInt);
 
-  /// End of the window this event holds open, UTC, given only where a bounded window is a real fact about it: the orb span of an aspect, the sign span of an ingress or a season, the retrograde span of a station. Absent for a lunar phase or an eclipse, which are instants and not spans.
+  /// End of the window this event holds open, on the same clock as at, given only where a bounded window is a real fact about it: the orb span of an aspect, the sign span of an ingress or a season, the retrograde span of a station. Absent for a lunar phase or an eclipse, which are instants and not spans.
   String? get through => readOrNull(json, 'through', asString);
+}
+
+extension type GetWeeklyHoroscopeResponseEventsItemPlacementsItem.fromJson(
+  Map<String, Object?> json
+)
+    implements Object {
+  /// Body name, canonical English in every language. Matches the entry at the same index in bodies.
+  String get name => read(json, 'name', asString);
+
+  /// Sign this body occupies at the event timestamp, lowercase and never translated. For a sign change, the sign entered.
+  String get sign => read(json, 'sign', asString);
+
+  /// Whole-sign house this body occupies at the event instant, counted from the queried sign, 1 to 12.
+  int get house => read(json, 'house', asInt);
+}
+
+extension type GetWeeklyHoroscopeResponsePositionsItem.fromJson(
+  Map<String, Object?> json
+)
+    implements Object {
+  /// Body, canonical English regardless of the requested language: Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune or Pluto, in that order, one row each. Same key and values as planets\[\].name on the natal chart.
+  String get name => read(json, 'name', asString);
+
+  /// Sign the body stands in at noon on the first day of the period on the reader clock, lowercase like events\[\].sign, never translated.
+  String get sign => read(json, 'sign', asString);
+
+  /// Whole-sign house that sign is for the queried sign, 1 to 12, counted as events\[\].house is.
+  int get house => read(json, 'house', asInt);
+
+  /// Whether the body moves retrograde at that noon. Same key as planets\[\].isRetrograde on the natal chart; the daily activeTransits prints the same flag as a translated string.
+  bool get isRetrograde => read(json, 'isRetrograde', asBool);
+
+  /// Essential dignity of the body in that sign, the same value planets\[\].dignity reports on the natal chart: domicile, exaltation, detriment, fall, or peregrine. Always English. A column or card that calls a body at home or exalted is backed by this value.
+  String get dignity => read(json, 'dignity', asString);
+
+  /// Instant the body entered this sign, to the second, on the same clock as events\[\].at. Where the entry is also a row of events\[\] in this response it is that row at, byte for byte. Absent only where the entry lies too far back to date.
+  String? get enteredAt => readOrNull(json, 'enteredAt', asString);
+
+  /// Instant the body next leaves this sign, to the second, on the same clock as events\[\].at: the date a column prints in until April 15. Where it is also in events\[\] (the ingress that ends the stay, or the through of the ingress that began it) it is that string, byte for byte. Absent only where the exit lies too far ahead to date.
+  String? get leavesAt => readOrNull(json, 'leavesAt', asString);
+
+  /// Instant the body next turns direct, to the second, on the same clock as events\[\].at, present only while isRetrograde is true: the date a retrograde is dated by in the prose. Where the station is also in events\[\] it is that row at or through, byte for byte. Absent only where the turn lies too far ahead to date.
+  String? get turnsDirectAt => readOrNull(json, 'turnsDirectAt', asString);
 }
 
 extension type GetYearlyHoroscopeResponse.fromJson(Map<String, Object?> json)
@@ -26188,32 +26420,42 @@ extension type GetYearlyHoroscopeResponse.fromJson(Map<String, Object?> json)
   /// Calendar year this forecast covers. Echoes the year requested, or the current year when it was omitted.
   int get year => read(json, 'year', asInt);
 
-  /// The single most relevant event of the period, whichever life area it touches, read into the whole-sign houses of this sign. The same event that leads column, at lede length rather than developed into a full movement, and checkable against the events array. Typically 70 to 120 words. Join it with love, career, health and finance for a general reading built from the six sections. Deterministic: the same sign and period always returns the same text.
+  /// The event of the year that most reaches home, roots and the self, or on a quiet year a standing planet, written as the five topic fields are and opening on the lead of column whenever focus is overview. Typically 35 to 90 words. Join it with love, career, health and finance for a general reading built from the six sections. Deterministic: the same sign and period always returns the same text.
   String get overview => read(json, 'overview', asString);
 
-  /// Yearly love and relationship outlook, read into the whole-sign houses of this sign. The same ranked events that drive column, filtered to romance and partnership, plus the standing placements that reach it. Every event named here is in the events array, so a piece can be fact-checked before it runs; this section reads an event through whichever of its houses carries romance and partnership, which for an aspect between two houses can be the other one from the house the events array leads with, and both are whole-sign houses of the bodies involved counted from this sign. Typically 150 to 260 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is the same material woven into one piece instead of split by topic. Deterministic: the same sign and period always returns the same text.
+  /// Yearly love and relationship outlook, read into the whole-sign houses of this sign. It opens on the event of the year that most reaches romance and partnership, dated, or on a quiet year a standing planet, naming the bodies, the aspect and the life area and what it stirs, then a human situation of this topic with a way through it, a conditional with a few options, and a close; the topic named in focus opens on the same event as column. Every named event is in events, with each participant sign and whole-sign house in placements at the event time. This section reads whichever participant house carries romance and partnership; the aggregate event house remains the leading body house. Typically 35 to 90 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is a separate piece of its own. Deterministic: the same sign and period always returns the same text.
   String get love => read(json, 'love', asString);
 
-  /// Yearly career and professional outlook, read into the whole-sign houses of this sign. The same ranked events that drive column, filtered to career, work and reputation, plus the standing placements that reach it. Every event named here is in the events array, so a piece can be fact-checked before it runs; this section reads an event through whichever of its houses carries career, work and reputation, which for an aspect between two houses can be the other one from the house the events array leads with, and both are whole-sign houses of the bodies involved counted from this sign. Typically 150 to 260 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is the same material woven into one piece instead of split by topic. Deterministic: the same sign and period always returns the same text.
+  /// Yearly career and professional outlook, read into the whole-sign houses of this sign. It opens on the event of the year that most reaches career, work and reputation, dated, or on a quiet year a standing planet, naming the bodies, the aspect and the life area and what it stirs, then a human situation of this topic with a way through it, a conditional with a few options, and a close; the topic named in focus opens on the same event as column. Every named event is in events, with each participant sign and whole-sign house in placements at the event time. This section reads whichever participant house carries career, work and reputation; the aggregate event house remains the leading body house. Typically 35 to 90 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is a separate piece of its own. Deterministic: the same sign and period always returns the same text.
   String get career => read(json, 'career', asString);
 
-  /// Yearly health, energy, and wellness outlook, read into the whole-sign houses of this sign. The same ranked events that drive column, filtered to health, plus the standing placements that reach it. Every event named here is in the events array, so a piece can be fact-checked before it runs; this section reads an event through whichever of its houses carries health, which for an aspect between two houses can be the other one from the house the events array leads with, and both are whole-sign houses of the bodies involved counted from this sign. Typically 150 to 260 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is the same material woven into one piece instead of split by topic. Deterministic: the same sign and period always returns the same text.
+  /// Yearly health, energy, and wellness outlook, read into the whole-sign houses of this sign. It opens on the event of the year that most reaches health, dated, or on a quiet year a standing planet, naming the bodies, the aspect and the life area and what it stirs, then a human situation of this topic with a way through it, a conditional with a few options, and a close; the topic named in focus opens on the same event as column. Every named event is in events, with each participant sign and whole-sign house in placements at the event time. This section reads whichever participant house carries health; the aggregate event house remains the leading body house. Typically 35 to 90 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is a separate piece of its own. Deterministic: the same sign and period always returns the same text.
   String get health => read(json, 'health', asString);
 
-  /// Yearly financial outlook, read into the whole-sign houses of this sign. The same ranked events that drive column, filtered to finance, plus the standing placements that reach it. Every event named here is in the events array, so a piece can be fact-checked before it runs; this section reads an event through whichever of its houses carries finance, which for an aspect between two houses can be the other one from the house the events array leads with, and both are whole-sign houses of the bodies involved counted from this sign. Typically 150 to 260 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is the same material woven into one piece instead of split by topic. Deterministic: the same sign and period always returns the same text.
+  /// Yearly financial outlook, read into the whole-sign houses of this sign. It opens on the event of the year that most reaches finance, dated, or on a quiet year a standing planet, naming the bodies, the aspect and the life area and what it stirs, then a human situation of this topic with a way through it, a conditional with a few options, and a close; the topic named in focus opens on the same event as column. Every named event is in events, with each participant sign and whole-sign house in placements at the event time. This section reads whichever participant house carries finance; the aggregate event house remains the leading body house. Typically 35 to 90 words. Render it alone for a single-topic page, or alongside the other five sections for a general reading; column is a separate piece of its own. Deterministic: the same sign and period always returns the same text.
   String get finance => read(json, 'finance', asString);
 
-  /// The single actionable takeaway from the leading event of the period, read into the whole-sign houses of this sign and checkable against the events array. Drawn from the same event as overview, kept to a short, actionable pair of sentences rather than grown to match the other sections. Deterministic: the same sign and period always returns the same text.
+  /// The single actionable takeaway of the period. It opens on the event of the year that most reaches travel, belief, conversation and daily learning, or on a quiet year a standing planet, naming the bodies, the aspect and the life area, then a situation with a way through it, a conditional with a few options, and a close, in the shape of the five fields beside it. Deterministic: the same sign and period always returns the same text.
   String get advice => read(json, 'advice', asString);
 
-  /// The full column for this period, ready to run as one piece, with paragraphs separated by a blank line. Names the events driving it and the dates they fall on, read into the whole-sign houses of this sign. Typically 600 to 900 words. The six section fields read the same ranked events filtered to their own life area, each composed as a column of its own rather than an excerpt of this one, so render either shape and never both. Deterministic: the same sign and period always returns the same column.
+  /// The full column for this period, ready to run as one piece, its paragraphs, where it has more than one, separated by a blank line. Names the events driving it and the dates they fall on, read into the whole-sign houses of this sign. Typically 190 to 320 words. The six section fields each open on an event or standing planet of their own read through their life area, the one named in focus on the lead of this column, so render either shape and never both. Deterministic: the same sign and period always returns the same column.
   String get column => read(json, 'column', asString);
+
+  /// The topic this reading is mainly about: love, career, finance or health when the lead event falls in that life area, overview for a bigger-picture period. A machine value, canonical English in every language, so a client can route its own content on it (a related article, a product, a call to action) without parsing the prose; the topic field it names reads the same lead the column opens on.
+  String get focus => read(json, 'focus', asString);
 
   /// The dated astronomical events this reading is built on, earliest first. Every field in every row can be checked against an independent authority, so a column can be fact-checked before it is published. Empty on a period in which nothing exact happens, where the reading falls back to the standing positions instead.
   List<GetYearlyHoroscopeResponseEventsItem> get events => read(
     json,
     'events',
     listOf(model(GetYearlyHoroscopeResponseEventsItem.fromJson)),
+  );
+
+  /// Where each of the ten bodies stands for this reading, one row per body, so every standing claim in the prose (a body in a house, until a date, retrograde until it turns direct, exalted or at home) can be checked against the response itself. It carries state only: every aspect, lunation, eclipse, ingress or station of the period is a row of events\[\]. Against events\[\], it adds the bodies that do nothing exact in the period (events\[\] names only what happens), the entry and exit of the sign each stands in (events\[\].through carries an exit only for an ingress inside the period), the instant a retrograde body turns direct, and dignity. Against activeTransits, which the daily prints as translated strings for the seven visible bodies, it adds Uranus, Neptune and Pluto, the lowercase sign and numeric house as values, the retrograde flag as a boolean, and the three instants. Where an instant appears in both keys it is the same string. Never translated.
+  List<GetYearlyHoroscopeResponsePositionsItem> get positions => read(
+    json,
+    'positions',
+    listOf(model(GetYearlyHoroscopeResponsePositionsItem.fromJson)),
   );
 
   /// The backdrop of the year: which whole-sign house each slow-moving body occupies for this sign, Jupiter first and Pluto last. One row per unbroken stretch, so a body that stays put is a single row spanning the year and a body that changes sign is two rows with the exact date between them. Dates are the part of the stretch that falls inside this year; the full span of a change that happens inside the year is in the events array. Use it for the year-at-a-glance panel a year-ahead page opens with.
@@ -26254,10 +26496,10 @@ extension type GetYearlyHoroscopeResponse.fromJson(Map<String, Object?> json)
   /// Four lucky numbers for the year, each 1 to 9 and all distinct, from the traditional planetary number correspondence applied to the four planets that govern this sign this year.
   List<num> get luckyNumbers => read(json, 'luckyNumbers', listOf(asNum));
 
-  /// Lucky color for the year, drawn from the three colors of the sign element and selected by the planet governing the reading.
+  /// Lucky color for the year, the color traditionally ruled by the planet that governs this sign this year: Sun gold, Moon silver, Mercury light blue, Venus green, Mars red, Jupiter purple, Saturn brown. When Uranus, Neptune or Pluto governs, the next most governing of the seven classical planets gives the color. Translated with the lang parameter.
   String get luckyColor => read(json, 'luckyColor', asString);
 
-  /// Most compatible zodiac signs for this sign. Trine partners (same element) followed by a sextile partner (complementary element).
+  /// Three zodiac signs most in tune with this sign this year, best first. Read from the real sky of the period, so the list moves with the transits instead of repeating a fixed table, and every pick can be traced in positions\[\]. On a quiet sky it settles on the classic element partners. For the fixed sign-to-sign pairing, read compatibleSigns from the signs endpoint.
   List<String> get compatibleSigns =>
       read(json, 'compatibleSigns', listOf(asString));
 }
@@ -26380,14 +26622,33 @@ extension type GetYearlyHoroscopeResponseEventsItem.fromJson(
   /// Kind of event. aspect is an exact angle between two moving bodies, sign-ingress a body entering a new sign, retrograde-station a body turning retrograde or direct, lunar-phase one of the four quarters, eclipse a solar or lunar eclipse, and solar-season the Sun entering a sign.
   String get type => read(json, 'type', asString);
 
-  /// Exact instant the event perfects, UTC, to the second. Verifiable against NASA JPL Horizons for a position event and against the US Naval Observatory for a lunar phase or eclipse.
+  /// Exact instant the event perfects, ISO 8601 to the second, on the clock the reading is read on: UTC with Z by default, the offset of timezone when one is passed on a daily, weekly or monthly reading (2026-11-13T19:27:27-05:00 in New York), the same instant either way; a yearly reading is written in UTC. Verifiable against NASA JPL Horizons for a position event and against the US Naval Observatory for a lunar phase or eclipse.
   String get at => read(json, 'at', asString);
 
   /// Bodies involved, canonical English regardless of the requested language so the value stays safe to switch on. Two entries for an aspect, faster body first. One entry for an ingress, a station, a lunar phase, or an eclipse.
   List<String> get bodies => read(json, 'bodies', listOf(asString));
 
+  /// Each participant at the enclosing event timestamp, in bodies order: two entries for an aspect and one for every other event. Names and signs stay canonical English in every language. Each entry carries its own whole-sign house, including the second body of an aspect. Event placements can differ from positions, which reports noon on the first day of the period.
+  List<GetYearlyHoroscopeResponseEventsItemPlacementsItem> get placements =>
+      read(
+        json,
+        'placements',
+        listOf(
+          model(GetYearlyHoroscopeResponseEventsItemPlacementsItem.fromJson),
+        ),
+      );
+
   /// Angle formed, on aspect events only: conjunction, sextile, square, trine, opposition, semi-sextile, quincunx, semi-square, or sesquiquadrate.
   String? get aspect => readOrNull(json, 'aspect', asString);
+
+  /// Exact quarter phase, on lunar-phase events only: new-moon, first-quarter, full-moon, or last-quarter. Canonical English in every language. Use to identify the phase at the event instant.
+  String? get phase => readOrNull(json, 'phase', asString);
+
+  /// Eclipse classification at peak, on eclipse events only: penumbral, partial, annular, or total. Canonical English in every language. Sun in bodies identifies a solar eclipse and Moon a lunar eclipse.
+  String? get kind => readOrNull(json, 'kind', asString);
+
+  /// Direction the body turns at the event instant, on retrograde-station events only: retrograde starts backward motion and direct ends it. Canonical English in every language. Present even when the other end of the retrograde span cannot be dated.
+  String? get direction => readOrNull(json, 'direction', asString);
 
   /// Sign the event falls in, lowercase, where it has exactly one. Absent for an aspect whose two bodies stand in different signs.
   String? get sign => readOrNull(json, 'sign', asString);
@@ -26395,8 +26656,22 @@ extension type GetYearlyHoroscopeResponseEventsItem.fromJson(
   /// Whole-sign house the event falls in, counted from the queried sign, 1 to 12. This is what turns one global sky event into a statement about this reader.
   int get house => read(json, 'house', asInt);
 
-  /// End of the window this event holds open, UTC, given only where a bounded window is a real fact about it: the orb span of an aspect, the sign span of an ingress or a season, the retrograde span of a station. Absent for a lunar phase or an eclipse, which are instants and not spans.
+  /// End of the window this event holds open, on the same clock as at, given only where a bounded window is a real fact about it: the orb span of an aspect, the sign span of an ingress or a season, the retrograde span of a station. Absent for a lunar phase or an eclipse, which are instants and not spans.
   String? get through => readOrNull(json, 'through', asString);
+}
+
+extension type GetYearlyHoroscopeResponseEventsItemPlacementsItem.fromJson(
+  Map<String, Object?> json
+)
+    implements Object {
+  /// Body name, canonical English in every language. Matches the entry at the same index in bodies.
+  String get name => read(json, 'name', asString);
+
+  /// Sign this body occupies at the event timestamp, lowercase and never translated. For a sign change, the sign entered.
+  String get sign => read(json, 'sign', asString);
+
+  /// Whole-sign house this body occupies at the event instant, counted from the queried sign, 1 to 12.
+  int get house => read(json, 'house', asInt);
 }
 
 extension type GetYearlyHoroscopeResponseKeyPeriodsItem.fromJson(
@@ -26417,6 +26692,35 @@ extension type GetYearlyHoroscopeResponseKeyPeriodsItem.fromJson(
 
   /// The life area that period is about, from the house it activates.
   String get focus => read(json, 'focus', asString);
+}
+
+extension type GetYearlyHoroscopeResponsePositionsItem.fromJson(
+  Map<String, Object?> json
+)
+    implements Object {
+  /// Body, canonical English regardless of the requested language: Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune or Pluto, in that order, one row each. Same key and values as planets\[\].name on the natal chart.
+  String get name => read(json, 'name', asString);
+
+  /// Sign the body stands in at noon on the first day of the period on the reader clock, lowercase like events\[\].sign, never translated.
+  String get sign => read(json, 'sign', asString);
+
+  /// Whole-sign house that sign is for the queried sign, 1 to 12, counted as events\[\].house is.
+  int get house => read(json, 'house', asInt);
+
+  /// Whether the body moves retrograde at that noon. Same key as planets\[\].isRetrograde on the natal chart; the daily activeTransits prints the same flag as a translated string.
+  bool get isRetrograde => read(json, 'isRetrograde', asBool);
+
+  /// Essential dignity of the body in that sign, the same value planets\[\].dignity reports on the natal chart: domicile, exaltation, detriment, fall, or peregrine. Always English. A column or card that calls a body at home or exalted is backed by this value.
+  String get dignity => read(json, 'dignity', asString);
+
+  /// Instant the body entered this sign, to the second, on the same clock as events\[\].at. Where the entry is also a row of events\[\] in this response it is that row at, byte for byte. Absent only where the entry lies too far back to date.
+  String? get enteredAt => readOrNull(json, 'enteredAt', asString);
+
+  /// Instant the body next leaves this sign, to the second, on the same clock as events\[\].at: the date a column prints in until April 15. Where it is also in events\[\] (the ingress that ends the stay, or the through of the ingress that began it) it is that string, byte for byte. Absent only where the exit lies too far ahead to date.
+  String? get leavesAt => readOrNull(json, 'leavesAt', asString);
+
+  /// Instant the body next turns direct, to the second, on the same clock as events\[\].at, present only while isRetrograde is true: the date a retrograde is dated by in the prose. Where the station is also in events\[\] it is that row at or through, byte for byte. Absent only where the turn lies too far ahead to date.
+  String? get turnsDirectAt => readOrNull(json, 'turnsDirectAt', asString);
 }
 
 extension type GetYearlyHoroscopeResponseRetrogradesItem.fromJson(
