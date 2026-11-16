@@ -855,7 +855,7 @@ The app reads that JSON into the same typed model, with no key inside the app. I
 ```dart
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:http/http.dart' as http;
 import 'package:roxyapi/roxyapi.dart' as roxy;
 

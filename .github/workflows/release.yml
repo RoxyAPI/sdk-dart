@@ -88,7 +88,6 @@ jobs:
           { echo '# Changelog'; echo; echo "## $VERSION"; echo; echo '- Regenerated from the latest API specification.'; tail -n +2 CHANGELOG.md; } > "$RUNNER_TEMP/CHANGELOG.md"
           mv "$RUNNER_TEMP/CHANGELOG.md" CHANGELOG.md
           dart test test/docs_test.dart
-          dart pub publish --dry-run
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       # pub.dev publishes only from a tag ref, and a push made with GITHUB_TOKEN starts no
@@ -103,6 +102,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add pubspec.yaml CHANGELOG.md specs/openapi.json lib doc example test README.md AGENTS.md
           git commit -m "release: v$VERSION"
+          # Validated on the committed tree: pub flags any modified file as a warning.
+          dart pub publish --dry-run
           git tag "v$VERSION"
           git push origin HEAD:main "v$VERSION"
           gh workflow run publish.yml --ref "v$VERSION"
