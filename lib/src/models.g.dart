@@ -475,7 +475,7 @@ extension type AspectPatternsResponse.fromJson(Map<String, Object?> json)
 /// Echo of the options used for this detection run. Useful for reproducibility and for downstream UI display.
 extension type AspectPatternsResponseOptions.fromJson(Map<String, Object?> json)
     implements Object {
-  /// Whether the tight orb budget was used. False uses the standard pattern-detection orbs (8 degrees for major aspects, 9 for square, 6 for sextile, 3 for quincunx).
+  /// Whether the tight orb budget was used. False uses the chart aspect table orbs; true narrows them further.
   bool get strictOrbs => read(json, 'strictOrbs', asBool);
 
   /// Optional bodies included beyond the default Sun-Pluto set. Empty means classical 10-planet detection only.
@@ -486,7 +486,7 @@ extension type AspectPatternsResponsePatternsItem.fromJson(
   Map<String, Object?> json
 )
     implements Object {
-  /// Pattern kind identifier. GRAND_TRINE (3 trines, harmonious flow), KITE (Grand Trine with a focal outlet planet), T_SQUARE (opposition with squared apex, growth engine), GRAND_CROSS (4 planets in 2 oppositions and 4 squares, peak tension), YOD (Finger of Fate, fated adjustment), MYSTIC_RECTANGLE (oppositions softened by trines and sextiles), STELLIUM (3+ planets clustered in a sign or 10-degree arc).
+  /// Pattern kind identifier. GRAND_TRINE (3 trines, harmonious flow), KITE (Grand Trine with a focal outlet planet), T_SQUARE (opposition with squared apex, growth engine), GRAND_CROSS (4 planets in 2 oppositions and 4 squares, peak tension), YOD (a planet at the apex of two quincunxes, a call to adjust), MYSTIC_RECTANGLE (oppositions softened by trines and sextiles), STELLIUM (3+ planets clustered in a sign or 10-degree arc).
   String get kind => read(json, 'kind', asString);
 
   /// Human-readable name of the configuration as used in astrological literature.
@@ -632,7 +632,7 @@ extension type AspectsResponseAspectsItemMeaningDescription.fromJson(
 
 extension type AspectsResponsePatternsItem.fromJson(Map<String, Object?> json)
     implements Object {
-  /// Pattern kind identifier. GRAND_TRINE (3 trines, harmonious flow), KITE (Grand Trine with a focal outlet planet), T_SQUARE (opposition with squared apex, growth engine), GRAND_CROSS (4 planets in 2 oppositions and 4 squares, peak tension), YOD (Finger of Fate, fated adjustment), MYSTIC_RECTANGLE (oppositions softened by trines and sextiles), STELLIUM (3+ planets clustered in a sign or 10-degree arc).
+  /// Pattern kind identifier. GRAND_TRINE (3 trines, harmonious flow), KITE (Grand Trine with a focal outlet planet), T_SQUARE (opposition with squared apex, growth engine), GRAND_CROSS (4 planets in 2 oppositions and 4 squares, peak tension), YOD (a planet at the apex of two quincunxes, a call to adjust), MYSTIC_RECTANGLE (oppositions softened by trines and sextiles), STELLIUM (3+ planets clustered in a sign or 10-degree arc).
   String get kind => read(json, 'kind', asString);
 
   /// Human-readable name of the configuration as used in astrological literature.
@@ -31973,6 +31973,13 @@ extension type NakshatraResponseRemedies.fromJson(Map<String, Object?> json)
 
 extension type NatalChartResponse.fromJson(Map<String, Object?> json)
     implements Object {
+  /// Whole-chart natal interpretation. Present when lang is one the natal engine writes (English, German, Spanish, French, Hindi, Portuguese, Russian, Turkish); absent otherwise.
+  NatalChartResponseInterpretation? get interpretation => readOrNull(
+    json,
+    'interpretation',
+    model(NatalChartResponseInterpretation.fromJson),
+  );
+
   /// Birth details echoed back from the request. Confirms the input used for this chart calculation.
   NatalChartResponseBirthDetails get birthDetails => read(
     json,
@@ -32056,6 +32063,25 @@ extension type NatalChartResponseAscendant.fromJson(Map<String, Object?> json)
 
   /// Absolute ecliptic longitude of the Ascendant (0-360).
   num get longitude => read(json, 'longitude', asNum);
+
+  /// Interpretation of the rising sign: how you meet the world and how others first meet you. Present when lang is one the natal engine writes (English, German, Spanish, French, Hindi, Portuguese, Russian, Turkish); absent otherwise.
+  NatalChartResponseAscendantInterpretation? get interpretation => readOrNull(
+    json,
+    'interpretation',
+    model(NatalChartResponseAscendantInterpretation.fromJson),
+  );
+}
+
+/// Interpretation of the rising sign: how you meet the world and how others first meet you. Present when lang is one the natal engine writes (English, German, Spanish, French, Hindi, Portuguese, Russian, Turkish); absent otherwise.
+extension type NatalChartResponseAscendantInterpretation.fromJson(
+  Map<String, Object?> json
+)
+    implements Object {
+  /// One-sentence read of the rising sign: how you meet the world and how others first meet you.
+  String get summary => read(json, 'summary', asString);
+
+  /// A paragraph on the rising sign: how you meet the world and how others first meet you: the strengths it brings, the habit to watch and how it shows in daily life.
+  String get detailed => read(json, 'detailed', asString);
 }
 
 /// Aspect pattern analysis showing the balance of harmonious vs challenging energies in the chart.
@@ -32066,13 +32092,13 @@ extension type NatalChartResponseAspectsInterpretation.fromJson(
   /// Narrative summary of the overall aspect pattern in this chart.
   String get summary => read(json, 'summary', asString);
 
-  /// Whether the chart is predominantly harmonious, challenging, or balanced.
+  /// Which way this chart leans, read from the harmonious and challenging counts beside it against how many of each a typical chart holds: harmonious, challenging or balanced. Always English, whatever the lang parameter says; the summary states the same lean in the requested language.
   String get dominant => read(json, 'dominant', asString);
 
   /// Count of harmonious aspects (trine, sextile).
   num get harmonious => read(json, 'harmonious', asNum);
 
-  /// Count of challenging aspects (square, opposition).
+  /// Count of challenging aspects (square, opposition, quincunx).
   num get challenging => read(json, 'challenging', asNum);
 
   /// Count of neutral aspects (conjunction).
@@ -32130,7 +32156,7 @@ extension type NatalChartResponseAspectsItemAspectInterpretation.fromJson(
   Map<String, Object?> json
 )
     implements Object {
-  /// One-sentence read of THIS pair: which two bodies, how tight the aspect is, whether it is applying or separating, and how it is classified. Translated in place, so it arrives in the requested language.
+  /// Short read of THIS pair of bodies as the aspect joins them in this chart. Type, orb, strength and motion stay in the fields beside it. Translated in place, so it arrives in the requested language.
   String get summary => read(json, 'summary', asString);
 
   /// Themes this aspect activates between the two bodies. Translated in place, so they arrive in the requested language.
@@ -32176,6 +32202,27 @@ extension type NatalChartResponseHousesItem.fromJson(Map<String, Object?> json)
   num get degree => read(json, 'degree', asNum);
 }
 
+/// Whole-chart natal interpretation. Present when lang is one the natal engine writes (English, German, Spanish, French, Hindi, Portuguese, Russian, Turkish); absent otherwise.
+extension type NatalChartResponseInterpretation.fromJson(
+  Map<String, Object?> json
+)
+    implements Object {
+  /// Whole-chart natal reading connecting the Sun, Moon, Ascendant, central signature and the tension that shapes their expression.
+  String get opening => read(json, 'opening', asString);
+
+  /// Relationships chapter connecting the seventh-house ruler and occupants with the Venus-Mars relationship.
+  String get love => read(json, 'love', asString);
+
+  /// Career chapter connecting the tenth-house ruler and occupants with the Midheaven sign.
+  String get career => read(json, 'career', asString);
+
+  /// Home chapter connecting the fourth-house ruler and occupants with the IC sign and private foundations.
+  String get home => read(json, 'home', asString);
+
+  /// Closing synthesis returning to the central drives, their integration and the chart signature.
+  String get closing => read(json, 'closing', asString);
+}
+
 /// Midheaven (MC). The highest point of the ecliptic at birth, representing career direction and public image.
 extension type NatalChartResponseMidheaven.fromJson(Map<String, Object?> json)
     implements Object {
@@ -32190,6 +32237,25 @@ extension type NatalChartResponseMidheaven.fromJson(Map<String, Object?> json)
 
   /// Absolute ecliptic longitude of the Midheaven (0-360).
   num get longitude => read(json, 'longitude', asNum);
+
+  /// Interpretation of the Midheaven sign: your public direction and the work you want to be known for. Present when lang is one the natal engine writes (English, German, Spanish, French, Hindi, Portuguese, Russian, Turkish); absent otherwise.
+  NatalChartResponseMidheavenInterpretation? get interpretation => readOrNull(
+    json,
+    'interpretation',
+    model(NatalChartResponseMidheavenInterpretation.fromJson),
+  );
+}
+
+/// Interpretation of the Midheaven sign: your public direction and the work you want to be known for. Present when lang is one the natal engine writes (English, German, Spanish, French, Hindi, Portuguese, Russian, Turkish); absent otherwise.
+extension type NatalChartResponseMidheavenInterpretation.fromJson(
+  Map<String, Object?> json
+)
+    implements Object {
+  /// One-sentence read of the Midheaven sign: your public direction and the work you want to be known for.
+  String get summary => read(json, 'summary', asString);
+
+  /// A paragraph on the Midheaven sign: your public direction and the work you want to be known for: the strengths it brings, the habit to watch and how it shows in daily life.
+  String get detailed => read(json, 'detailed', asString);
 }
 
 /// Part of Fortune (Lot of Fortune). A point derived from the Ascendant and the two luminaries that marks an area of ease, vitality, and material wellbeing in the chart.
@@ -32220,7 +32286,7 @@ extension type NatalChartResponsePatternsItem.fromJson(
   Map<String, Object?> json
 )
     implements Object {
-  /// Pattern kind identifier. GRAND_TRINE (3 trines, harmonious flow), KITE (Grand Trine with a focal outlet planet), T_SQUARE (opposition with squared apex, growth engine), GRAND_CROSS (4 planets in 2 oppositions and 4 squares, peak tension), YOD (Finger of Fate, fated adjustment), MYSTIC_RECTANGLE (oppositions softened by trines and sextiles), STELLIUM (3+ planets clustered in a sign or 10-degree arc).
+  /// Pattern kind identifier. GRAND_TRINE (3 trines, harmonious flow), KITE (Grand Trine with a focal outlet planet), T_SQUARE (opposition with squared apex, growth engine), GRAND_CROSS (4 planets in 2 oppositions and 4 squares, peak tension), YOD (a planet at the apex of two quincunxes, a call to adjust), MYSTIC_RECTANGLE (oppositions softened by trines and sextiles), STELLIUM (3+ planets clustered in a sign or 10-degree arc).
   String get kind => read(json, 'kind', asString);
 
   /// Human-readable name of the configuration as used in astrological literature.
@@ -32290,7 +32356,7 @@ extension type NatalChartResponsePlanetsItem.fromJson(Map<String, Object?> json)
   /// Essential dignity of this body in the sign it occupies: domicile (the sign it rules, its strongest placement), exaltation (honoured and amplified), detriment (opposite its rulership, where it struggles), fall (opposite its exaltation, where it is weakened), or peregrine (in none of its own dignity signs). Absent for the lunar nodes, Chiron and Black Moon Lilith, which rule no sign and therefore hold no dignity at all, so an absent field and peregrine are different answers. Derived by sign only, so triplicity, bounds and face are not considered. Always English, whatever the lang parameter says, so it stays safe to compare against in code. The four dignity signs behind it are published per body by GET /planet-meanings/{id}.
   String? get dignity => readOrNull(json, 'dignity', asString);
 
-  /// Planet-in-sign-in-house interpretation. Narrative analysis of what this placement means in the natal chart.
+  /// Reading of this body in its sign and house for this chart, in the requested language.
   NatalChartResponsePlanetsItemInterpretation? get interpretation => readOrNull(
     json,
     'interpretation',
@@ -32298,15 +32364,15 @@ extension type NatalChartResponsePlanetsItem.fromJson(Map<String, Object?> json)
   );
 }
 
-/// Planet-in-sign-in-house interpretation. Narrative analysis of what this placement means in the natal chart.
+/// Reading of this body in its sign and house for this chart, in the requested language.
 extension type NatalChartResponsePlanetsItemInterpretation.fromJson(
   Map<String, Object?> json
 )
     implements Object {
-  /// One-sentence interpretation of this planet in its sign and house placement.
+  /// The placement in brief: what this body does in its sign and in its house, written for this chart.
   String get summary => read(json, 'summary', asString);
 
-  /// Multi-sentence detailed interpretation with personality insights.
+  /// The full reading of this placement: its sign and house, and where they apply its dignity, retrograde motion, the Moon phase at birth, a nearby angle and its tightest aspect.
   String get detailed => read(json, 'detailed', asString);
 
   /// Key personality traits and themes for this placement.
@@ -33248,7 +33314,7 @@ extension type RelocationPlanetInterpretation.fromJson(
   Map<String, Object?> json
 )
     implements Object {
-  /// One-sentence interpretation of this planet in its sign and relocated house.
+  /// The placement in brief: what this body does in its natal sign and in its relocated house.
   String get summary => read(json, 'summary', asString);
 
   /// Multi-sentence interpretation of this relocated placement.

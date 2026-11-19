@@ -17,7 +17,7 @@ final roxy = Roxy(Platform.environment['ROXY_API_KEY'] ?? '');
 <!-- BEGIN:METHODS -->
 ## Western Astrology: `roxy.astrology`
 
-Western astrology API for natal birth charts, daily, weekly, monthly, and yearly horoscopes with unique content per s...
+Western astrology API for natal birth charts with an editorial reading of the whole chart, daily, weekly, monthly, an...
 
 [API reference](https://roxyapi.com/api-reference/western-astrology)
 
@@ -38,9 +38,9 @@ final result = await roxy.astrology.listPlanetMeanings();
 final result = await roxy.astrology.getPlanetMeaning(id: 'sun');
 // Returns GetPlanetMeaningResponse: id String, name String, symbol String, tagline String, category String?, temperature String, orbit String, retrograde bool?, rulership String?, detriment String?, exaltation String?, exultation String?, fall String?, keywords GetPlanetMeaningResponseKeywords, description GetPlanetMeaningResponseDescription
 
-// Generate natal chart - Birth chart calculator API with houses and aspects
+// Generate natal chart - Birth chart API with houses, aspects and a written reading
 final result = await roxy.astrology.generateNatalChart(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$, houseSystem: HouseSystem.placidus);
-// Returns NatalChartResponse: birthDetails NatalChartResponseBirthDetails, planets List<NatalChartResponsePlanetsItem>, houses List<NatalChartResponseHousesItem>, houseSystem String, aspects List<NatalChartResponseAspectsItem>, patterns List<NatalChartResponsePatternsItem>?, aspectsInterpretation NatalChartResponseAspectsInterpretation, ascendant NatalChartResponseAscendant, midheaven NatalChartResponseMidheaven, partOfFortune NatalChartResponsePartOfFortune, vertex NatalChartResponseVertex, summary NatalChartResponseSummary
+// Returns NatalChartResponse: interpretation NatalChartResponseInterpretation?, birthDetails NatalChartResponseBirthDetails, planets List<NatalChartResponsePlanetsItem>, houses List<NatalChartResponseHousesItem>, houseSystem String, aspects List<NatalChartResponseAspectsItem>, patterns List<NatalChartResponsePatternsItem>?, aspectsInterpretation NatalChartResponseAspectsInterpretation, ascendant NatalChartResponseAscendant, midheaven NatalChartResponseMidheaven, partOfFortune NatalChartResponsePartOfFortune, vertex NatalChartResponseVertex, summary NatalChartResponseSummary
 
 // Get planetary positions - Ephemeris calculator for all planets
 final result = await roxy.astrology.getPlanetaryPositions(date: '2025-12-18', time: '12:00:00', nodeType: NodeType.true$, latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'));
