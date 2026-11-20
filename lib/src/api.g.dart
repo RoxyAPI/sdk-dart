@@ -1413,7 +1413,7 @@ final class AstrologyApi {
   );
 }
 
-/// Vedic Astrology. Vedic astrology (Jyotish) and KP API for kundli generation with the sixteen Shodasavarga divisional charts (D1 to D60), panchang with choghadiya, hora and the classical muhurta windows, kundli matching by Ashtakoot Gun Milan, the South Indian ten porutham with Rajju and Vedha vetoes and Papasamyam, Vimshottari Dasha predictions, dosha detection with remedies, a 301-entry planetary yoga glossary with 48 of them chart-detected and evidenced, and KP horary with 249-level sub-lord analysis. Calculations verified against NASA JPL Horizons at arc-second-level accuracy. Built for matrimonial apps, horoscope platforms, spiritual wellness services, and AI-powered astrology chatbots. One key covers every RoxyAPI domain, with Remote MCP and typed SDKs.
+/// Vedic Astrology. Vedic astrology (Jyotish) and KP API for kundli generation with an editorial reading of the whole chart, the sixteen Shodasavarga divisional charts (D1 to D60), panchang with choghadiya, hora and the classical muhurta windows, kundli matching by Ashtakoot Gun Milan, the South Indian ten porutham with Rajju and Vedha vetoes and Papasamyam, Vimshottari Dasha predictions, dosha detection with remedies, a 301-entry planetary yoga glossary with 48 of them chart-detected and evidenced, and KP horary with 249-level sub-lord analysis. Calculations verified against NASA JPL Horizons at arc-second-level accuracy. Built for matrimonial apps, horoscope platforms, spiritual wellness services, and AI-powered astrology chatbots. One key covers every RoxyAPI domain, with Remote MCP and typed SDKs.
 ///
 /// API reference: https://roxyapi.com/api-reference/vedic-astrology
 final class VedicAstrologyApi {
@@ -1422,9 +1422,9 @@ final class VedicAstrologyApi {
 
   final Transport _transport;
 
-  /// Get birth chart (D1 Rashi chart) - Kundli Calculator API
+  /// Get birth chart (D1 Rashi chart) - Kundli API with a written chart reading
   ///
-  /// Calculate complete Vedic birth chart (Janam Kundli, natal chart) with all 9 planetary positions (Sun through Ketu) plus Ascendant (Lagna). Kundli calculator API for astrology apps, matrimonial sites. Returns accurate graha positions grouped by zodiac signs (rashis) with nakshatra details and pada. Perfect for kundli generation, horoscope matching, and Vedic astrology software integration. Rahu and Ketu are the mean lunar node, referred to the true equinox of date, with Ketu exactly opposite Rahu.
+  /// Calculate a Vedic birth chart (Janam Kundli): all 9 grahas, Sun through Ketu, and the Lagna, grouped by rashi with nakshatra and pada. Every chart carries a Vedic chart reading written for that birth: the kundli at a glance, every graha read in its rashi and its nakshatra, and every bhava read from its lord and the grahas it holds, in English, German, Spanish, French, Hindi, Portuguese, Russian, Turkish. Rahu and Ketu are the mean lunar node, referred to the true equinox of date, with Ketu exactly opposite Rahu.
   ///
   /// - `date`: Birth date in YYYY-MM-DD format. Date determines planetary positions and nakshatra calculations for Vedic kundli (janam patri). Accurate birth date is essential for dashas, yoga calculations, and divisional charts (vargas).
   /// - `time`: Birth time in 24-hour HH:MM:SS format. Time is CRITICAL for Lagna (Ascendant) calculation and house divisions. It changes every two hours roughly. Even minutes matter for accurate nakshatra pada and divisional chart (D9, D10) calculations. Without exact time, Lagna and house-based predictions will be incorrect.

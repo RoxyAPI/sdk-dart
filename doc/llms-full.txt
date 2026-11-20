@@ -183,14 +183,14 @@ final result = await roxy.astrology.generateProfections(date: '1990-07-15', time
 
 ## Vedic Astrology: `roxy.vedicAstrology`
 
-Vedic astrology (Jyotish) and KP API for kundli generation with the sixteen Shodasavarga divisional charts (D1 to D60...
+Vedic astrology (Jyotish) and KP API for kundli generation with an editorial reading of the whole chart, the sixteen...
 
 [API reference](https://roxyapi.com/api-reference/vedic-astrology)
 
 ```dart
-// Get birth chart (D1 Rashi chart) - Kundli Calculator API
+// Get birth chart (D1 Rashi chart) - Kundli API with a written chart reading
 final result = await roxy.vedicAstrology.generateBirthChart(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24, avasthaInfo: true, modernPlanets: true, focus: Focus.general);
-// Returns BirthChartResponse: aries BirthChartResponseAries, taurus BirthChartResponseTaurus, gemini BirthChartResponseGemini, cancer BirthChartResponseCancer, leo BirthChartResponseLeo, virgo BirthChartResponseVirgo, libra BirthChartResponseLibra, scorpio BirthChartResponseScorpio, sagittarius BirthChartResponseSagittarius, capricorn BirthChartResponseCapricorn, aquarius BirthChartResponseAquarius, pisces BirthChartResponsePisces, frame BirthChartResponseFrame, modernPlanets List<BirthChartResponseModernPlanetsItem>?, houses List<BirthChartResponseHousesItem>, combustion List<BirthChartResponseCombustionItem>, planetaryWar List<BirthChartResponsePlanetaryWarItem>, interpretations Map<String, BirthChartResponseInterpretationsValue>, yogas List<BirthChartResponseYogasItem>?, meta Map<String, BirthChartResponseMetaValue>
+// Returns BirthChartResponse: aries BirthChartResponseAries, taurus BirthChartResponseTaurus, gemini BirthChartResponseGemini, cancer BirthChartResponseCancer, leo BirthChartResponseLeo, virgo BirthChartResponseVirgo, libra BirthChartResponseLibra, scorpio BirthChartResponseScorpio, sagittarius BirthChartResponseSagittarius, capricorn BirthChartResponseCapricorn, aquarius BirthChartResponseAquarius, pisces BirthChartResponsePisces, frame BirthChartResponseFrame, modernPlanets List<BirthChartResponseModernPlanetsItem>?, houses List<BirthChartResponseHousesItem>, combustion List<BirthChartResponseCombustionItem>, planetaryWar List<BirthChartResponsePlanetaryWarItem>, interpretations Map<String, BirthChartResponseInterpretationsValue>, interpretation BirthChartResponseInterpretation, yogas List<BirthChartResponseYogasItem>?, meta Map<String, BirthChartResponseMetaValue>
 
 // Get Navamsa chart (D9) - Marriage Compatibility Calculator
 final result = await roxy.vedicAstrology.generateNavamsa(date: '1990-07-04', time: '10:12:00', latitude: 28.6139, longitude: 77.209, timezone: NumOrString.number(5.5), ayanamsa: Ayanamsa.lahiri, ayanamsaValue: 24);

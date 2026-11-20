@@ -1301,13 +1301,20 @@ extension type BirthChartResponse.fromJson(Map<String, Object?> json)
     listOf(model(BirthChartResponsePlanetaryWarItem.fromJson)),
   );
 
-  /// Planet-in-rashi and planet-in-nakshatra interpretation summaries, keyed by planet name. Translated when a supported lang is requested.
+  /// Rashi and nakshatra readings for every graha and the Lagna, keyed by planet name, written for this chart in English, German, Spanish, French, Hindi, Portuguese, Russian, Turkish.
   Map<String, BirthChartResponseInterpretationsValue> get interpretations =>
       read(
         json,
         'interpretations',
         mapOf(model(BirthChartResponseInterpretationsValue.fromJson)),
       );
+
+  /// Whole-chart Vedic birth chart reading written for this birth in English, German, Spanish, French, Hindi, Portuguese, Russian, Turkish, the kundli at a glance.
+  BirthChartResponseInterpretation get interpretation => read(
+    json,
+    'interpretation',
+    model(BirthChartResponseInterpretation.fromJson),
+  );
 
   /// Forty-eight classical yogas detected against this chart. Twelve conjunction and dignity yogas: Gajakesari (three-rule parashara definition), Sunapha, Anapha, Dhurdhura, Kemadruma, Chandra Mangala, Budha-Aditya, and the five Pancha Mahapurusha (Ruchaka, Bhadra, Hamsa, Malavya, Sasa). Plus all 32 Nabhasa distribution yogas across the Asraya, Dala, Akriti and Sankhya families, which read how the seven visible grahas are spread over the whole chart rather than any single conjunction, and which apply the four classical precedence norms so an outranked yoga is returned as absent with evidence naming the norm that silenced it. Plus the four wealth and poverty verdicts (Dhana, Daridra, Lakshmi, Dhana Malika), each reading as the first rule that matched. Each entry carries an `id` (matches `GET /yoga/{id}` for full glossary lookup), a `present` boolean, a `quality` (Positive, Negative, or Both = auspicious, inauspicious, or context-dependent), and classical-text `evidence` for the rule that triggered or failed. Filter on `present === true` for the active list.
   List<BirthChartResponseYogasItem>? get yogas => readOrNull(
@@ -1665,14 +1672,26 @@ extension type BirthChartResponseHousesItem.fromJson(Map<String, Object?> json)
   /// Bhava (house) number 1-12. House 1 is the Lagna (Ascendant), house 7 the partnership axis, house 10 the career axis.
   int get number => read(json, 'number', asInt);
 
-  /// Classical name of the bhava (house). Present when an interpretation entry exists for this house.
-  String? get name => readOrNull(json, 'name', asString);
+  /// Classical name of the bhava (house).
+  String get name => read(json, 'name', asString);
 
-  /// Significations of the bhava (house). Present when an interpretation entry exists for this house.
-  String? get description => readOrNull(json, 'description', asString);
+  /// Reading of the bhava (house), written for this chart in English, German, Spanish, French, Hindi, Portuguese, Russian, Turkish: where its lord sits, each graha it holds, and, for a bhava no graha occupies, the drishti Jupiter or Saturn casts on it.
+  String get description => read(json, 'description', asString);
 
-  /// Significations of the bhava as short keywords, the compact form of description. Bhava 1 covers self, body and vitality; 2 wealth and speech; 7 marriage and partnership; 10 career and status. Suited to chart labels, table cells and legends where the full classical description is too long, and identical to the houseThemes map returned by the Vimshottari dasha and KP chart routes. Localized by the lang query parameter.
-  List<String>? get themes => readOrNull(json, 'themes', listOf(asString));
+  /// Significations of the bhava as short keywords. Bhava 1 covers self, body and vitality; 2 wealth and speech; 7 marriage and partnership; 10 career and status. Suited to chart labels, table cells and legends, and identical to the houseThemes map returned by the Vimshottari dasha and KP chart routes. Localized by the lang query parameter.
+  List<String> get themes => read(json, 'themes', listOf(asString));
+}
+
+/// Whole-chart Vedic birth chart reading written for this birth in English, German, Spanish, French, Hindi, Portuguese, Russian, Turkish, the kundli at a glance.
+extension type BirthChartResponseInterpretation.fromJson(
+  Map<String, Object?> json
+)
+    implements Object {
+  /// The chart thesis in two sentences: how the Lagna (ascendant) rashi and the Moon rashi relate, the two placements a Vedic reading opens on, then where the Lagna lord sits.
+  String get summary => read(json, 'summary', asString);
+
+  /// The whole-chart reading in three paragraphs separated by a blank line: how the Lagna (ascendant) rashi and the Moon rashi relate, counted from each other, with the paksha (lunar fortnight) of birth, or the dark Moon when the Moon is combust; where the Lagna lord sits, its strength and its distance from the Moon; then the chart signature, such as a Pancha Mahapurusha or Gajakesari yoga, a cluster of grahas in one bhava, or an exalted graha.
+  String get detailed => read(json, 'detailed', asString);
 }
 
 /// The two composed readings for one graha: what its rashi placement says, and what its nakshatra placement says. Both are full sentences ready to render.
@@ -1680,10 +1699,10 @@ extension type BirthChartResponseInterpretationsValue.fromJson(
   Map<String, Object?> json
 )
     implements Object {
-  /// Interpretation of the planet placement in its rashi (sign).
+  /// Reading of the graha in its rashi (sign), with its dignity, combustion, retrograde motion and planetary war where the chart holds them.
   String get rashi => read(json, 'rashi', asString);
 
-  /// Interpretation of the planet placement in its nakshatra.
+  /// Reading of the graha in its nakshatra and the star lord it serves; for the Moon, the janma nakshatra.
   String get nakshatra => read(json, 'nakshatra', asString);
 }
 
