@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.5
+
+- Regenerated from the latest API specification.
+
 ## 1.1.4
 
 - Regenerated from the latest API specification.

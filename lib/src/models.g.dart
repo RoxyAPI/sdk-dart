@@ -4427,10 +4427,10 @@ extension type CalculateCentersResponseCentersItem.fromJson(
   /// Whether this is an awareness center. The three awareness centers are Ajna, Solar Plexus, and Spleen.
   bool get awareness => read(json, 'awareness', asBool);
 
-  /// Theme text describing the center in its current defined or undefined state.
+  /// What this center does in this chart, in second person: how it works when defined, or what it takes in and learns when open. A defined Throat reads differently when a motor reaches it, which is what lets it act.
   String get theme => read(json, 'theme', asString);
 
-  /// The conditioning trap of this center when it is open. Returned on every center so a consumer can surface it the moment `defined` is false, which is where the not-self operates.
+  /// The question that exposes this center going off course. On an open center it is the not-self question of the conditioning it takes in from others; on a defined center it is the trap of its own fixed energy, never the open-center question.
   String get notSelfQuestion => read(json, 'notSelfQuestion', asString);
 
   /// The gland, organ, or system this center corresponds to in the body.
@@ -4681,7 +4681,7 @@ extension type CalculateChannelsResponseChannelsItem.fromJson(
   /// The two centers this channel connects and defines.
   List<String> get centers => read(json, 'centers', listOf(asString));
 
-  /// What this channel wires between its two centers and the nature of the energy it carries.
+  /// What this channel wires between its two centers and how its energy shows up in you, in second person. Where the channel defines the center your inner authority comes from, or carries a motor to the Throat, the description says so.
   String get description => read(json, 'description', asString);
 
   /// What the circuit family of this channel governs.
@@ -6046,7 +6046,7 @@ extension type CalculateGatesResponseDesignItem.fromJson(
   /// Bodygraph function of the gate: what it does in the center it sits in and the channel it forms. This is NOT the meaning of the I-Ching hexagram that shares its number. They share a number, not a definition.
   String get gateDescription => read(json, 'gateDescription', asString);
 
-  /// Meaning of this gate at this specific line, one of 384. The finest interpretive layer in the chart and the one that makes a reading specific rather than generic. This is not the six abstract line archetypes: gate 41 line 3 carries its own meaning that neither the gate keynote nor the line-3 archetype holds alone.
+  /// Meaning of this gate at this specific line, one of 384. The finest interpretive layer in the chart and the one that makes a reading specific rather than generic. This is not the six abstract line archetypes: gate 41 line 3 carries its own meaning that neither the gate keynote nor the line-3 archetype holds alone. When an earlier activation already sits on the same gate and line, this says so in one line instead of printing the meaning twice.
   String get lineMeaning => read(json, 'lineMeaning', asString);
 
   /// What this planetary activation contributes in Human Design specifically, which is not its meaning in western astrology.
@@ -6068,8 +6068,11 @@ extension type CalculateGatesResponseDesignItemIchingHexagram.fromJson(
   /// I-Ching hexagram number, identical to the gate number it corresponds to.
   num get number => read(json, 'number', asNum);
 
-  /// English name of the corresponding I-Ching hexagram.
+  /// English name of the corresponding I-Ching hexagram. Always English, whatever the lang parameter says. Use nameLocalized for anything a reader sees.
   String get english => read(json, 'english', asString);
+
+  /// Hexagram name in the requested language, for display only. Present only when lang is set to a language other than English, since in English it would repeat its canonical partner field exactly. Never compare against this value, compare against the canonical field beside it.
+  String? get nameLocalized => readOrNull(json, 'nameLocalized', asString);
 }
 
 extension type CalculateGatesResponsePersonalityItem.fromJson(
@@ -6101,7 +6104,7 @@ extension type CalculateGatesResponsePersonalityItem.fromJson(
   /// Bodygraph function of the gate: what it does in the center it sits in and the channel it forms. This is NOT the meaning of the I-Ching hexagram that shares its number. They share a number, not a definition.
   String get gateDescription => read(json, 'gateDescription', asString);
 
-  /// Meaning of this gate at this specific line, one of 384. The finest interpretive layer in the chart and the one that makes a reading specific rather than generic. This is not the six abstract line archetypes: gate 41 line 3 carries its own meaning that neither the gate keynote nor the line-3 archetype holds alone.
+  /// Meaning of this gate at this specific line, one of 384. The finest interpretive layer in the chart and the one that makes a reading specific rather than generic. This is not the six abstract line archetypes: gate 41 line 3 carries its own meaning that neither the gate keynote nor the line-3 archetype holds alone. When an earlier activation already sits on the same gate and line, this says so in one line instead of printing the meaning twice.
   String get lineMeaning => read(json, 'lineMeaning', asString);
 
   /// What this planetary activation contributes in Human Design specifically, which is not its meaning in western astrology.
@@ -6124,8 +6127,11 @@ extension type CalculateGatesResponsePersonalityItemIchingHexagram.fromJson(
   /// I-Ching hexagram number, identical to the gate number it corresponds to.
   num get number => read(json, 'number', asNum);
 
-  /// English name of the corresponding I-Ching hexagram.
+  /// English name of the corresponding I-Ching hexagram. Always English, whatever the lang parameter says. Use nameLocalized for anything a reader sees.
   String get english => read(json, 'english', asString);
+
+  /// Hexagram name in the requested language, for display only. Present only when lang is set to a language other than English, since in English it would repeat its canonical partner field exactly. Never compare against this value, compare against the canonical field beside it.
+  String? get nameLocalized => readOrNull(json, 'nameLocalized', asString);
 }
 
 extension type CalculateGematriaResponse.fromJson(Map<String, Object?> json)
@@ -12566,6 +12572,13 @@ extension type GenerateBirthProfileResponseSephirah.fromJson(
 
 extension type GenerateBodygraphResponse.fromJson(Map<String, Object?> json)
     implements Object {
+  /// A reading of the whole bodygraph that connects type, authority, profile, definition and incarnation cross, written for this chart in English, German, Spanish, French, Hindi, Portuguese, Russian, Turkish.
+  GenerateBodygraphResponseInterpretation get interpretation => read(
+    json,
+    'interpretation',
+    model(GenerateBodygraphResponseInterpretation.fromJson),
+  );
+
   /// Human Design energy type. One of Manifestor, Generator, Manifesting Generator, Projector, Reflector. Always English, whatever the lang parameter says, so it stays safe to compare against in code. Use typeLocalized for anything a reader sees.
   String get type => read(json, 'type', asString);
 
@@ -12633,7 +12646,7 @@ extension type GenerateBodygraphResponse.fromJson(Map<String, Object?> json)
   String? get definitionLocalized =>
       readOrNull(json, 'definitionLocalized', asString);
 
-  /// How energy flows through the defined centers in this configuration, and what the configuration needs. For a split, this is where the bridging gates of other people matter.
+  /// How energy flows through your defined centers: which centers form each connected group and, where the definition is split, the gates in another person that would bridge the groups.
   String get definitionDescription =>
       read(json, 'definitionDescription', asString);
 
@@ -12694,10 +12707,10 @@ extension type GenerateBodygraphResponseCentersItem.fromJson(
   /// Whether this is an awareness center. The three awareness centers are Ajna, Solar Plexus, and Spleen.
   bool get awareness => read(json, 'awareness', asBool);
 
-  /// Theme text describing the center in its current defined or undefined state.
+  /// What this center does in this chart, in second person: how it works when defined, or what it takes in and learns when open. A defined Throat reads differently when a motor reaches it, which is what lets it act.
   String get theme => read(json, 'theme', asString);
 
-  /// The conditioning trap of this center when it is open. Returned on every center so a consumer can surface it the moment `defined` is false, which is where the not-self operates.
+  /// The question that exposes this center going off course. On an open center it is the not-self question of the conditioning it takes in from others; on a defined center it is the trap of its own fixed energy, never the open-center question.
   String get notSelfQuestion => read(json, 'notSelfQuestion', asString);
 
   /// The gland, organ, or system this center corresponds to in the body.
@@ -12733,7 +12746,7 @@ extension type GenerateBodygraphResponseChannelsItem.fromJson(
   /// The two centers this channel connects and defines.
   List<String> get centers => read(json, 'centers', listOf(asString));
 
-  /// What this channel wires between its two centers and the nature of the energy it carries.
+  /// What this channel wires between its two centers and how its energy shows up in you, in second person. Where the channel defines the center your inner authority comes from, or carries a motor to the Throat, the description says so.
   String get description => read(json, 'description', asString);
 
   /// What the circuit family of this channel governs.
@@ -12769,7 +12782,7 @@ extension type GenerateBodygraphResponseGatesItem.fromJson(
   /// Bodygraph function of the gate: what it does in the center it sits in and the channel it forms. This is NOT the meaning of the I-Ching hexagram that shares its number. They share a number, not a definition.
   String get gateDescription => read(json, 'gateDescription', asString);
 
-  /// Meaning of this gate at this specific line, one of 384. The finest interpretive layer in the chart and the one that makes a reading specific rather than generic. This is not the six abstract line archetypes: gate 41 line 3 carries its own meaning that neither the gate keynote nor the line-3 archetype holds alone.
+  /// Meaning of this gate at this specific line, one of 384. The finest interpretive layer in the chart and the one that makes a reading specific rather than generic. This is not the six abstract line archetypes: gate 41 line 3 carries its own meaning that neither the gate keynote nor the line-3 archetype holds alone. When an earlier activation already sits on the same gate and line, this says so in one line instead of printing the meaning twice.
   String get lineMeaning => read(json, 'lineMeaning', asString);
 
   /// What this planetary activation contributes in Human Design specifically, which is not its meaning in western astrology.
@@ -12791,8 +12804,11 @@ extension type GenerateBodygraphResponseGatesItemIchingHexagram.fromJson(
   /// I-Ching hexagram number, identical to the gate number it corresponds to.
   num get number => read(json, 'number', asNum);
 
-  /// English name of the corresponding I-Ching hexagram.
+  /// English name of the corresponding I-Ching hexagram. Always English, whatever the lang parameter says. Use nameLocalized for anything a reader sees.
   String get english => read(json, 'english', asString);
+
+  /// Hexagram name in the requested language, for display only. Present only when lang is set to a language other than English, since in English it would repeat its canonical partner field exactly. Never compare against this value, compare against the canonical field beside it.
+  String? get nameLocalized => readOrNull(json, 'nameLocalized', asString);
 }
 
 /// The incarnation cross built from the four cardinal gates and the profile angle.
@@ -12812,11 +12828,26 @@ extension type GenerateBodygraphResponseIncarnationCross.fromJson(
   /// Short code for the angle. One of RAX, JXT, LAX.
   String get angleCode => read(json, 'angleCode', asString);
 
-  /// Canonical published name of the incarnation cross, determined by the Personality Sun gate and the angle. All 192 crosses (64 Personality Sun gates times three angles) carry their published name, numbered variants included, so this is never a composed placeholder. Always begins with the angle followed by Cross of. Always English, whatever the lang parameter says.
+  /// Canonical published name of the incarnation cross, determined by the Personality Sun gate and the angle. All 192 crosses (64 Personality Sun gates times three angles) carry their published name, numbered variants included, so this is never a composed placeholder. Always begins with the angle followed by Cross of. Always English, whatever the lang parameter says. Use nameLocalized for anything a reader sees.
   String get name => read(json, 'name', asString);
 
-  /// The life theme of the cross, synthesized from its four gates and the orientation the angle gives them. The same Sun gate under a different angle is a genuinely different theme: Right Angle is personal destiny, Left Angle is worked out through other people, Juxtaposition is a fixed fate.
+  /// Incarnation cross name in the requested language, for display only. Present only when lang is set to a language other than English, since in English it would repeat its canonical partner field exactly. Never compare against this value, compare against the canonical field beside it.
+  String? get nameLocalized => readOrNull(json, 'nameLocalized', asString);
+
+  /// The life theme of the cross, read from all four of its gates, the way its angle orients that theme, and the conscious Sun gate it leads with. The same Sun gate under a different angle is a different theme: Right Angle is lived through personal experience, Left Angle through other people, Juxtaposition on one fixed course.
   String? get description => readOrNull(json, 'description', asString);
+}
+
+/// A reading of the whole bodygraph that connects type, authority, profile, definition and incarnation cross, written for this chart in English, German, Spanish, French, Hindi, Portuguese, Russian, Turkish.
+extension type GenerateBodygraphResponseInterpretation.fromJson(
+  Map<String, Object?> json
+)
+    implements Object {
+  /// The whole chart in two sentences: your type and inner authority as one decision rule, then the role your profile plays.
+  String get summary => read(json, 'summary', asString);
+
+  /// The whole-chart reading in two paragraphs separated by a blank line: the shape of your definition and what drives your Throat, then your two Sun gates and the two Earth gates that complete your incarnation cross.
+  String get detailed => read(json, 'detailed', asString);
 }
 
 /// The two line keynotes the profile is built from, conscious over unconscious, so the profile is readable without a separate lookup.
@@ -12977,6 +13008,17 @@ extension type GenerateCompositeChartResponseAspectsItem.fromJson(
 
   /// Aspect nature. Harmonious (trine, sextile) flows easily. Challenging (square, opposition) creates tension and growth. Neutral (conjunction) blends energies. Always English, whatever the lang parameter says: it is an identifier consumers switch and style on. Use interpretationLocalized for anything a reader sees.
   String get interpretation => read(json, 'interpretation', asString);
+
+  /// First planet name in the requested language, for display only. Present only when lang is set to a language other than English, since in English it would repeat its canonical partner field exactly. Never compare against this value, compare against the canonical field beside it.
+  String? get planet1Localized =>
+      readOrNull(json, 'planet1Localized', asString);
+
+  /// Second planet name in the requested language, for display only. Present only when lang is set to a language other than English, since in English it would repeat its canonical partner field exactly. Never compare against this value, compare against the canonical field beside it.
+  String? get planet2Localized =>
+      readOrNull(json, 'planet2Localized', asString);
+
+  /// Aspect type name in the requested language, for display only. Present only when lang is set to a language other than English, since in English it would repeat its canonical partner field exactly. Never compare against this value, compare against the canonical field beside it.
+  String? get typeLocalized => readOrNull(json, 'typeLocalized', asString);
 }
 
 /// Composite Ascendant. Represents how the relationship presents itself to the outside world.
@@ -12986,6 +13028,9 @@ extension type GenerateCompositeChartResponseCompositeAscendant.fromJson(
     implements Object {
   /// Zodiac sign on the composite Ascendant.
   String get sign => read(json, 'sign', asString);
+
+  /// Ascendant sign name in the requested language, for display only. Present only when lang is set to a language other than English, since in English it would repeat its canonical partner field exactly. Never compare against this value, compare against the canonical field beside it.
+  String? get signLocalized => readOrNull(json, 'signLocalized', asString);
 
   /// Degree within the sign (0-29.999).
   num get degree => read(json, 'degree', asNum);
@@ -13004,6 +13049,9 @@ extension type GenerateCompositeChartResponseCompositeHousesItem.fromJson(
   /// Zodiac sign on the composite house cusp.
   String get sign => read(json, 'sign', asString);
 
+  /// Zodiac sign name on this cusp in the requested language, for display only. Present only when lang is set to a language other than English, since in English it would repeat its canonical partner field exactly. Never compare against this value, compare against the canonical field beside it.
+  String? get signLocalized => readOrNull(json, 'signLocalized', asString);
+
   /// Degree within the zodiac sign (0-29.999).
   num get degree => read(json, 'degree', asNum);
 
@@ -13018,6 +13066,9 @@ extension type GenerateCompositeChartResponseCompositeMidheaven.fromJson(
     implements Object {
   /// Zodiac sign on the composite Midheaven.
   String get sign => read(json, 'sign', asString);
+
+  /// Midheaven sign name in the requested language, for display only. Present only when lang is set to a language other than English, since in English it would repeat its canonical partner field exactly. Never compare against this value, compare against the canonical field beside it.
+  String? get signLocalized => readOrNull(json, 'signLocalized', asString);
 
   /// Degree within the sign (0-29.999).
   num get degree => read(json, 'degree', asNum);
@@ -13053,6 +13104,12 @@ extension type GenerateCompositeChartResponseCompositePlanetsItem.fromJson(
 
   /// Whether the planet appears to move backward from Earth perspective. Retrograde periods signal review and introspection.
   bool get isRetrograde => read(json, 'isRetrograde', asBool);
+
+  /// Body name in the requested language, for display only. Present only when lang is set to a language other than English, since in English it would repeat its canonical partner field exactly. Never compare against this value, compare against the canonical field beside it.
+  String? get nameLocalized => readOrNull(json, 'nameLocalized', asString);
+
+  /// Zodiac sign name in the requested language, for display only. Present only when lang is set to a language other than English, since in English it would repeat its canonical partner field exactly. Never compare against this value, compare against the canonical field beside it.
+  String? get signLocalized => readOrNull(json, 'signLocalized', asString);
 
   /// Composite interpretation for this planet in the relationship chart.
   GenerateCompositeChartResponseCompositePlanetsItemCompositeInterpretation?
@@ -16726,8 +16783,11 @@ extension type GenerateTransitResponseActivationsItemIchingHexagram.fromJson(
   /// I-Ching hexagram number, identical to the gate number it corresponds to.
   num get number => read(json, 'number', asNum);
 
-  /// English name of the corresponding I-Ching hexagram.
+  /// English name of the corresponding I-Ching hexagram. Always English, whatever the lang parameter says. Use nameLocalized for anything a reader sees.
   String get english => read(json, 'english', asString);
+
+  /// Hexagram name in the requested language, for display only. Present only when lang is set to a language other than English, since in English it would repeat its canonical partner field exactly. Never compare against this value, compare against the canonical field beside it.
+  String? get nameLocalized => readOrNull(json, 'nameLocalized', asString);
 }
 
 extension type GenerateTransitResponseCompletedChannelsItem.fromJson(
