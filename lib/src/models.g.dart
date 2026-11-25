@@ -9081,11 +9081,18 @@ extension type CalculateTransitAspectsResponse.fromJson(
         listOf(model(CalculateTransitAspectsResponseNatalPlanetsItem.fromJson)),
       );
 
-  /// Transit-to-natal aspects with interpretations, strength ratings, and guidance. Each aspect represents a transiting planet forming a geometric angle to a natal planet.
+  /// Transit-to-natal aspects, each with a written reading, strength and orb. Each aspect is a transiting body forming a geometric angle to a natal body.
   List<CalculateTransitAspectsResponseAspectsItem> get aspects => read(
     json,
     'aspects',
     listOf(model(CalculateTransitAspectsResponseAspectsItem.fromJson)),
+  );
+
+  /// The reading of the whole transit sky against this chart, from every aspect found, so planets, aspectTypes and minStrength never change it.
+  CalculateTransitAspectsResponseInterpretation get interpretation => read(
+    json,
+    'interpretation',
+    model(CalculateTransitAspectsResponseInterpretation.fromJson),
   );
 
   /// Statistical summary of all transit aspects. The harmonious-to-challenging ratio reveals the overall transit weather, meaning whether the current period favors ease or demands effort.
@@ -9153,7 +9160,7 @@ extension type CalculateTransitAspectsResponseAspectsItem.fromJson(
   /// Aspect type name in the requested language, for display only. Present only when lang is set to a language other than English, since in English it would repeat its canonical partner field exactly. Never compare against this value, compare against the canonical field beside it.
   String? get typeLocalized => readOrNull(json, 'typeLocalized', asString);
 
-  /// Rich interpretation of the transit aspect: narrative summary, timing, impact assessment, practical guidance, and keywords.
+  /// The reading of this transit aspect: summary, dated timing, impact, guidance and keywords, written for this chart.
   CalculateTransitAspectsResponseAspectsItemTransitInterpretation
   get transitInterpretation => read(
     json,
@@ -9164,24 +9171,24 @@ extension type CalculateTransitAspectsResponseAspectsItem.fromJson(
   );
 }
 
-/// Rich interpretation of the transit aspect: narrative summary, timing, impact assessment, practical guidance, and keywords.
+/// The reading of this transit aspect: summary, dated timing, impact, guidance and keywords, written for this chart.
 extension type CalculateTransitAspectsResponseAspectsItemTransitInterpretation.fromJson(
   Map<String, Object?> json
 )
     implements Object {
-  /// Narrative interpretation of this transit aspect and its life impact.
+  /// The transit in brief: what the transiting body is doing to the natal body in this aspect, in plain words for this chart.
   String get summary => read(json, 'summary', asString);
 
-  /// When this transit is most active and how long its influence lasts, localized. The bucket follows the speed of the transiting body: a few hours for the Moon, a few days for the Sun, Mercury, Venus and Mars, one to two weeks for Jupiter, several weeks for Saturn, and an extended period for Uranus, Neptune and Pluto.
+  /// The dated window of this transit on the transit clock: when it enters orb, every exact pass and when it leaves. A fast body such as the Moon reads in hours of the day.
   String get timing => read(json, 'timing', asString);
 
-  /// Strength and nature of this transit effect: constructive, challenging, or neutral.
+  /// What the transit stirs in the natal body and the life area where it plays out, from the natal house the transiting body passes through.
   String get impact => read(json, 'impact', asString);
 
-  /// Practical advice for working with this transit energy.
+  /// Ways to work with this transit, offered as options and drawn from both bodies in the aspect.
   String get guidance => read(json, 'guidance', asString);
 
-  /// Key themes activated by this transit aspect.
+  /// Themes of this transit, drawn from both bodies and the aspect.
   List<String> get keywords => read(json, 'keywords', listOf(asString));
 }
 
@@ -9203,6 +9210,18 @@ extension type CalculateTransitAspectsResponseHousesItem.fromJson(
 
   /// Zodiac sign name on this cusp in the requested language, for display only. Present only when lang is set to a language other than English, since in English it would repeat its canonical partner field exactly. Never compare against this value, compare against the canonical field beside it.
   String? get signLocalized => readOrNull(json, 'signLocalized', asString);
+}
+
+/// The reading of the whole transit sky against this chart, from every aspect found, so planets, aspectTypes and minStrength never change it.
+extension type CalculateTransitAspectsResponseInterpretation.fromJson(
+  Map<String, Object?> json
+)
+    implements Object {
+  /// The leading transit of the moment in one or two sentences.
+  String get summary => read(json, 'summary', asString);
+
+  /// The whole sky read as one piece in short paragraphs: the long season set by the slow bodies, the transits easing the way, the nearer ones and the Moon of the day, drawn from every aspect before any filter applies.
+  String get detailed => read(json, 'detailed', asString);
 }
 
 extension type CalculateTransitAspectsResponseNatalPlanetsItem.fromJson(
@@ -9308,7 +9327,7 @@ extension type CalculateTransitAspectsResponseSummaryStrongest.fromJson(
   /// Aspect type name in the requested language, for display only. Present only when lang is set to a language other than English, since in English it would repeat its canonical partner field exactly. Never compare against this value, compare against the canonical field beside it.
   String? get typeLocalized => readOrNull(json, 'typeLocalized', asString);
 
-  /// Rich interpretation of the transit aspect: narrative summary, timing, impact assessment, practical guidance, and keywords.
+  /// The reading of this transit aspect: summary, dated timing, impact, guidance and keywords, written for this chart.
   CalculateTransitAspectsResponseSummaryStrongestTransitInterpretation
   get transitInterpretation => read(
     json,
@@ -9320,24 +9339,24 @@ extension type CalculateTransitAspectsResponseSummaryStrongest.fromJson(
   );
 }
 
-/// Rich interpretation of the transit aspect: narrative summary, timing, impact assessment, practical guidance, and keywords.
+/// The reading of this transit aspect: summary, dated timing, impact, guidance and keywords, written for this chart.
 extension type CalculateTransitAspectsResponseSummaryStrongestTransitInterpretation.fromJson(
   Map<String, Object?> json
 )
     implements Object {
-  /// Narrative interpretation of this transit aspect and its life impact.
+  /// The transit in brief: what the transiting body is doing to the natal body in this aspect, in plain words for this chart.
   String get summary => read(json, 'summary', asString);
 
-  /// When this transit is most active and how long its influence lasts, localized. The bucket follows the speed of the transiting body: a few hours for the Moon, a few days for the Sun, Mercury, Venus and Mars, one to two weeks for Jupiter, several weeks for Saturn, and an extended period for Uranus, Neptune and Pluto.
+  /// The dated window of this transit on the transit clock: when it enters orb, every exact pass and when it leaves. A fast body such as the Moon reads in hours of the day.
   String get timing => read(json, 'timing', asString);
 
-  /// Strength and nature of this transit effect: constructive, challenging, or neutral.
+  /// What the transit stirs in the natal body and the life area where it plays out, from the natal house the transiting body passes through.
   String get impact => read(json, 'impact', asString);
 
-  /// Practical advice for working with this transit energy.
+  /// Ways to work with this transit, offered as options and drawn from both bodies in the aspect.
   String get guidance => read(json, 'guidance', asString);
 
-  /// Key themes activated by this transit aspect.
+  /// Themes of this transit, drawn from both bodies and the aspect.
   List<String> get keywords => read(json, 'keywords', listOf(asString));
 }
 
@@ -11490,7 +11509,7 @@ extension type FindSignificantDatesResponseEventsItem.fromJson(
   /// For a lunar-phase event, which syzygy it is: new-moon (Sun-Moon conjunction) or full-moon (Sun-Moon opposition). The intermediate quarters are not emitted. A stable machine value, never localized. Absent for other event types.
   String? get phase => readOrNull(json, 'phase', asString);
 
-  /// Plain-language summary of the event, suitable for direct display. The only localized field: when lang is set this sentence, and the body, target, and aspect names within it, render in the requested language while the structured fields stay English.
+  /// Plain-language reading of the event, suitable for direct display. A transit aspect, sign ingress or retrograde or direct station names the event and says what it stirs for this birth subject, in one or two sentences. The only localized field: when lang is set this sentence, and the body, target, and aspect names within it, render in the requested language while the structured fields stay English.
   String get description => read(json, 'description', asString);
 
   /// Importance score from 0 to 100. Outer-planet exact transit aspects and mahadasha changes score highest; fast Moon events and biorhythm critical days score lower. When domainWeights is supplied this is the weighted score, rounded and clamped to 0 to 100, which is the same value the significance floor and the event cap acted on.
@@ -11970,7 +11989,7 @@ extension type ForecastTransitsResponseEventsItem.fromJson(
   /// For a lunar-phase event, which syzygy it is: new-moon (Sun-Moon conjunction) or full-moon (Sun-Moon opposition). The intermediate quarters are not emitted. A stable machine value, never localized. Absent for other event types.
   String? get phase => readOrNull(json, 'phase', asString);
 
-  /// Plain-language summary of the event, suitable for direct display. The only localized field: when lang is set this sentence, and the body, target, and aspect names within it, render in the requested language while the structured fields stay English.
+  /// Plain-language reading of the event, suitable for direct display. A transit aspect, sign ingress or retrograde or direct station names the event and says what it stirs for this birth subject, in one or two sentences. The only localized field: when lang is set this sentence, and the body, target, and aspect names within it, render in the requested language while the structured fields stay English.
   String get description => read(json, 'description', asString);
 
   /// Importance score from 0 to 100. Outer-planet exact transit aspects and mahadasha changes score highest; fast Moon events and biorhythm critical days score lower. When domainWeights is supplied this is the weighted score, rounded and clamped to 0 to 100, which is the same value the significance floor and the event cap acted on.
@@ -13391,7 +13410,7 @@ extension type GenerateDigestResponseWindowsItemTopItem.fromJson(
   /// For a lunar-phase event, which syzygy it is: new-moon (Sun-Moon conjunction) or full-moon (Sun-Moon opposition). The intermediate quarters are not emitted. A stable machine value, never localized. Absent for other event types.
   String? get phase => readOrNull(json, 'phase', asString);
 
-  /// Plain-language summary of the event, suitable for direct display. The only localized field: when lang is set this sentence, and the body, target, and aspect names within it, render in the requested language while the structured fields stay English.
+  /// Plain-language reading of the event, suitable for direct display. A transit aspect, sign ingress or retrograde or direct station names the event and says what it stirs for this birth subject, in one or two sentences. The only localized field: when lang is set this sentence, and the body, target, and aspect names within it, render in the requested language while the structured fields stay English.
   String get description => read(json, 'description', asString);
 
   /// Importance score from 0 to 100. Outer-planet exact transit aspects and mahadasha changes score highest; fast Moon events and biorhythm critical days score lower. When domainWeights is supplied this is the weighted score, rounded and clamped to 0 to 100, which is the same value the significance floor and the event cap acted on.
@@ -16675,7 +16694,7 @@ extension type GenerateTimelineResponseEventsItem.fromJson(
   /// For a lunar-phase event, which syzygy it is: new-moon (Sun-Moon conjunction) or full-moon (Sun-Moon opposition). The intermediate quarters are not emitted. A stable machine value, never localized. Absent for other event types.
   String? get phase => readOrNull(json, 'phase', asString);
 
-  /// Plain-language summary of the event, suitable for direct display. The only localized field: when lang is set this sentence, and the body, target, and aspect names within it, render in the requested language while the structured fields stay English.
+  /// Plain-language reading of the event, suitable for direct display. A transit aspect, sign ingress or retrograde or direct station names the event and says what it stirs for this birth subject, in one or two sentences. The only localized field: when lang is set this sentence, and the body, target, and aspect names within it, render in the requested language while the structured fields stay English.
   String get description => read(json, 'description', asString);
 
   /// Importance score from 0 to 100. Outer-planet exact transit aspects and mahadasha changes score highest; fast Moon events and biorhythm critical days score lower. When domainWeights is supplied this is the weighted score, rounded and clamped to 0 to 100, which is the same value the significance floor and the event cap acted on.
@@ -33979,16 +33998,35 @@ extension type TransitsResponse.fromJson(Map<String, Object?> json)
     listOf(model(TransitsResponseTransitPlanetsItem.fromJson)),
   );
 
-  /// Transit-to-natal aspects (only included when natalChart is provided in the request). Shows which transiting planets are aspecting natal planets.
+  /// Transit-to-natal aspects with a written reading each (only included when natalChart is provided in the request). Aspects under 15 percent strength are left out of the list, not out of the readings.
   List<TransitsResponseTransitAspectsItem>? get transitAspects => readOrNull(
     json,
     'transitAspects',
     listOf(model(TransitsResponseTransitAspectsItem.fromJson)),
   );
 
+  /// The reading of the whole transit sky against the natal chart (only included when natalChart is provided in the request).
+  TransitsResponseInterpretation? get interpretation => readOrNull(
+    json,
+    'interpretation',
+    model(TransitsResponseInterpretation.fromJson),
+  );
+
   /// Transit aspect summary counts (only included when natalChart is provided). Quick overview of the current transit weather.
   TransitsResponseSummary? get summary =>
       readOrNull(json, 'summary', model(TransitsResponseSummary.fromJson));
+}
+
+/// The reading of the whole transit sky against the natal chart (only included when natalChart is provided in the request).
+extension type TransitsResponseInterpretation.fromJson(
+  Map<String, Object?> json
+)
+    implements Object {
+  /// The leading transit of the moment in one or two sentences.
+  String get summary => read(json, 'summary', asString);
+
+  /// The whole sky read as one piece in short paragraphs: the long season set by the slow bodies, the transits easing the way, the nearer ones and the Moon of the day, drawn from every aspect found.
+  String get detailed => read(json, 'detailed', asString);
 }
 
 /// Transit aspect summary counts (only included when natalChart is provided). Quick overview of the current transit weather.
@@ -34046,7 +34084,7 @@ extension type TransitsResponseTransitAspectsItem.fromJson(
   /// Aspect nature: harmonious (trine, sextile), challenging (square, opposition), or neutral (conjunction).
   String get nature => read(json, 'nature', asString);
 
-  /// Rich interpretation of the transit aspect including narrative summary, timing, impact assessment, practical guidance, and keywords.
+  /// The reading of this transit aspect: summary, dated timing, impact, guidance and keywords, written for this chart.
   TransitsResponseTransitAspectsItemInterpretation get interpretation => read(
     json,
     'interpretation',
@@ -34054,24 +34092,24 @@ extension type TransitsResponseTransitAspectsItem.fromJson(
   );
 }
 
-/// Rich interpretation of the transit aspect including narrative summary, timing, impact assessment, practical guidance, and keywords.
+/// The reading of this transit aspect: summary, dated timing, impact, guidance and keywords, written for this chart.
 extension type TransitsResponseTransitAspectsItemInterpretation.fromJson(
   Map<String, Object?> json
 )
     implements Object {
-  /// Narrative interpretation of what this transit aspect means and how it manifests.
+  /// The transit in brief: what the transiting body is doing to the natal body in this aspect, in plain words for this chart.
   String get summary => read(json, 'summary', asString);
 
-  /// How long this transit influence lasts, localized. The bucket follows the speed of the transiting body: a few hours for the Moon, a few days for the Sun, Mercury, Venus and Mars, one to two weeks for Jupiter, several weeks for Saturn, and an extended period for Uranus, Neptune and Pluto.
+  /// The dated window of this transit on the transit clock: when it enters orb, every exact pass and when it leaves. A fast body such as the Moon reads in hours of the day.
   String get timing => read(json, 'timing', asString);
 
-  /// Strength and nature of the transit impact on your natal chart.
+  /// What the transit stirs in the natal body and the life area where it plays out, from the natal house the transiting body passes through.
   String get impact => read(json, 'impact', asString);
 
-  /// Practical advice for working with or navigating this transit energy.
+  /// Ways to work with this transit, offered as options and drawn from both bodies in the aspect.
   String get guidance => read(json, 'guidance', asString);
 
-  /// Key themes activated by this transit aspect.
+  /// Themes of this transit, drawn from both bodies and the aspect.
   List<String> get keywords => read(json, 'keywords', listOf(asString));
 }
 

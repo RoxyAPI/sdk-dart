@@ -1,6 +1,6 @@
 name: roxyapi
 description: Astrology API SDK for Dart and Flutter. Natal charts, horoscopes, Vedic kundli, tarot, numerology, human design and 18+ insight domains, fully typed.
-version: 1.1.6
+version: 1.1.7
 homepage: https://roxyapi.com/docs/sdk
 repository: https://github.com/RoxyAPI/sdk-dart
 issue_tracker: https://github.com/RoxyAPI/sdk-dart/issues

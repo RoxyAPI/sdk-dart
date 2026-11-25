@@ -544,7 +544,7 @@ final class AstrologyApi {
 
   /// Calculate planetary transits - Current transits with natal chart comparison
   ///
-  /// Calculate current or future planetary transits (positions of all bodies now). Optionally compare transits to natal chart to find transit-to-natal aspects. Returns all 14 celestial bodies (the 10 classical planets, the lunar nodes, Chiron, and Black Moon Lilith) with signs, degrees, and speeds. When natal chart provided, includes transit aspects (transiting Sun conjunct natal Mars, etc.) with orbs and applying/separating status. Perfect for daily transit forecasts, aspect alerts, and personalized transit reports.
+  /// Calculate the planetary transits of any moment, and read them against a natal chart with dated windows and exact passes. Returns all 14 celestial bodies (the 10 classical planets, the lunar nodes, Chiron and Black Moon Lilith) with sign, degree and speed; with a natalChart, every transit-to-natal aspect carries a written reading, orb, strength and applying or separating status, beside a reading of the whole sky. The time is read on the timezone sent, and the natal houses are Placidus.
   ///
   /// - `date`: Transit date in YYYY-MM-DD format (defaults to current date)
   /// - `time`: Transit time in HH:MM:SS format (defaults to current time)
@@ -611,7 +611,7 @@ final class AstrologyApi {
 
   /// Transit Aspects - Detailed transit-to-natal aspect analysis with interpretations
   ///
-  /// Calculate all transit-to-natal aspects with detailed interpretations, strength ratings, and timing guidance. Compares current (or future) planetary positions against your natal chart to identify active transits. Returns aspect type, orb, applying/separating status, narrative interpretation, impact rating, and practical guidance for each transit. Like /astrology/transits with a natalChart, returns summary, timing, impact, guidance, and keywords for each aspect. Adds planet, aspect-type, and minStrength filtering plus summary.strongest and summary.byType rollups. Transit aspects API, transit-to-natal analysis, predictive astrology, personalized transit forecast.
+  /// Read the sky of a given day against a natal chart: every transit-to-natal aspect with a written reading, its dated window and exact passes, and a reading of the whole sky. Returns orb, strength and applying or separating status for each aspect, plus summary.strongest and summary.byType rollups, and planet, aspect-type and minStrength filters. The same aspect readings as /astrology/transits with a natalChart, with the transit time read on the natal chart timezone and the natal houses in the requested houseSystem.
   ///
   /// - `natalChart`: Natal chart birth details (date, time, location, timezone). Used to calculate natal planetary positions that transits are compared against.
   /// - `transitDate`: Transit date in YYYY-MM-DD format. Defaults to current date if omitted. Use future dates for predictive transit analysis.

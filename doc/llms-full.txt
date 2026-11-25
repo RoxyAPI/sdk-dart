@@ -84,7 +84,7 @@ final result = await roxy.astrology.detectAspectPatterns(date: '1990-07-15', tim
 
 // Calculate planetary transits - Current transits with natal chart comparison
 final result = await roxy.astrology.calculateTransits(date: '2025-12-19', time: '12:00:00', timezone: NumOrString.number(0), nodeType: NodeType.true$);
-// Returns TransitsResponse: transitDate String, transitTime String, timezone num, transitPlanets List<TransitsResponseTransitPlanetsItem>, transitAspects List<TransitsResponseTransitAspectsItem>?, summary TransitsResponseSummary?
+// Returns TransitsResponse: transitDate String, transitTime String, timezone num, transitPlanets List<TransitsResponseTransitPlanetsItem>, transitAspects List<TransitsResponseTransitAspectsItem>?, interpretation TransitsResponseInterpretation?, summary TransitsResponseSummary?
 
 // Monthly Transits - Tropical sign ingresses for an entire month
 final result = await roxy.astrology.getMonthlyTropicalTransits(year: 2026, month: 3, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$);
@@ -92,7 +92,7 @@ final result = await roxy.astrology.getMonthlyTropicalTransits(year: 2026, month
 
 // Transit Aspects - Detailed transit-to-natal aspect analysis with interpretations
 final result = await roxy.astrology.calculateTransitAspects(natalChart: CalculateTransitAspectsRequestNatalChart(date: '1990-07-15', time: '14:30:00', latitude: 40.7128, longitude: -74.006, timezone: NumOrString.string('America/New_York'), nodeType: NodeType.true$), transitDate: '2026-02-03', transitTime: '12:00:00', planets: [Planets.jupiter, Planets.saturn, Planets.pluto], aspectTypes: [AspectTypes.conjunction, AspectTypes.opposition, AspectTypes.trine, AspectTypes.square], minStrength: 50, houseSystem: HouseSystem.placidus);
-// Returns CalculateTransitAspectsResponse: transitDate String, houseSystem String, houses List<CalculateTransitAspectsResponseHousesItem>, ascendant CalculateTransitAspectsResponseAscendant, transitPlanets List<CalculateTransitAspectsResponseTransitPlanetsItem>, natalPlanets List<CalculateTransitAspectsResponseNatalPlanetsItem>, aspects List<CalculateTransitAspectsResponseAspectsItem>, summary CalculateTransitAspectsResponseSummary
+// Returns CalculateTransitAspectsResponse: transitDate String, houseSystem String, houses List<CalculateTransitAspectsResponseHousesItem>, ascendant CalculateTransitAspectsResponseAscendant, transitPlanets List<CalculateTransitAspectsResponseTransitPlanetsItem>, natalPlanets List<CalculateTransitAspectsResponseNatalPlanetsItem>, aspects List<CalculateTransitAspectsResponseAspectsItem>, interpretation CalculateTransitAspectsResponseInterpretation, summary CalculateTransitAspectsResponseSummary
 
 // Monthly Parallels - Declination contacts for an entire month
 final result = await roxy.astrology.getMonthlyDeclinationParallels(year: 2026, month: 3, timezone: NumOrString.string('America/New_York'), orb: 1.5, nodeType: NodeType.true$);
